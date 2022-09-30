@@ -1,0 +1,63 @@
+.ph-picture {
+    background-color: #ced4da;
+    height: 230px;
+    width: 100%;
+}
+
+.ph-picture-product {
+    background-color: #ced4da;
+    height: 130px;
+    width: 100%;
+}
+
+.ph-item {
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    direction: ltr;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    overflow: hidden;
+    padding: 30px 15px 15px;
+    position: relative;
+}
+
+.ph-item-banner {
+    background-color: #ced4da;
+    border: 0px solid #e6e6e6;
+    border-radius: 2px;
+    direction: ltr;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    overflow: hidden;
+    padding: 0px 0px 0px;
+    position: relative;
+  }
+
+  
+
+  .ph-item-banner::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    z-index: 1;
+    width: 500%;
+    margin-left: -250%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 46%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 54%) 50% 50%;
+    -webkit-animation: phAnimation 0.8s linear infinite;
+            animation: phAnimation 0.8s linear infinite;
+    content: " ";
+    pointer-events: none;
+  }
+  .ph-item-banner > * {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column;
+    margin-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }

@@ -1,0 +1,255 @@
+{
+    "sliders": {
+        "builder": true,
+        "name": "Deslizadores",
+        "element": {
+            "images": {
+                "slider": {
+                    "size": "1220x223"
+                }
+            },
+            "link": "text",
+            "modal": true
+        }
+    },
+
+    "banners_top": {
+        "builder": true,
+        "name": "Banners arriba",
+        "element": {
+            "images": {
+                "image": {
+
+                }
+            },
+
+            "title": "text",
+            "label": "text",
+            "label_background": {
+                "type": "dropdown",
+                "options": {
+                    "red": "Red",
+                    "green": "Green",
+                    "blue": "Blue",
+                    "yellow": "Yellow",
+                    "gray": "Gray",
+                    "dark": "Dark",
+                    "teal": "Teal"
+                }
+            },
+            "size": {
+                "type": "dropdown",
+                "options": {
+                    "340x275": "340x275",
+                    "340x518": "340x518"
+                }
+            },
+            "link": "text",
+            "modal": false
+        }
+    },
+
+    "banners_middle": {
+        "builder": true,
+        "name": "Banners medio",
+        "element": {
+            "images": {
+                "image": {
+                    "size": "551x151"
+                }
+            },
+
+            "link": "text",
+            "modal": true
+        }
+    },
+
+    "about_page": {
+        "builder": true,
+        "name": "Acerca de la página",
+        "content": {
+            "page_title": "text",
+            "description": "textarea"
+        }
+    },
+
+    "faq_page": {
+        "builder": true,
+        "name": "Página de preguntas frecuentes",
+        "content": {
+            "page_title": "text",
+            "description": "textarea-nic"
+        }
+    },
+
+    "contact_page": {
+        "builder": true,
+        "name": "Pagina de contacto",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "800x964"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+
+
+    "subscribe": {
+        "builder": true,
+        "name": "Sección de suscripción",
+        "content": {
+            "text": "text"
+        }
+    },
+
+    "social_icon": {
+        "builder": true,
+        "name": "Iconos sociales",
+        "element": {
+            "title": "text",
+            "social_icon": "icon",
+            "url": "text",
+            "modal": true
+        }
+    },
+
+    "footer": {
+        "builder": true,
+        "name": "Pie de página",
+        "content": {
+            "images":{
+                "payment_methods":{
+                    "size": "250x30"
+                }
+            },
+            "cell_number": "text",
+            "email": "text",
+            "contact_address": "textarea",
+            "footer_note": "textarea",
+            "copyright_text": "text"
+
+        }
+    },
+
+    "register_page": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Página de registro",
+        "content": {
+            "images":{
+                "image":{
+                    "size": "750x979"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+    "login_page": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Página de inicio de sesión",
+        "content": {
+            "images":{
+                "image":{
+                    "size": "600x840"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+    "forgot_password_page": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Página de contraseña olvidada",
+        "content": {
+            "images":{
+                "image":{
+                    "size": "600x840"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+    "code_verify_page": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Página de verificación de código",
+        "content": {
+            "images":{
+                "image":{
+                    "size": "600x840"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+    "reset_password_page": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Página de restablecimiento de contraseña",
+        "content": {
+            "images":{
+                "image":{
+                    "size": "600x840"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+    "authorize_email_page": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Autorizar página de correo electrónico",
+        "content": {
+            "images":{
+                "image":{
+                    "size": "600x840"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+    "authorize_sms_page": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Autorizar la página de SMS",
+        "content": {
+            "images":{
+                "image":{
+                    "size": "600x840"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+
+
+    "pages": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Paginas",
+        "element": {
+            "page_title": "text",
+            "description": "textarea-nic",
+            "modal":false
+        }
+
+    }
+}
