@@ -657,6 +657,11 @@ function imagePath()
         'size' => '200x150',
     ];
 
+    $data['carrier'] = [
+        'path' => 'assets/images/carrier',
+        'size' => '200x150',
+    ];
+
     return $data;
 }
 

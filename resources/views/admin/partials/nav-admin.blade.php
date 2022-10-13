@@ -401,6 +401,7 @@
     </div>
 </li>
 
+
 <li class="sidebar__menu-header">@lang('Store Front')</li>
 
 <li class="sidebar-menu-item sidebar-dropdown">
@@ -460,13 +461,34 @@
 
         </li> 
 
-<li class="sidebar-menu-item {{ menuActive('admin.shipping-methods*') }}">
-    <a href="{{ route('admin.shipping-methods.all') }}" class="nav-link">
+<li class="sidebar-menu-item sidebar-dropdown">
+    <a href="javascript:void(0)" class="{{menuActive(['admin.carrier*', 'admin.shipping-methods'],3)}}">
         <i class="fas fa-shipping-fast menu-icon"></i>
-        <span class="menu-title">@lang('Shipping Methods')</span>
+        <span class="menu-title">Metodos de envio</span>
     </a>
+    <div class="sidebar-submenu {{menuActive(['admin.carrier*', 'admin.shipping-methods'],2)}} ">
+        <ul>
+            <li class="sidebar-menu-item {{ menuActive('admin.shipping-methods*') }}">
+                <a href="{{ route('admin.shipping-methods.all') }}" class="nav-link">
+                    <i class="fas fa-shipping-fast menu-icon"></i>
+                    <span class="menu-title">@lang('Shipping Methods')</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item {{ menuActive('admin.carrier.index') }}">
+                <a href="{{ route('admin.carrier.index') }}" class="nav-link">
+                    <i class="fas fa-shipping-fast menu-icon"></i>
+                    <span class="menu-title">@lang('Carrier')</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item {{ menuActive('admin.carrier-office.index') }}">
+                <a href="{{ route('admin.carrier-office.index') }}" class="nav-link">
+                    <i class="las la-store-alt menu-icon"></i>
+                    <span class="menu-title">@lang('Carrier offices')</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
-
 <li class="sidebar-menu-item sidebar-dropdown">
     <a href="javascript:void(0)" class="{{menuActive(['admin.setting*', 'admin.language*', 'admin.plugin*'],3)}}">
         <i class="menu-icon la la-tools"></i>

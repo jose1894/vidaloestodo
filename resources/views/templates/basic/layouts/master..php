@@ -138,9 +138,7 @@
     <script src="{{ asset($activeTemplateTrue.'js/dev.js') }}"></script>
     <script src="{{ asset($activeTemplateTrue.'js/sxs.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-
-
-
+    @include('helpers.scripts')
 
     <script>
         'use strict';
@@ -890,24 +888,6 @@
                             // window.location.replace("{{ route('user.checkout') }}");
                     }else{
                         window.location.replace("{{ route('user.checkout') }}");
-                    }
-                }
-            });
-        }
-
-        function search_cities(id) {
-            $('#city').empty();
-            $.ajax({
-                url: "{{ route('search_cities') }}",
-                method: "get",
-                data: {
-                    state_id: id
-                },
-                success: function(response){
-                    if (response.length > 0) {
-                        for (var i=0; i < response.length; i++) {
-                            $('#city').append('<option value="'+response[i].name+'">'+response[i].name+'</option>');
-                        }
                     }
                 }
             });

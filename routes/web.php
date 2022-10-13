@@ -113,6 +113,22 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('product/category/create/{id}', 'CategoryController@store')->name('category-store')->where('id', '[0-9]+');
         Route::post('product/category/delete/{id}', 'CategoryController@delete')->name('category.delete')->where('id', '[0-9]+');
 
+        //Carrier
+        Route::get('carrier', 'CarrierController@index')->name('carrier.index');
+        Route::post('carrier/create/{id}', 'CarrierController@store')->name('carrier.store');
+        Route::post('carrier/{id}', 'CarrierController@delete')->name('carrier.delete')->where('id', '[0-9]+');
+        Route::get('carrier/search/', 'CarrierController@carrierSearch')->name('carrier.search');
+        Route::get('carrier/trashed', 'CarrierController@trashed')->name('carrier.trashed');
+        Route::get('carrier/trashed/search/', 'CarrierController@carrierTrashedSearch')->name('carrier.trashed.search');
+
+        //Carrier-offices
+        Route::get('carrier-offices', 'CarrierOfficeController@index')->name('carrier-office.index');
+        Route::post('carrier-offices/create/{id}', 'CarrierOfficeController@store')->name('carrier-office.store');
+        Route::post('carrier-offices/{id}', 'CarrierOfficeController@delete')->name('carrier-office.delete')->where('id', '[0-9]+');
+        Route::get('carrier-offices/search/', 'CarrierOfficeController@carrierOfficeSearch')->name('carrier-office.search');
+        Route::get('carrier-offices/trashed', 'CarrierOfficeController@trashed')->name('carrier-office.trashed');
+        Route::get('carrier-offices/trashed/search/', 'CarrierOfficeController@carrierTrashedSearch')->name('carrier-office.trashed.search');
+
         //Brand
         Route::get('product/brands', 'BrandController@index')->name('brand.all');
         Route::post('product/brand/create/{id}', 'BrandController@store')->name('brand.store');
