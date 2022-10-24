@@ -193,6 +193,34 @@
                         @endif
 
                     </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label class="font-weight-bold">
+                                    Codigo OEM
+                                </label>
+                            </div>
+                            <div class="col-md-10">
+                                
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="oem_code"
+                                    placeholder="Codigo OEM" value="{{ $product->oem_code ?? '' }}" />
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                            <div class="col-md-2">
+                                <label class="font-weight-bold">
+                                    Codigo interno
+                                </label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="internal_code"
+                                        placeholder="Codigo interno" value="{{ $product->internal_code ?? '' }}" />
+                                </div>
+                            </div>
+                        </div>
                 </div>
 
                 <div class="card p-2 my-3">
