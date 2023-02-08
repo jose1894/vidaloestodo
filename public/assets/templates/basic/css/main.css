@@ -5893,7 +5893,7 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
 }
 
 .bg-footer-argo {
-  background: var(--naranja-argo);
+  background: #49a1d2;
   padding: 2rem 0;
 }
 
@@ -5909,7 +5909,7 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
 }
 
 subfooter {
-  background: var(--gray-two);
+  background: #09314a;;
   display: block;
 }
 
