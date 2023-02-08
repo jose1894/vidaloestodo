@@ -1,29 +1,29 @@
-version: '3'
+version: '3.7'
 services:
 
   #PHP Service
-  app:
+  app_euroricambi_prod:
     build:
       context: .
       dockerfile: Dockerfile
-    image: alfogolarexpress.com/php-docker
+    image: euroricambidiesel.com/php
     container_name: app
     restart: unless-stopped
     tty: true
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      SERVICE_NAME: app_euroricambi_prod
+      SERVICE_TAGS: prod
     working_dir: /var/www
     volumes:
       - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      - app-network
+      - app-network-euroricambi-prod
 
   #Nginx Service
-  webserver:
+  webserver_euroricambi_prod:
     image: nginx:alpine
-    container_name: webserver
+    container_name: webserver_euroricambi_prod
     restart: unless-stopped
     tty: true
     ports:
@@ -33,32 +33,32 @@ services:
       - ./:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d/
     networks:
-      - app-network
+      - app-network-euroricambi-prod
 
   #MySQL Service
-  db:
+  db_euroricambi_prod:
     image: mysql:5.7.22
-    container_name: db
+    container_name: db_euroricambi_prod
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "33060:33060"
     environment:
-      MYSQL_DATABASE: alfogola_bd
-      MYSQL_ROOT_PASSWORD: m1passw0rd
-      MYSQL_PASSWORD: cpsess5617006439!
-      MYSQL_USER: alfogola_us
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      # MYSQL_PASSWORD: ${$DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      SERVICE_TAGS: prod
+      SERVICE_NAME: db_euroricambi_prod
     volumes:
       - dbdata:/var/lib/mysql
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
-      - app-network
+      - app-network-euroricambi-prod
 
 #Docker Networks
 networks:
-  app-network:
+  app-network-euroricambi-prod:
     driver: bridge
 
 #Volumes
