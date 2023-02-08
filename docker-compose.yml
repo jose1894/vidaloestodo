@@ -47,7 +47,7 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       # MYSQL_PASSWORD: ${$DB_DATABASE}
-      MYSQL_USER: ${DB_USER}
+      MYSQL_USER: ${DB_USERNAME}
       SERVICE_TAGS: prod
       SERVICE_NAME: db_euroricambi_prod
     volumes:
