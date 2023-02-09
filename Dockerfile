@@ -55,7 +55,6 @@ RUN chmod -R ug+w /var/www/storage
 RUN chmod -R ug+w /var/www/public
 RUN chmod 777 -R storage bootstrap/cache 
 RUN chmod 755 -R public/
-RUN composer install
 
 # Change current user to www
 USER www
