@@ -42,7 +42,9 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "33060:33060"
+      - "3307:3306"
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
@@ -60,8 +62,3 @@ services:
 networks:
   app-network-euroricambi-prod:
     driver: bridge
-
-#Volumes
-volumes:
-  dbdata:
-    driver: local
