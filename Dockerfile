@@ -24,7 +24,10 @@ RUN apt-get update && apt-get install -y \
     sudo \
     unzip \
     zip \
-    unzip
+    unzip \
+    php-mysql \
+    mbstring \
+    php-zip 
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
