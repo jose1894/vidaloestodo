@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: euroricambidiesel.com/php
-    container_name: app
+    container_name: app_euroricambi_prod
     restart: unless-stopped
     tty: true
     environment:
@@ -34,6 +34,8 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d/
     networks:
       - app-network-euroricambi-prod
+    depends_on:
+      - app_euroricambi_prod
 
   #MySQL Service
   db_euroricambi_prod:
@@ -48,13 +50,8 @@ services:
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      # MYSQL_PASSWORD: ${$DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
       SERVICE_TAGS: prod
       SERVICE_NAME: db_euroricambi_prod
-    volumes:
-      - dbdata:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network-euroricambi-prod
 
