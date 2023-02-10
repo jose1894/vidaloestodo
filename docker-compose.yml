@@ -1,67 +1,51 @@
-version: '3'
+version: "3.3"
 services:
-
-  #PHP Service
-  app:
+  app_euroricambi_prod:
     build:
-      context: .
+      args:
+        user: eurodocker
+        uid: 1000
+      context: ./
       dockerfile: Dockerfile
-    image: alfogolarexpress.com/php-docker
-    container_name: app
+    image: euroricambi
+    container_name: euroricambi-app-prod
     restart: unless-stopped
-    tty: true
-    environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
-    working_dir: /var/www
+    working_dir: /var/www/
     volumes:
       - ./:/var/www
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      - app-network
+      - euroricambi-network-prod
 
-  #Nginx Service
-  webserver:
-    image: nginx:alpine
-    container_name: webserver
+  db_euroricambi_prod:
+    image: mysql:8.0
+    container_name: euroricambi-db-prod
     restart: unless-stopped
-    tty: true
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./:/var/www
-      - ./nginx/conf.d:/etc/nginx/conf.d/
-    networks:
-      - app-network
-
-  #MySQL Service
-  db:
-    image: mysql:5.7.22
-    container_name: db
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "3306:3306"
     environment:
-      MYSQL_DATABASE: alfogola_bd
-      MYSQL_ROOT_PASSWORD: m1passw0rd
-      MYSQL_PASSWORD: cpsess5617006439!
-      MYSQL_USER: alfogola_us
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - dbdata:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
-      - app-network
+      - euroricambi-network-prod
 
-#Docker Networks
+  nginx_euroricambi_prod:
+    image: nginx:alpine
+    container_name: euroricambi-nginx-prod
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - euroricambi-network-prod
+    depends_on:
+      - app_euroricambi_prod
+
 networks:
-  app-network:
+  euroricambi-network-prod:
     driver: bridge
-
-#Volumes
-volumes:
-  dbdata:
-    driver: local

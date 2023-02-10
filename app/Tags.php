@@ -18,8 +18,8 @@ class Tags extends Model
     //use SoftDeletes;
     //protected $guarded = ['id'];    
 
-    /*public function products()
+    public function products()
     {
         return $this->belongsToMany(Product::class, 'products_tags', 'tags_id', 'product_id');
-    }*/
+    }
 }

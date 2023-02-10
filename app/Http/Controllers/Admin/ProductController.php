@@ -163,6 +163,8 @@ class ProductController extends Controller
             'description'           => 'nullable|string',
             'summary'               => 'nullable|string|max:360',
             'sku'                   => 'nullable|string|max:100',
+            'oem_code'              => 'nullable|string|max:100',
+            'internal_code'         => 'nullable|string|max:100',
             'extra'                 => 'sometimes|required|array',
             'extra.*.key'           => 'required_with:extra',
             'extra.*.value'         => 'required_with:extra',
@@ -226,6 +228,8 @@ class ProductController extends Controller
 
         $product->brand_id          = $request->brand_id;
         $product->sku               = $request->has_variants ? null : $request->sku;
+        $product->oem_code          = $request->oem_code;
+        $product->internal_code     = $request->internal_code;
         $product->name              = $request->name;
         $product->model             = $request->model;
         $product->has_variants      = $request->has_variants ?? 0;
