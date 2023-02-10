@@ -8,11 +8,11 @@
             <div class="form-wrapper">
                 <h4 class="logo-text mb-15">
                     {{-- @lang("Welcome to $general->sitename") --}} 
-                    ¡Bienvenido a Al Fogolar!
+                    ¡Bienvenido a EURORICAMBI DIESEL!
                 </h4>
                 <p>
                     {{-- @lang("$page_title to $general->sitename Dashboard") --}}
-                    Inicio de Sesión a la vista pricipal de Al Fogolar
+                    Inicio de Sesión a la vista pricipal de EURORICAMBI DIESEL
                 </p>
                 <form action="{{ route('admin.login') }}" method="POST" class="cmn-form mt-30">
                     @csrf

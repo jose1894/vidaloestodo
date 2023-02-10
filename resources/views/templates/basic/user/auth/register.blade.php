@@ -19,7 +19,7 @@
                         </h3>
                         <p>
                             {{-- __($register_content->data_values->description) --}}
-                            Bienvenido a Al Fogolar
+                            Bienvenido a EURORICAMBI DIESEL
                         </p>
                     </div>
                     <form action="{{ route('user.register') }}" method="POST" class="contact-form mb-30-none">
