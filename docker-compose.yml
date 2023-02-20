@@ -42,8 +42,7 @@ services:
       - 8000:80
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx/conf.d:/etc/nginx/conf.d
-      - ./docker-compose/nginx/nginx/:/etc/nginx/
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
       - euroricambi-network-prod
     depends_on:
