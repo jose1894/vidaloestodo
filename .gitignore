@@ -5,6 +5,7 @@
 /vendor
 /app/Http/Controllers/Gateway/blockio/cacert.pem
 /public/assets
+/dbdata/*
 .env
 .env.backup
 .env.back
