@@ -187,6 +187,8 @@ class SiteController extends Controller
         $products_like = Product::with('productIva')
             ->where(function ($product) use ($search) {
                     $product->where('name', 'like', "%" . $search . "%");
+                    $product->orWhere('specification', 'like', "%" . $search . "%");
+                    $product->orWhere('extra_descriptions', 'like', "%" . $search . "%");
                 })->paginate(10);
         // dd($products_like);
 
@@ -427,6 +429,8 @@ class SiteController extends Controller
             )
                 ->where(function ($product) use ($search_key) {
                     $product->where('name', 'like', "%" . $search_key . "%");
+                    $product->orWhere('specification', 'like', "%" . $search_key . "%");
+                    $product->orWhere('extra_descriptions', 'like', "%" . $search_key . "%");
                 })
                 ->where('is_plan', 0)
                 ->whereHas('categories')
