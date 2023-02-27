@@ -254,7 +254,7 @@
            // $('#placeholder_product').html(make_skeleton());
 
 
-            getMoneda();            
+           getMoneda();            
             background();
             backgroundColor();
             triggerOwl();

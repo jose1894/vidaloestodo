@@ -18,6 +18,7 @@ use App\Rules\FileTypeValidate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Excel;
 
 class ProductController extends Controller
 {
@@ -631,5 +632,38 @@ class ProductController extends Controller
         $combo->products_combo          = $request->products_combo;
         $combo->cantidad          = $request->cantidad;
         $combo->save();
+    }
+
+    public function import(Request $request)
+    {
+        $rows = Excel::toArray(new ProductImport, request()->file('fileSelect'));
+
+        foreach ($rows as $row) {
+            foreach ($row as $rowd) {
+                $product = Product::where('codigo_int', $rowd[0])->first();
+                if ($product) {
+                    $iva = ProductIva::where('percentage', $rowd[2])->first();
+                    $product->base_price          = $rowd[3];
+                    $product->prime_price          = $rowd[5];
+
+                    if ($iva) {
+                        $product->iva          = $iva ? 1 : 0;
+                        $product->iva_id          = $iva ? $iva->id : 0;
+                    }
+
+                    $stock = ProductStock::where('product_id', $product->id)->first();
+                if ($stock) {
+                    $stock->quantity = $rowd[6] + $rowd[7] + $rowd[8];
+                    $stock->save();
+                }
+                    $product->save();
+                }
+            }
+        }
+        return redirect()->back()->with('success', 'File imported successfully!');
+    }
+
+    public function export(){
+        return Excel::download(new ProductExport, 'product.xlsx');
     }
 }

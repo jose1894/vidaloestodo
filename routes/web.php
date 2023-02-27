@@ -168,6 +168,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('product-highlight', 'ProductController@highlight')->name('products.highlight');
         Route::get('product/filters/', 'ProductController@productFilters')->name('products.filters');
         Route::get('product-storecombo', 'ProductController@storeCombo')->name('products.storecombo');
+        Route::post('product-import', 'ProductController@import')->name('products.import');
+        Route::get('product-export', 'ProductController@export')->name('products.export');
 
         Route::get('product/reviews', 'ProductController@reviews')->name('product.reviews');
         Route::get('product/reviews/trashed', 'ProductController@trashedReviews')->name('product.reviews.trashed');

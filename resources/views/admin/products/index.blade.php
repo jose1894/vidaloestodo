@@ -199,20 +199,26 @@
 
 @endsection
 @push('breadcrumb-plugins')
-    @if(request()->routeIs('admin.products.all'))
-    <a href="{{ route('admin.products.create') }}" title="@lang('Shortcut'): shift+n" class="btn btn-sm btn--success box--shadow1 text--small"><i class="la la-plus"></i>Agregar Nuevo</a>
+    @if (request()->routeIs('admin.products.all'))
+        <a href="{{ route('admin.products.export') }}" class="export-btn btn btn-sm btn--warning box--shadow1 text--small">
+            <i class="la la-cloud-download"></i>Exportar Excel</a>
+            <a href="javascript:void(0)" class="import-btn btn btn-sm btn--primary box--shadow1 text--small">
+            <i class="la la-cloud-upload"></i>Importar Excel</a>
+        <a href="{{ route('admin.products.create') }}" title="@lang('Shortcut'): shift+n"
+            class="btn btn-sm btn--success box--shadow1 text--small"><i class="la la-plus"></i>Agregar Nuevo</a>
     @else
-        @if(request()->routeIs('admin.products.trashed.search'))
-        <a href="{{route('admin.products.trashed')}}" class="btn btn-sm btn--primary box--shadow1 text--small">
-            <i class="la la-backward"></i>Regresar</a>
+        @if (request()->routeIs('admin.products.trashed.search'))
+            <a href="{{ route('admin.products.trashed') }}" class="btn btn-sm btn--primary box--shadow1 text--small">
+                <i class="la la-backward"></i>Regresar</a>
         @else
-        <a href="{{route('admin.products.all')}}" class="btn btn-sm btn--primary box--shadow1 text--small">
-            <i class="la la-backward"></i>Regresar</a>
+            <a href="{{ route('admin.products.all') }}" class="btn btn-sm btn--primary box--shadow1 text--small">
+                <i class="la la-backward"></i>Regresar</a>
         @endif
     @endif
 
-    @if(request()->routeIs('admin.products.all'))
-    <a href="{{ route('admin.products.trashed') }}" class="btn btn-sm btn--danger box--shadow1 text--small"><i class="la la-trash-alt"></i>Borrados</a>
+    @if (request()->routeIs('admin.products.all'))
+        <a href="{{ route('admin.products.trashed') }}" class="btn btn-sm btn--danger box--shadow1 text--small"><i
+                class="la la-trash-alt"></i>Borrados</a>
     @endif
 @endpush
 
