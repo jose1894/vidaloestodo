@@ -25,14 +25,16 @@ RUN apt-get update && apt-get install -y \
     sudo \
     unzip \
     npm \
-    nodejs 
+    nodejs
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd xml iconv simplexml zip
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd xml iconv simplexml
+RUN docker-php-ext-configure zip
+RUN docker-php-ext-install zip
 # zip
 
 # xdebug zlib zip xmlreader
