@@ -3,6 +3,8 @@ FROM php:7.4-fpm-buster
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
 
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
 # Set working directory
 WORKDIR /var/www
 
@@ -24,15 +26,17 @@ RUN apt-get update && apt-get install -y \
     sudo \
     unzip \
     npm \
-    nodejs
+    nodejs 
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd xml iconv simplexml 
 
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions xdebug zlib zip xmlreader
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
