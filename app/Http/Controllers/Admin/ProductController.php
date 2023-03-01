@@ -639,7 +639,7 @@ class ProductController extends Controller
     public function import(Request $request)
     {
         $rows = Excel::toArray(new ProductImport, request()->file('fileSelect'));
-
+        dd($rows);
         foreach ($rows as $row) {
             foreach ($row as $rowd) {
                 $product = Product::where('codigo_int', $rowd[0])->first();
