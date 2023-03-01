@@ -642,7 +642,7 @@ class ProductController extends Controller
         //dd($rows);
         foreach ($rows as $row) {
             foreach ($row as $rowd) {
-                print_r($rowd);
+                print_r($rowd[2]);
                 /*$product = Product::where('codigo_int', $rowd[0])->first();
                 if ($product) {
                     
