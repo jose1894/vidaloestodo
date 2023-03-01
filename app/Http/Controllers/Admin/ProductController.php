@@ -642,11 +642,11 @@ class ProductController extends Controller
         //dd($rows);
         foreach ($rows as $row) {
             foreach ($row as $rowd) {
-                print_r($rowd[2]);
-                /*$product = Product::where('codigo_int', $rowd[0])->first();
+                //print_r($rowd[2]);
+                $product = Product::where('codigo_int', $rowd[0])->first();
                 if ($product) {
                     
-                    $iva = ProductIva::where('percentage', $rowd[2])->first();
+                    $iva = ProductIva::where('percentage', isset($rowd[2]) ? $rowd[2] : 16)->first();
                     $product->base_price          = $rowd[3];
                     $product->prime_price          = $rowd[5];
 
@@ -661,7 +661,7 @@ class ProductController extends Controller
                     $stock->save();
                 }
                     $product->save();
-                }*/
+                }
             }
         }
         return redirect()->back()->with('success', 'File imported successfully!');
