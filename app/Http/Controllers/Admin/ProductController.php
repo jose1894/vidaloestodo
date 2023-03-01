@@ -641,11 +641,11 @@ class ProductController extends Controller
         $rows = Excel::toArray(new ProductImport, request()->file('fileSelect'));
         //dd($rows);
         foreach ($rows as $row) {
-            print_r($row);
-            /*foreach ($row as $rowd) {
-                $product = Product::where('codigo_int', $rowd[0])->first();
+            foreach ($row as $rowd) {
+                print_r($rowd);
+                /*$product = Product::where('codigo_int', $rowd[0])->first();
                 if ($product) {
-
+                    
                     $iva = ProductIva::where('percentage', $rowd[2])->first();
                     $product->base_price          = $rowd[3];
                     $product->prime_price          = $rowd[5];
@@ -661,8 +661,8 @@ class ProductController extends Controller
                     $stock->save();
                 }
                     $product->save();
-                }
-            }*/
+                }*/
+            }
         }
         return redirect()->back()->with('success', 'File imported successfully!');
     }
