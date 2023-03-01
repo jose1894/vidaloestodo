@@ -647,8 +647,8 @@ class ProductController extends Controller
                 if ($product) {
                     
                     $iva = ProductIva::where('percentage', isset($rowd[2]) ? $rowd[2] : 16)->first();
-                    $product->base_price          = $rowd[3];
-                    $product->prime_price          = $rowd[5];
+                    $product->base_price          = isset($rowd[3]) ? $rowd[3] : 0;
+                    $product->prime_price          = isset($rowd[5]) ? $rowd[5] : 0;
 
                     if ($iva) {
                         $product->iva          = $iva ? 1 : 0;
