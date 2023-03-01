@@ -657,7 +657,7 @@ class ProductController extends Controller
 
                     $stock = ProductStock::where('product_id', $product->id)->first();
                 if ($stock) {
-                    $stock->quantity = $rowd[6] + $rowd[7] + $rowd[8];
+                    $stock->quantity = isset($rowd[6]) ? $rowd[6] : 0 + isset($rowd[7]) ? $rowd[7] : 0 + isset($rowd[8]) ? $rowd[8] : 0;
                     $stock->save();
                 }
                     $product->save();
