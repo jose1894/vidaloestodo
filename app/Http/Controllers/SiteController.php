@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Category;
+use App\Exports\OrderExport;
 use App\Frontend;
 use App\Order;
 use App\OrderDetail;
@@ -183,14 +184,10 @@ class SiteController extends Controller
 
 		$search = implode("%", $search);
 
-        // $products_like = Product::where('name', 'like', "%{$search}%")->get(['name']);
         $products_like = Product::with('productIva')
             ->where(function ($product) use ($search) {
-                    $product->where('name', 'like', "%" . $search . "%");
-                    $product->orWhere('specification', 'like', "%" . $search . "%");
-                    $product->orWhere('extra_descriptions', 'like', "%" . $search . "%");
-                })->paginate(10);
-        // dd($products_like);
+                $product->where('name', 'like', "%" . $search . "%");
+            })->paginate(10);
 
         //DB::statement("ALTER TABLE products ADD FULLTEXT(name, description)");
 
@@ -298,7 +295,7 @@ class SiteController extends Controller
                 // unset($data['featured_products'][$key]); 
             }
         }*/
-        // dd($this->activeTemplate . 'home');
+        // dd($data['featured_products']);
         //return $data['featured_products'];
         return view($this->activeTemplate . 'home', $data);
     }
@@ -429,8 +426,6 @@ class SiteController extends Controller
             )
                 ->where(function ($product) use ($search_key) {
                     $product->where('name', 'like', "%" . $search_key . "%");
-                    $product->orWhere('specification', 'like', "%" . $search_key . "%");
-                    $product->orWhere('extra_descriptions', 'like', "%" . $search_key . "%");
                 })
                 ->where('is_plan', 0)
                 ->whereHas('categories')
@@ -873,7 +868,6 @@ class SiteController extends Controller
 
         $perpage = 30;
 
-
         $all_products       = Product::with(
             [
                 'categories',
@@ -891,6 +885,8 @@ class SiteController extends Controller
             ->whereHas('categories')
             ->whereHas('offer.activeOffer')
             ->get();
+
+           // dd($all_products);
 
 
         $min_price              = $all_products->min('base_price') ?? 0;
@@ -1480,6 +1476,7 @@ class SiteController extends Controller
 
     public function placeholderImage($size = null)
     {
+
         if ($size != 'undefined') {
             $size = $size;
             $imgWidth = explode('x', $size)[0];
@@ -1490,8 +1487,7 @@ class SiteController extends Controller
             $imgHeight = 150;
             $text = 'Tamaño Indefinido';
         }
-        $fontFile = realpath('../public/assets/font') . DIRECTORY_SEPARATOR . 'RobotoMono-Regular.ttf';
-
+        $fontFile = realpath('assets/font') . DIRECTORY_SEPARATOR . 'RobotoMono-Regular.ttf';
         $fontSize = round(($imgWidth - 50) / 8);
         if ($fontSize <= 9) {
             $fontSize = 9;
@@ -1758,6 +1754,10 @@ class SiteController extends Controller
 
 
         return view('invoice.print', compact('page_title', 'order', 'discountPrime'));
+    }
+
+    public function exportInvoice(Order $order){
+        return (new OrderExport($order->id))->download('order-'.$order->id.'.xlsx');
     }
 
     public function setMoneda(Request $request)
