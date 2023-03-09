@@ -280,8 +280,14 @@ class SiteController extends Controller
                 ]
             )
             ->where('in_filter_menu',  '1')
-            ->orderBy('position', 'asc')
+            ->orderByRaw(
+                "case when position is null then 1 else 0 end, position"
+            )
+           // ->orderBy('position', 'asc')
+           // ->orderByRaw("position > 0 DESC")
             ->paginate(3);
+
+            //dd($data['categories']);
 
         // dd($data['categories'][0]->specialProuducts);
 
@@ -325,7 +331,10 @@ class SiteController extends Controller
                 ]
             )
             ->where('in_filter_menu',  '1')
-            ->orderBy('position', 'asc')
+            //->orderBy('position', 'asc')
+            ->orderByRaw(
+                "case when position is null then 1 else 0 end, position"
+            )
             ->paginate(3);
 
         // dd( $categories);
