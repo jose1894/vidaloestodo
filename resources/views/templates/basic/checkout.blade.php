@@ -54,14 +54,14 @@
                                                                         <del>{{ getAmount($item->product->precioBaseIva, 2) }}</del>
                                                                         @if (!is_null($item->product->prime_price))
                                                                             <br>
-                                                                            Prime:
+                                                                            Premium:
                                                                             {{ $general->cur_sym }}{{ getAmount($item->product->precioPrimeIva ?? $$item->product->prime_price, 2) }}
                                                                         @endif
                                                                     @else
                                                                         {{ $general->cur_sym }}{{ getAmount($item->product->precioBaseIva, 2) }}
-                                                                        @if (!is_null($item->product->prime_price))
+                                                                        @if ($item->prime_price > 0 && $item->precioBaseIva !== $item->precioPrimeIva)
                                                                             <br>
-                                                                            Prime:
+                                                                            Premium:
                                                                             {{ $general->cur_sym }}{{ getAmount($item->product->precioPrimeIva ?? $item->product->prime_price, 2) }}
                                                                         @endif
                                                                     @endif
@@ -71,14 +71,14 @@
                                                                         <del>{{ getAmount($item->product->precioBaseIva * $rate, 2) }}</del>
                                                                         @if (!is_null($item->product->prime_price))
                                                                             <br>
-                                                                            Prime:
+                                                                            Premium:
                                                                             {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->product->precioPrimeIva ?? $item->product->prime_price * $rate, 2) }}
                                                                         @endif
                                                                     @else
                                                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->product->precioBaseIva * $rate, 2) }}
                                                                         @if (!is_null($item->product->prime_price))
                                                                             <br>
-                                                                            Prime:
+                                                                            Premium:
                                                                             {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->product->precioPrimeIva ?? $item->product->prime_price * $rate, 2) }}
                                                                         @endif
                                                                     @endif
@@ -366,7 +366,7 @@
 
                                         <select v-model="form.order_time_horario" id="order_time_horario"
                                             name="order_time_horario" class="form-control">
-                                            <option selected disabled value="0"></option>
+                                            <option selected disabled value="0">Express</option>
                                             <option value="1">Mañana</option>
                                             <option value="2">Tarde</option>
                                             <option value="3">Noche</option>
@@ -1784,9 +1784,9 @@
                         this.error.push('Debe selecionar el tipo de envío a usar.')
                     }
 
-                    if (this.form.order_time_horario == 0) {
+                    /*if (this.form.order_time_horario == 0) {
                         this.error.push('Debe selecionar un horario de envío.')
-                    }
+                    }**/
 
                     /*if (this.form.method_payment == 2) {
                         

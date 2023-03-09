@@ -122,7 +122,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $page_title     = "Editar Producto";
-        
+
         $product        = Product::whereId($id)->with([
             'productPreviewImages', 'categories', 'tags', 'productIva',
             'productcombo' => function ($q) {
@@ -151,8 +151,8 @@ class ProductController extends Controller
 
     public function store(Request $request, $id)
     {
-        
-       //   dd($request->data);
+
+        //   dd($request->data);
         $validation_rule = [
             'name'                  => 'required|string|max:191',
             'model'                 => 'nullable|string|max:100',
@@ -283,7 +283,7 @@ class ProductController extends Controller
 
         $data = json_decode($request->data);
         //$data = json_encode($data);
-       // dd($data);
+        // dd($data);
         foreach ($data as $item) {
 
             $combo = new ProductCombo();
@@ -645,7 +645,7 @@ class ProductController extends Controller
                 //print_r($rowd[2]);
                 $product = Product::where('codigo_int', $rowd[0])->first();
                 if ($product) {
-                    
+
                     $iva = ProductIva::where('percentage', isset($rowd[2]) ? $rowd[2] : 16)->first();
                     $product->base_price          = isset($rowd[3]) ? $rowd[3] : 0;
                     $product->prime_price          = isset($rowd[5]) ? $rowd[5] : 0;
@@ -656,10 +656,10 @@ class ProductController extends Controller
                     }
 
                     $stock = ProductStock::where('product_id', $product->id)->first();
-                if ($stock) {
-                    $stock->quantity = $rowd[8];
-                    $stock->save();
-                }
+                    if ($stock) {
+                        $stock->quantity = $rowd[8];
+                        $stock->save();
+                    }
                     $product->save();
                 }
             }
@@ -667,7 +667,8 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'File imported successfully!');
     }
 
-    public function export(){
+    public function export()
+    {
         return Excel::download(new ProductExport, 'product.xlsx');
     }
 }

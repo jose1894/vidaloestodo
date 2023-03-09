@@ -211,30 +211,30 @@
                                                         {{ $general->cur_sym }}{{ getAmount($item->base_price - $discount,
                                                         2) }}
                                                         <del>{{ getAmount($item->base_price, 2) }}</del>
-                                                        @if(!is_null($item->prime_price) )
+                                                        @if($item->prime_price > 0)
                                                         <br>
-                                                        Prime: {{ $general->cur_sym }}{{ getAmount($item->prime_price, 2) }}
+                                                        Premium: {{ $general->cur_sym }}{{ getAmount($item->prime_price, 2) }}
                                                         @endif
                                                         @else
                                                         {{ $general->cur_sym }}{{ getAmount($item->base_price, 2) }}
-                                                        @if(!is_null($item->prime_price) )
+                                                        @if ($item->prime_price > 0 && $item->precioBaseIva !== $item->precioPrimeIva)
                                                         <br>
-                                                        Prime: {{ $general->cur_sym }}{{ getAmount($item->prime_price, 2) }}
+                                                        Premium: {{ $general->cur_sym }}{{ getAmount($item->prime_price, 2) }}
                                                         @endif
                                                         @endif
                                                     @else 
                                                         @if($discount > 0)
                                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount(($item->base_price - $discoun) * $rate,2) }}
                                                         <del>{{ getAmount($item->base_price * $rate, 2) }}</del>
-                                                        @if(!is_null($item->prime_price) )
+                                                        @if($item->prime_price > 0)
                                                         <br>
-                                                        Prime: {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->prime_price * $rate, 2)  }}
+                                                        Premium: {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->prime_price * $rate, 2)  }}
                                                         @endif
                                                         @else
                                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->base_price * $rate, 2)  }}
-                                                        @if(!is_null($item->prime_price) )
+                                                        @if($item->prime_price > 0)
                                                         <br>
-                                                        Prime: {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->prime_price * $rate, 2)  }}
+                                                        Premium: {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->prime_price * $rate, 2)  }}
                                                         @endif
                                                         @endif
                                                     @endif
