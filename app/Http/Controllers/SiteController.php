@@ -280,10 +280,7 @@ class SiteController extends Controller
                 ]
             )
             ->where('in_filter_menu',  '1')
-            //->orderBy('position', 'asc')
-            ->orderByRaw(
-                "CASE WHEN position > 0 THEN 0  "                           
-            )
+            ->orderBy('position', 'asc')
             ->paginate(3);
 
         // dd($data['categories'][0]->specialProuducts);
