@@ -26,7 +26,7 @@
                 <div class="product-content">
                     <div class="product-before-content">
                         <h6 class="title">
-                            <a href="{{route('product.detail', ['id'=>$item->id, 'slug'=>slug($item->name)])}}">{{ $item->name }}</a>
+                            <a href="{{route('product.detail', ['id'=>$item->id, 'slug'=>slug($item->name)])}}" style="font-size:14px">aaaaa{{ $item->name }}</a>
                         </h6>
                         <div class="single_content">
                             <p>@php echo __($item->summary) @endphp</p>
