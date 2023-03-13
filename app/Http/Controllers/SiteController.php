@@ -270,10 +270,10 @@ class SiteController extends Controller
                 [
                     'products' => function ($q) {
                         //$q->take(4)
-                        return $q->whereHas('categories');
+                        return $q->with('brand')->whereHas('categories');
                     },
                     'products.reviews',
-                    'products.offers',
+                    'products.offers',                    
                     'products.stocks' => function ($q) {
                         $q->where('quantity', '>', 0);
                     },
@@ -287,7 +287,7 @@ class SiteController extends Controller
            // ->orderByRaw("position > 0 DESC")
             ->paginate(3);
 
-            //dd($data['categories']);
+            // dd($data['categories']);
 
         // dd($data['categories'][0]->specialProuducts);
 

@@ -45,13 +45,18 @@
                                                 </div>
                                             </a> 
                                             <div class="item-descp">
-                                                    
                                                     <span class="screenReaderOnlyText"></span>                                                    
                                                     <h3 class="item-nomb">                                                         
                                                         <a href="{{route('product.detail', ['id'=>$item->id, 'slug'=>slug($item->name)])}}" class="mr-2 mb-2">{{ __($item->name) }}</a>
                                                         </a>
                                                     </h3>
                                                     <p><span class="item-disp stock-argo">({{ $item['stocks']->count() > 0 ? $item['stocks'][0]->quantity : '0' }} @lang('product avaliable') )</span></p>
+                                                    <p class="producto-brand">
+                                                        <span data-automation-id="brand">Marca: {{ $item->brand ? $item->brand->name : 'No definida'}}</span>
+                                                    </p>
+                                                    <p class="producto-cod_int">
+                                                        <span data-automation-id="cod_int">Codigo: {{ $item->codigo_int }}</span>
+                                                    </p>
                                                     <p class="producto-categ">
                                                         @if(isset($item['categories']) && ($item['categories']->count() > 0 ) ) 
                                                             @foreach($item['categories'] as $category)
@@ -65,6 +70,7 @@
                                                     <p class="producto-categ">
                                                         <span data-automation-id="price-per-unit">{{ $item->iva == 1 ? 'IVA Incluido' : 'Exento'}}</span>
                                                     </p>
+
                                             </div> 
                                             <div style="display: none;" class="item-prod-argo badgeProduct{{$item->id}}"></div>
                                             <div class="item-final">
