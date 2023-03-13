@@ -104,16 +104,16 @@
                                                 <span class="screenReaderOnlyText"></span>
                                                 <h3 class="item-nomb">
                                                     <a href="{{ route('product.detail', ['id' => $item->id, 'slug' => slug($item->name)]) }}"
-                                                        class="mr-2 mb-2" style="font-size:14px">{{ __($item->name) }}</a>
+                                                        class="mr-2 mb-2" style="font-size:13px">{{ __($item->name) }}</a>
                                                     </a>
                                                 </h3>
                                                 <p><span class="item-disp stock-argo">({{ $item['stocks']->count() > 0 ? $item['stocks'][0]->quantity : '0' }}
                                                         @lang('product avaliable') )</span></p>
-                                                <p style="font-size:14px" class="producto-brand">
+                                                <p style="font-size:12px" class="producto-brand">
                                                     <span data-automation-id="brand">Marca:</span> 
                                                     <span style="color:black">{{ $item->brand ? $item->brand->name : 'No definida'}}</span>
                                                 </p>
-                                                <p style="font-size:14px" class="producto-cod_int">
+                                                <p style="font-size:12px" class="producto-cod_int">
                                                     <span data-automation-id="cod_int">Codigo:</span>
                                                     <span style="color:black">{{ $item->codigo_int }}</span>
                                                 </p>
@@ -130,7 +130,7 @@
                                                     @endif
                                                 </p>--}}
                                                 <p class="producto-categ">
-                                                    <span data-automation-id="price-per-unit" style="font-size:12px">{{ $item->iva == 1 ? 'IVA Incluido' : 'Exento'}}</span>
+                                                    <span data-automation-id="price-per-unit" style="font-size:10px">{{ $item->iva == 1 ? 'IVA Incluido' : 'Exento'}}</span>
                                                 </p>
                                             </div>
                                             <div style="display: none;"
