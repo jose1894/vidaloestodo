@@ -28,6 +28,7 @@
                                     <th>@lang('Id')</th>
                                     <th>Miniatura</th>
                                     <th>Nombre</th>
+                                    <th>Marca</th>
                                     <th>Precio</th>
                                     <th>Precio Prime</th>
                                     <th>Existencias</th>
@@ -63,6 +64,7 @@
                                                     {{ shortDescription($product->name, 50) }}</span>
                                             </a>
                                         </td>
+                                        <td data-label="@lang('Brand')">{{ $product->brand ? $product->brand->name : 'No definida' }}</td>
                                         <td data-label="@lang('Price')">{{ $product->base_price }}</td>
 
                                         <td data-label="Precio Prime">{{ $product->prime_price ?? 'No posee' }}</td>
