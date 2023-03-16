@@ -49,7 +49,9 @@
             <div class="col-lg-7">
                 <div class="product-details-content product-details">
                     <h4 class="title">{{__($product->name)}}</h4>
-
+                    <p>Marca: {{ $product->brand ? $product->brand->name : 'No definida'}}</p>
+                    <p>Codigo: {{$product->codigo_int}}</p>
+                    <p>Codigo OEM: {{$product->oem_code}}</p>
                     <div class="xdes-argo">
                         <div class="description-item">
                             @if($product->description)
@@ -64,18 +66,93 @@
                             @endif
                         </div>
                     </div>
-                    <!-- 
-                    <div class="ratings-area justify-content-between">
-                        <div class="ratings">
-                            @php echo __(display_avg_rating($product->reviews)) @endphp
+                    <div class="row my-3">
+                        <div class="col-3">
+                            <!-- 
+                            <div class="ratings-area justify-content-between">
+                                <div class="ratings">
+                                    @php echo __(display_avg_rating($product->reviews)) @endphp
+                                </div>
+                                <span class="ml-2 mr-auto">({{__($product->reviews->count())}})</span>
+                            </div> -->
+                            @if($product->show_in_frontend && $product->track_inventory)
+                            @php $quantity = $product->stocks->sum('quantity'); @endphp
+                                <div class="badge badge--{{$quantity>0?'success':'danger'}} stock-status">Existencias (<span
+                                    class="stock-qty">{{$quantity}}</span>)
+                                </div>
+                            @endif
+                            <div class="price">
+                                @php
+                                    $rate = session()->get('rate');
+                                    $moneda = session()->get('moneda');
+                                @endphp
+                                @if ($moneda == 'Dolares' || $moneda == '')
+                                    @if ($discount > 0)
+                                        {{ $general->cur_sym }}{{ getAmount($product->precioBaseIva - $discount, 2) }}
+                                        <del>{{ getAmount($product->precioBaseIva, 2) }}</del>
+                                        @if ($product->prime_price > 0)
+                                            <br>
+                                            Premium:
+                                            {{ $general->cur_sym }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price, 2) }}
+                                        @endif
+                                    @else
+                                        {{ $general->cur_sym }}{{ getAmount($product->precioBaseIva, 2) }}
+                                        @if (isset($item) && $product->prime_price > 0 && $product->precioBaseIva !== $product->precioPrimeIva)
+                                            <br>
+                                            Premium:
+                                            {{ $general->cur_sym }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price, 2) }}
+                                        @endif
+                                    @endif
+                                @else
+                                    @if ($discount > 0)
+                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioBaseIva - $discount * $rate, 2) }}
+                                        <del>{{ getAmount($product->precioBaseIva * $rate, 2) }}</del>
+                                        @if ($product->prime_price > 0)
+                                            <br>
+                                            Premium:
+                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price * $rate, 2) }}
+                                        @endif
+                                    @else
+                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioBaseIva * $rate, 2) }}
+                                        @if ($product->prime_price > 0)
+                                            <br>
+                                            Premium:
+                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price * $rate, 2) }}
+                                        @endif
+                                    @endif
+                                @endif
+                            </div>
+                            <p style="font-size:12px">{{ $product->iva==1 ? 'Precio incluye IVA' : 'Exento'}}</p>
                         </div>
-                        <span class="ml-2 mr-auto">({{__($product->reviews->count())}})</span>
-                    </div> -->
-                    @if($product->show_in_frontend && $product->track_inventory)
-                    @php $quantity = $product->stocks->sum('quantity'); @endphp
-                    <div class="badge badge--{{$quantity>0?'success':'danger'}} stock-status">Existencias (<span
-                            class="stock-qty">{{$quantity}}</span>)</div>
-                    @endif
+                        <div class="col-4 d-flex align-items-center">
+                            <div class="container">                                
+                                <div class="row">                           
+                                    <div class="col-6">
+                                        <select onchange="QuantityValue(this.value,'{{ $product->id }}')" type="number"
+                                            id="quantity{{ $product->id }}" name="quantity" step="1" min="1"
+                                            class="integer-validation quantity{{ $product->id }} form-control">
+                                            @if($quantity > 0)
+                                                @for ($i = 1; $i < $quantity+1; $i++)
+                                                    <option value="{{$i}}">{{$i}}</option>
+                                                @endfor
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="price-btn">
+                                            <div class="add-cart">
+                                                <button type="submit" class="cmn-btn cart-add-btn"
+                                                    data-id="{{ $product->id }}">Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
 
 
 
@@ -146,53 +223,6 @@
                                     @endif
                             </select>-->
 
-
-
-                            @if(!$product->usa_gramaje)
-                            <select onchange="QuantityValue(this.value,'{{ $product->id }}')" type="number"
-                                id="quantity{{ $product->id }}" name="quantity" step="1" min="1"
-                                class="integer-validation quantity{{ $product->id }} form-control">
-                            @if($quantity > 0)
-                            @for ($i = 1; $i < $quantity+1; $i++)
-                            <option value="{{$i}}">{{$i}}</option>
-                            @endfor
-                            @endif
-                            </select>
-                        @else        
-                            <div class="container-fluid">
-                                <div class="row justify-content-center">
-                                    <div class="col-3" style="padding:0">
-                                        
-                                        <button 
-                                        class="cmn-btn btn btn-sm" 
-                                        style=""
-                                        onclick="addAndSubstract('{{ $product->id }}','-'); return false;"> <i class="fa fa-minus"></i> </button>
-                                        
-                                    </div>
-                                    <div class="col-6" style="padding-left: 0px;padding-right: 0px;">
-                                        <input 
-                                            class="form-control gramaje" 
-                                            value="0.25" 
-                                            type="number" 
-                                            readonly 
-                                            onblur="QuantityValue(this.value, '{{ $product->id }}')" 
-                                            formcontrolname="cantidad"
-                                            id="quantity{{ $product['id'] }}" 
-                                            name="quantity"
-                                            style="text-align:right;font-size: 0.8rem;">
-                                    </div>
-                                    <div class="col-3" style="padding:0">
-                                        <button 
-                                            class="cmn-btn btn btn-sm" 
-                                            style=""
-                                            onclick="addAndSubstract('{{ $product->id }}','+'); return false;"> <i class="fa fa-plus"></i> </button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endif
-
-
                             <!--                             <div class="cart-increase qtybutton inc">
                                 <i class="las la-plus"></i>
                             </div> -->
@@ -201,10 +231,6 @@
                     </div>
 
                     <div>
-
-                        <p>{{ $product->iva==1 ? 'Precio incluye IVA' : 'Exento'}}</p>
-                        <p>Codigo: {{$product->codigo_int}}</p>
-                        <p>Marca: {{ $product->brand ? $product->brand->name : 'No definida'}}</p>
                         <p class="c-link">
 
                             @lang('Categories'):
@@ -270,55 +296,7 @@
                             @endforeach
                         </p>
                         @endif
-                        @php
-                            $rate = session()->get('rate');
-                            $moneda = session()->get('moneda');
-                        @endphp
-                        <div class="price-btn">
-                            <div class="price">
-                                @if ($moneda == 'Dolares' || $moneda == '')
-                                    @if ($discount > 0)
-                                        {{ $general->cur_sym }}{{ getAmount($product->precioBaseIva - $discount, 2) }}
-                                        <del>{{ getAmount($product->precioBaseIva, 2) }}</del>
-                                        @if ($product->prime_price > 0)
-                                            <br>
-                                            Premium:
-                                            {{ $general->cur_sym }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price, 2) }}
-                                        @endif
-                                    @else
-                                        {{ $general->cur_sym }}{{ getAmount($product->precioBaseIva, 2) }}
-                                        @if (isset($item) && $product->prime_price > 0 && $product->precioBaseIva !== $product->precioPrimeIva)
-                                            <br>
-                                            Premium:
-                                            {{ $general->cur_sym }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price, 2) }}
-                                        @endif
-                                    @endif
-                                @else
-                                    @if ($discount > 0)
-                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioBaseIva - $discount * $rate, 2) }}
-                                        <del>{{ getAmount($product->precioBaseIva * $rate, 2) }}</del>
-                                        @if ($product->prime_price > 0)
-                                            <br>
-                                            Premium:
-                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price * $rate, 2) }}
-                                        @endif
-                                    @else
-                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioBaseIva * $rate, 2) }}
-                                        @if ($product->prime_price > 0)
-                                            <br>
-                                            Premium:
-                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($product->precioPrimeIva ?? $product->prime_price * $rate, 2) }}
-                                        @endif
-                                    @endif
-                                @endif
-                            </div>
-
-                            <div class="add-cart">
-                                <button type="submit" class="cmn-btn cart-add-btn"
-                                    data-id="{{ $product->id }}">Agregar</button>
-                            </div>
-
-                        </div>
+                        
                     </div>
 
 
