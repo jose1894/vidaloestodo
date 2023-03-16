@@ -49,39 +49,13 @@
             <div class="col-lg-7">
                 <div class="product-details-content product-details">
                     <h4 class="title">{{__($product->name)}}</h4>
-                    <p>Marca: {{ $product->brand ? $product->brand->name : 'No definida'}}</p>
-                    <p>Codigo: {{$product->codigo_int}}</p>
-                    <p>Codigo OEM: {{$product->oem_code}}</p>
-                    <div class="xdes-argo">
-                        <div class="description-item">
-                            @if($product->description)
-                            <p>
-                                @lang($product->description)
-                            </p>
-
-                            @else
-                            <div class="alert cl-title alert--base" role="alert">
-                                No Hay Descripción Para Este Producto
-                            </div>
-                            @endif
-                        </div>
-                    </div>
+                    <p>MARCA: {{ $product->brand ? $product->brand->name : 'No definida'}}</p>
+                    <p>CÓDIGO: {{$product->codigo_int}}</p>
+                    <p>CÓDIGO OEM: {{$product->oem_code}}</p>
                     <div class="row my-3">
                         <div class="col-3">
-                            <!-- 
-                            <div class="ratings-area justify-content-between">
-                                <div class="ratings">
-                                    @php echo __(display_avg_rating($product->reviews)) @endphp
-                                </div>
-                                <span class="ml-2 mr-auto">({{__($product->reviews->count())}})</span>
-                            </div> -->
-                            @if($product->show_in_frontend && $product->track_inventory)
-                            @php $quantity = $product->stocks->sum('quantity'); @endphp
-                                <div class="badge badge--{{$quantity>0?'success':'danger'}} stock-status">Existencias (<span
-                                    class="stock-qty">{{$quantity}}</span>)
-                                </div>
-                            @endif
-                            <div class="price">
+
+                            <div class="price" style="font-size:24px">
                                 @php
                                     $rate = session()->get('rate');
                                     $moneda = session()->get('moneda');
@@ -122,10 +96,27 @@
                                     @endif
                                 @endif
                             </div>
-                            <p style="font-size:12px">{{ $product->iva==1 ? 'Precio incluye IVA' : 'Exento'}}</p>
+                            <p style="font-size:12px">{{ $product->iva==1 ? 'IVA incluido' : 'Exento'}}</p>
                         </div>
-                        <div class="col-4 d-flex align-items-center">
+                        <div class="col-5 d-flex align-items-center">
                             <div class="container">                                
+                                <div class="row">
+                                    <div class="col-12 my-3">   
+                                        <!-- 
+                                        <div class="ratings-area justify-content-between">
+                                            <div class="ratings">
+                                                @php echo __(display_avg_rating($product->reviews)) @endphp
+                                            </div>
+                                            <span class="ml-2 mr-auto">({{__($product->reviews->count())}})</span>
+                                        </div> -->
+                                        @if($product->show_in_frontend && $product->track_inventory)
+                                        @php $quantity = $product->stocks->sum('quantity'); @endphp
+                                            <div class="badge badge--{{$quantity>0?'success':'danger'}} stock-status d-block">Existencias (<span
+                                                class="stock-qty">{{$quantity}}</span>)
+                                            </div>
+                                        @endif 
+                                    </div>                       
+                                </div>                       
                                 <div class="row">                           
                                     <div class="col-6">
                                         <select onchange="QuantityValue(this.value,'{{ $product->id }}')" type="number"
@@ -150,6 +141,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="xdes-argo">
+                        <div class="description-item">
+                            @if($product->description)
+                            <p>
+                                @lang($product->description)
+                            </p>
+
+                            @else
+                            <div class="alert cl-title alert--base" role="alert">
+                                No Hay Descripción Para Este Producto
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    
                     
 
 
