@@ -464,18 +464,18 @@ class SiteController extends Controller
                         ', [$search_key])
                 ->with(
                     [
-                        'categories',
-                        'offer',
-                        'offer.activeOffer',
-                        'reviews',
-                        'brand',
+                        // 'categories',
+                        // 'offer',
+                        // 'offer.activeOffer',
+                        // 'reviews',
+                        // 'brand',
                         'stocks' => function ($q) {
                             $q->where('quantity', '>', 0);
                         },
                         'productIva'
                     ]
                 )
-                ->where('is_plan', 0)
+                // ->where('is_plan', 0)
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
