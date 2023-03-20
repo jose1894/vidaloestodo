@@ -50,7 +50,7 @@
                 <div class="product-details-content product-details">
                     <h4 class="title">{{__($product->name)}}</h4>
                     <p>MARCA: {{ $product->brand ? $product->brand->name : 'No definida'}}</p>
-                    <p>CÓDIGO: {{$product->codigo_int}}</p>
+                    <p>CÓDIGO: {{$product->internal_code}}</p>
                     <p>CÓDIGO OEM: {{$product->oem_code}}</p>
                     <div class="row my-3">
                         <div class="col-3">
@@ -368,7 +368,7 @@
                                         </p>
                                         <p style="font-size:12px" class="producto-cod_int">
                                             <span data-automation-id="cod_int">Codigo:</span>
-                                            <span style="color:black">{{ $item->codigo_int }}</span>
+                                            <span style="color:black">{{ $item->internal_code }}</span>
                                         </p>
                                         {{-- <p class="producto-categ">
                                             @if(isset($item['categories']) && ($item['categories']->count() > 0 ) ) 

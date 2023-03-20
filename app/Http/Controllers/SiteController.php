@@ -187,17 +187,21 @@ class SiteController extends Controller
         $products_like = Product::with('productIva')
             ->where(function ($product) use ($search) {
                 $product->where('name', 'like', "%" . $search . "%");
+                $product->where('description', 'like', "%" . $search . "%");
+                $product->where('internal_code', 'like', "%" . $search . "%");
+                $product->where('oem_code', 'like', "%" . $search . "%");
             })->paginate(10);
 
-        //DB::statement("ALTER TABLE products ADD FULLTEXT(name, description)");
+        // DB::statement("ALTER TABLE products ADD FULLTEXT(name, description)");
+        // DB::statement("ALTER TABLE products ADD FULLTEXT(internal_code, oem_code)");
 
         $products_match = Product::select('*')
             ->selectRaw('
-                            match(name, description) 
+                            match(name, description, internal_code, oem_code) 
                             against(? in natural language mode) as score
                         ', [$search])
             ->whereRaw('
-                            match(name, description) 
+                            match(name, description, internal_code, oem_code) 
                             against(? in natural language mode) > 0.0000001
                         ', [$search])
             ->with(
@@ -454,15 +458,20 @@ class SiteController extends Controller
                 )
                 ->paginate($perpage);
                 
-                $products_match = Product::select('*')
+            $products_match = Product::select('*')
                 ->selectRaw('
-                                match(name, description) 
+                                match(name, description, internal_code, oem_code) 
                                 against(? in natural language mode) as score
                             ', [$search_key])
                 ->whereRaw('
-                                match(name, description) 
+                                match(name, description, internal_code, oem_code) 
                                 against(? in natural language mode) > 0.0000001
                             ', [$search_key])
+                ->whereHas('stocks', function ($p) {
+                    //$p->whereHas('amounts', function ($t) {
+                    $p->where('quantity', '>', '0');
+                    //});
+                })
                 ->with(
                     [
                         'stocks' => function ($query) {

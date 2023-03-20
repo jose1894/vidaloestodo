@@ -643,7 +643,7 @@ class ProductController extends Controller
         foreach ($rows as $row) {
             foreach ($row as $rowd) {
                 //print_r($rowd[2]);
-                $product = Product::where('codigo_int', $rowd[0])->first();
+                $product = Product::where('internal_code', $rowd[0])->first();
                 if ($product) {
 
                     $iva = ProductIva::where('percentage', isset($rowd[2]) ? $rowd[2] : 16)->first();

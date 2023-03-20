@@ -16,7 +16,7 @@ class ProductExport implements FromCollection, WithHeadings
             'Id',
             'Brand',
             'SKU',
-            'Codigo_int',
+            'internal_code',
             'Name',
             'Model',
             'Has_variants',

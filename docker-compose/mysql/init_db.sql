@@ -714,7 +714,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `prime_price` double(8,2) DEFAULT NULL COMMENT 'Precio de producto en plan prime',
   `unidad_medida` int(10) UNSIGNED DEFAULT NULL,
   `usa_gramaje` int(11) NOT NULL DEFAULT 0,
-  `codigo_int` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `internal_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `products_brand_id_index` (`brand_id`),
   KEY `products_unidad_medida_index` (`unidad_medida`)

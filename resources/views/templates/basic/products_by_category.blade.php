@@ -115,7 +115,7 @@
                                                 </p>
                                                 <p style="font-size:12px" class="producto-cod_int">
                                                     <span data-automation-id="cod_int">Codigo:</span>
-                                                    <span style="color:black">{{ $item->codigo_int }}</span>
+                                                    <span style="color:black">{{ $item->internal_code }}</span>
                                                 </p>
                                                 {{-- <p class="producto-categ">
                                                     @if (isset($item['categories']) && $item['categories']->count() > 0)
