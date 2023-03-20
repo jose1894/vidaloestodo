@@ -166,7 +166,7 @@ class ProductController extends Controller
             'description'           => 'nullable|string',
             'summary'               => 'nullable|string|max:360',
             'sku'                   => 'nullable|string|max:100',
-            'oem_code'              => 'nullable|string|max:100',
+            'oem_code'              => 'nullable|string|max:255',
             'internal_code'         => 'nullable|string|max:100',
             'extra'                 => 'sometimes|required|array',
             'extra.*.key'           => 'required_with:extra',

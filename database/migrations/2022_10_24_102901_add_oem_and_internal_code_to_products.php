@@ -15,7 +15,7 @@ class AddOemAndInternalCodeToProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
-            $table->string('oem_code', 100)->index()->after('model')->nullable();
+            $table->string('oem_code', 255)->index()->after('model')->nullable();
             $table->string('internal_code', 100)->index()->after('model')->nullable();
         });
     }
