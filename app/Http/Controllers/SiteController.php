@@ -419,6 +419,7 @@ class SiteController extends Controller
         //DB::statement("ALTER TABLE products ADD FULLTEXT(name, description)");
 
         if ($category_id == 0 || $category_id == null) {
+
             $products_like = Product::with(
                 [
                     'categories',
@@ -452,46 +453,74 @@ class SiteController extends Controller
 						  END, name ASC"
                 )
                 ->paginate($perpage);
-
-            $products_match = Product::select('*')
+                
+                $products_match = Product::select('*')
                 ->selectRaw('
-                            match(name, description) 
-                            against(? in natural language mode) as score
-                        ', [$search_key])
+                                match(name, description) 
+                                against(? in natural language mode) as score
+                            ', [$search_key])
                 ->whereRaw('
-                            match(name, description) 
-                            against(? in natural language mode) > 0.0000001
-                        ', [$search_key])
+                                match(name, description) 
+                                against(? in natural language mode) > 0.0000001
+                            ', [$search_key])
                 ->with(
                     [
-                        // 'categories',
-                        // 'offer',
-                        // 'offer.activeOffer',
-                        // 'reviews',
-                        // 'brand',
-                        'stocks' => function ($q) {
-                            $q->where('quantity', '>', 0);
+                        'stocks' => function ($query) {
+                            $query->where('quantity', '>', 0)->latest()->get(); //el ultimo stock registrado
                         },
-                        'productIva'
+                        'productIva',
                     ]
                 )
-                // ->where('is_plan', 0)
-                ->whereHas('categories')
-                ->whereHas('stocks', function ($p) {
-                    //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity', '>', '0');
-                    //});
-                })
-                //->orderBy('name', 'desc')
-                ->orderByRaw(
-                    "CASE WHEN name = '" . $search_key . "' THEN 0  
-							   WHEN name LIKE '" . $search_key . "%' THEN 1  
-							   WHEN name LIKE '%" . $search_key . "%' THEN 2  
-							   WHEN name LIKE '%" . $search_key . "' THEN 3  
-							   ELSE 4
-						  END, name ASC"
-                )
                 ->paginate($perpage);
+
+            // $products_match = Product::select('*')
+            //     ->selectRaw('
+            //                 match(name, description) 
+            //                 against(? in natural language mode) as score
+            //             ', [$search_key])
+            //     ->whereRaw('
+            //                 match(name, description) 
+            //                 against(? in natural language mode) > 0.0000001
+            //             ', [$search_key])
+            //     ->with(
+            //         [
+            //             // 'categories',
+            //             // 'offer',
+            //             // 'offer.activeOffer',
+            //             // 'reviews',
+            //             // 'brand',
+            //             'stocks' => function ($q) {
+            //                 $q->where('quantity', '>', 0);
+            //             },
+            //             'productIva'
+            //         ]
+            //     )
+            //     // ->where('is_plan', 0)
+            //     ->whereHas('categories')
+            //     ->whereHas('stocks', function ($p) {
+            //         //$p->whereHas('amounts', function ($t) {
+            //         $p->where('quantity', '>', '0');
+            //         //});
+            //     })
+            //     //->orderBy('name', 'desc')
+            //     ->orderByRaw(
+            //         "CASE WHEN name = '" . $search_key . "' THEN 0  
+			// 				   WHEN name LIKE '" . $search_key . "%' THEN 1  
+			// 				   WHEN name LIKE '%" . $search_key . "%' THEN 2  
+			// 				   WHEN name LIKE '%" . $search_key . "' THEN 3  
+			// 				   ELSE 4
+			// 			  END, name ASC,
+            //         CASE WHEN description = '" . $search_key . "' THEN 0  
+            //             WHEN description LIKE '" . $search_key . "%' THEN 1  
+            //             WHEN description LIKE '%" . $search_key . "%' THEN 2  
+            //             WHEN description LIKE '%" . $search_key . "' THEN 3  
+            //             ELSE 4
+            //         END, description ASC"
+            //     )
+            //     ->toSql();
+                // ->paginate($perpage);
+
+                // dd($products_match);
         } else {
             $products_like   = Category::where('id', $category_id)
                 // ->where('parent_id', $category_id)
@@ -531,7 +560,6 @@ class SiteController extends Controller
         }
 
         $products = isset($products_match) ? $products_match->count() > 0 ? $products_match : $products_like : $products_like;
-
         return view($this->activeTemplate . $view, compact('page_title', 'products', 'empty_message', 'search_key', 'category_id', 'perpage'));
     }
 
