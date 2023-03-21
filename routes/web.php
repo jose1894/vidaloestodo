@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+URL::forceRootUrl(env('APP_URL'));
+
 Route::get('/clear', function(){
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
     $notify[]=['success', 'Cache cleared successfully'];

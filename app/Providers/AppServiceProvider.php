@@ -31,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        if (env('APP_ENV') === 'production') {
+        	$this->app['request']->server->set('HTTPS', true);
+    	}
+        
         $activeTemplate = activeTemplate();
 
         $viewShare['general'] = GeneralSetting::first();

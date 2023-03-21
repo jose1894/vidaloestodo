@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*','http://www.euroricambidiesel.com','https://www.euroricambidiesel.com'],
 
     'allowed_origins_patterns' => [],
 
