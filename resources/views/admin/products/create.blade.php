@@ -873,8 +873,7 @@
                 //storecombo(data)
             });
 
-            $('.add-specification').on('click', function() {
-                debugger
+            $('.add-specification').on('click', function() {            
                 var specifications = $(document).find('.specifications');
                 var length = specifications.length;
                 $('.specification-info').addClass('d-none');
