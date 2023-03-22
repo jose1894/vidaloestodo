@@ -590,7 +590,7 @@ class OrderController extends Controller
         $message_to_admin = 'Acaba de recibir una orden por parte del cliente ' . $user->firstname .' '. $user->lastname . 
         ' por un monto de: '.number_format($order->total_amount,2) .'$. Este atento para confirmar el pago.';
         $admin = Admin::where('role_id',3)->first();
-        $message_to_client = '¡Felicidades! Acaba de realizar un pedido en alfogolarexpress por un monto de: ' .number_format($order->total_amount,2) .
+        $message_to_client = '¡Felicidades! Acaba de realizar un pedido en Euroricambidiesel por un monto de: ' .number_format($order->total_amount,2) .
         '$. Estamos a su servicio.' ;
         try {
             send_general_email($admin->email, '¡Alerta de Orden!', $message_to_admin, 'Admin');
@@ -1020,7 +1020,7 @@ class OrderController extends Controller
         $message_to_admin = 'Acaba de recibir una orden por parte del cliente ' . $user->firstname .' '. $user->lastname . 
         ' por un monto de: '.number_format($order->total_amount,2) .'$. Este atento para confirmar el pago.';
         $admin = Admin::where('role_id',3)->first();
-        $message_to_client = '¡Felicidades! Acaba de realizar un pedido en alfogolarexpress por un monto de: ' .number_format($order->total_amount,2) .
+        $message_to_client = '¡Felicidades! Acaba de realizar un pedido en Euroricambidiesel por un monto de: ' .number_format($order->total_amount,2) .
         '$. Estamos a su servicio.' ;
         
         try {
