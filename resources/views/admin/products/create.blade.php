@@ -874,6 +874,7 @@
             });
 
             $('.add-specification').on('click', function() {
+                debugger
                 var specifications = $(document).find('.specifications');
                 var length = specifications.length;
                 $('.specification-info').addClass('d-none');
@@ -886,13 +887,13 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="specification[${length}][name]" placeholder="@lang('Type Name Here...')">
+                                                    <input type="text" class="form-control" name="specification[${length + 1}][name]" placeholder="@lang('Type Name Here...')">
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group abs-form-group d-flex justify-content-between flex-wrap">
 
-                                                    <input type="text" class="form-control" name="specification[${length}][value]" placeholder="@lang('Type Value Here...')">
+                                                    <input type="text" class="form-control" name="specification[${length + 1}][value]" placeholder="@lang('Type Value Here...')">
                                                     <button type="button" class="btn btn-outline--danger remove-specification abs-button"><i class="la la-minus"></i></button>
                                                 </div>
                                             </div>
