@@ -642,22 +642,23 @@ class ProductController extends Controller
         //dd($rows);
         foreach ($rows as $row) {
             foreach ($row as $rowd) {
-                //print_r($rowd[2]);
+                //print_r($rowd[8]);
                 $product = Product::where('internal_code', $rowd[0])->first();
+                // dd($row);
                 if ($product) {
-
+                    
                     $iva = ProductIva::where('percentage', isset($rowd[2]) ? $rowd[2] : 16)->first();
                     $product->base_price          = isset($rowd[3]) ? $rowd[3] : 0;
                     $product->prime_price          = isset($rowd[5]) ? $rowd[5] : 0;
-
+                    
                     if ($iva) {
                         $product->iva          = $iva ? 1 : 0;
                         $product->iva_id          = $iva ? $iva->id : 0;
                     }
-
+                    
                     $stock = ProductStock::where('product_id', $product->id)->first();
-                    if ($stock) {
-                        $stock->quantity = $rowd[8];
+                    if (isset($stock)) {
+                        $stock->quantity = 0;//$rowd[8];
                         $stock->save();
                     }
                     $product->save();
