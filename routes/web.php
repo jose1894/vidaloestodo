@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-URL::forceRootUrl(env('APP_URL'));
+if (env('APP_ENV') === 'production') {
+    URL::forceRootUrl(env('APP_URL'));
+}
 
 Route::get('/clear', function(){
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');

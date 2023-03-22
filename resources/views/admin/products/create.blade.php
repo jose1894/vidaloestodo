@@ -1005,7 +1005,7 @@
                 }
             });
 
-            $('#addForm').on('submit', function(e) {
+            $('body').on('submit','#addForm', function(e) {
                 var loading = $('.loader-container');
                 e.preventDefault();
                 loading.removeClass('d-none').fadeIn();
