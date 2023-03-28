@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-buster
+FROM php:8.2-rc-fpm-buster
 
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/

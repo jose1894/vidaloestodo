@@ -1,24 +1,24 @@
 version: "3.3"
 services:
-  app_euroricambi_prod:
+  app_vidaloestodo_prod:
     build:
       args:
         user: eurodocker
         uid: 1000
       context: ./
       dockerfile: Dockerfile
-    image: euroricambi
-    container_name: euroricambi-app-prod
+    image: vidaloestodo
+    container_name: app_vidaloestodo_prod
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
       - ./:/var/www
     networks:
-      - euroricambi-network-prod
+      - network-prod
 
-  db_euroricambi_prod:
+  db_vidaloestodo_prod:
     image: mysql:8.0
-    container_name: euroricambi-db-prod
+    container_name: db_vidaloestodo_prod
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -33,23 +33,24 @@ services:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
       - ./dbdata:/var/lib/mysql
     networks:
-      - euroricambi-network-prod
+      - network-prod
 
-  nginx_euroricambi_prod:
+  nginx_vidaloestodo_prod:
     image: nginx:alpine
-    container_name: euroricambi-nginx-prod
+    container_name: nginx_vidaloestodo_prod
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8000:80"
+      # - "127.0.0.1:8000:80"
+      - 8000:80
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d:/etc/nginx/conf.d/
       - ./docker-compose/nginx/nginx.conf:/etc/nginx/nginx.conf
     networks:
-      - euroricambi-network-prod
+      - network-prod
     depends_on:
-      - app_euroricambi_prod
+      - app_vidaloestodo_prod
 
 networks:
-  euroricambi-network-prod:
+  network-prod:
     driver: bridge

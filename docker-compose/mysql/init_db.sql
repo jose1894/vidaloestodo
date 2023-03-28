@@ -21,8 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `alfogola_bd`
 --
-CREATE DATABASE IF NOT EXISTS `eurodb` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `eurodb`;
+CREATE DATABASE IF NOT EXISTS `vidaloestodo` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `vidaloestodo`;
 
 -- --------------------------------------------------------
 
