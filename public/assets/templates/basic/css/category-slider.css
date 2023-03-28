@@ -1,0 +1,80 @@
+/* Category Slider */
+.category-item img {
+	background: #fff none repeat scroll 0 0;
+	border-radius: 70px;
+	box-shadow: 0 0 2px #ccc;
+	height: 140px;
+	margin: 1px 0 8px;
+	object-fit: scale-down;
+	padding: 7px;
+	transform: scale(1);
+	transition-duration: 0.4s;
+	width: 140px !important;
+    display: initial !important;
+}
+
+.category-item:hover img
+{
+	 transform: scale(1.09);
+}
+
+.category-item {
+    padding: 8px;
+    text-align: center;
+}
+.category-item h6 {
+    font-size: 13px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.top-category {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 1px solid #eeeeee;
+    border-top: 1px solid #eeeeee;
+    margin-bottom: 15px;
+    padding: 14px 0;
+}
+.category-item p {
+    margin: 0;
+}
+.top-category .owl-prev {
+    left: -70px;
+}
+.top-category .owl-next {
+    right: -70px;
+}
+
+/* Main Slider */
+.carousel-slider-main .owl-pagination {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+.carousel-slider-main {
+    position: relative;
+}
+.carousel-slider-main .owl-prev, .carousel-slider-main .owl-next {
+    top: 46%;
+}
+
+.owl-carousel-category .owl-theme .owl-controls .owl-buttons div{
+	background: #dbdbdb none repeat scroll 0 0;
+	border-radius: 30px;
+	color: #fff;
+	display: inline-block;
+	font-size: 21px;
+	height: 40px;
+	line-height: 40px;
+	margin: 0 20px;
+	opacity: 0.8;
+	text-align: center;
+	text-transform: uppercase;
+	width: 40px;
+}
+.owl-carousel-category .owl-theme .owl-controls .owl-buttons div:hover{
+	background: #1c2224 none repeat scroll 0 0;
+    color: #ffffff;
+}
