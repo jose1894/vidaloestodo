@@ -58,9 +58,7 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
-# Expose port 9000, exec entrypoints and start php-fpm server
+# Expose port 9000 start php-fpm server
 EXPOSE 9000
-
-ENTRYPOINT ["/var/www/docker-compose/config/entrypoints/docker-entrypoint.sh"]
 
 CMD ["php-fpm"]
