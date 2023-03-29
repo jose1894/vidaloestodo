@@ -1,4 +1,4 @@
-FROM php:8.2-rc-fpm-buster
+FROM php:8.0.2-fpm-buster
 
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
@@ -58,6 +58,9 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
-# Expose port 9000 and start php-fpm server
+# Expose port 9000, exec entrypoints and start php-fpm server
 EXPOSE 9000
+
+ENTRYPOINT ["/var/www/docker-compose/config/entrypoints/docker-entrypoint.sh"]
+
 CMD ["php-fpm"]
