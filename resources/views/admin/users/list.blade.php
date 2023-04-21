@@ -5,26 +5,18 @@
     <div class="col-lg-12">
         <div class="card b-radius--10 ">
             <div class="card-body">
-                <form class="form-inline" action="{{ route('admin.users.search') }}" method="GET">
                 <div class="row">
                         <div class="col-lg-4 mb-3">
-                            <select name="tipo_usuario">
-                            <option value="1">Uno
-                            </select>
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            
-                        </div>
-                        <div class="col-lg-4 mb-3">
+                            <form class="form-inline" action="{{ route('admin.users.search') }}" method="GET">
                                 <div class="input-group has_append">
                                     <input type="text" name="search" class="form-control" placeholder="@lang('Search')..." value="{{ request()->search ?? '' }}">
                                     <div class="input-group-append">
                                         <button class="btn btn--success" id="search-btn" type="submit"><i class="la la-search"></i></button>
                                     </div>
                                 </div>
+                            </form>
                         </div>
                 </div>
-                </form>
                 <div class="table-responsive--md  table-responsive">
                     <table class="table table--light style--two">
                         <thead>
