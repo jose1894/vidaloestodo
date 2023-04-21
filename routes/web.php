@@ -278,6 +278,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('report/user_order/{id}/search', 'ReportController@userOrderSearch')->name('report.order.user_search');
 
         // Admin Support
+        /*
         Route::get('tickets', 'SupportTicketController@tickets')->name('ticket');
         Route::get('tickets/pending', 'SupportTicketController@pendingTicket')->name('ticket.pending');
         Route::get('tickets/closed', 'SupportTicketController@closedTicket')->name('ticket.closed');
@@ -286,7 +287,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('ticket/reply/{id}', 'SupportTicketController@ticketReplySend')->name('ticket.reply');
         Route::get('ticket/download/{ticket}', 'SupportTicketController@ticketDownload')->name('ticket.download');
         Route::post('ticket/delete', 'SupportTicketController@ticketDelete')->name('ticket.delete');
-
+        */
 
 
         // General Setting

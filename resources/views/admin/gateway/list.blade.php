@@ -6,7 +6,6 @@
         <div class="col-lg-12">
             <div class="card ">
                 <div class="card-body ">
-
                     <div class="table-responsive table-responsive--sm">
                         <table class="default-data-table table ">
                             <thead>

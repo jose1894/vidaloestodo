@@ -305,50 +305,7 @@
 </li>
 @endif
 
-@if($modules->status == '1' && $modules->name == 'Tickets de soporte')
-<li class="sidebar-menu-item sidebar-dropdown">
-    <a href="javascript:void(0)" class="{{menuActive('admin.ticket*',3)}}">
-        <i class="menu-icon la la-ticket"></i>
-        <span class="menu-title">@lang('Support Ticket') </span>
-        @if(0 < $pending_ticket_count) <span class="menu-badge pill bg--primary ml-auto">
-            <i class="fa fa-exclamation"></i>
-            </span>
-            @endif
-    </a>
-    <div class="sidebar-submenu {{menuActive('admin.ticket*',2)}} ">
-        <ul>
 
-            <li class="sidebar-menu-item {{menuActive('admin.ticket')}} ">
-                <a href="{{route('admin.ticket')}}" class="nav-link">
-                    <i class="menu-icon las la-list"></i>
-                    <span class="menu-title">@lang('All Ticket')</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item {{menuActive('admin.ticket.pending')}} ">
-                <a href="{{route('admin.ticket.pending')}}" class="nav-link">
-                    <i class="menu-icon las la-pause-circle"></i>
-                    <span class="menu-title">@lang('Pending Ticket')</span>
-                    @if($pending_ticket_count)
-                    <span class="menu-badge pill bg--primary ml-auto">{{$pending_ticket_count}}</span>
-                    @endif
-                </a>
-            </li>
-            <li class="sidebar-menu-item {{menuActive('admin.ticket.closed')}} ">
-                <a href="{{route('admin.ticket.closed')}}" class="nav-link">
-                    <i class="menu-icon las la-times-circle"></i>
-                    <span class="menu-title">@lang('Closed Ticket')</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item {{menuActive('admin.ticket.answered')}} ">
-                <a href="{{route('admin.ticket.answered')}}" class="nav-link">
-                    <i class="menu-icon las la-reply"></i>
-                    <span class="menu-title">@lang('Answered Ticket')</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-@endif
 
 @if($modules->status == '1' && $modules->name == 'Tasa del día')
 <li class="sidebar-menu-item {{menuActive('admin.rates')}}">

@@ -323,7 +323,7 @@
     </div>
 </li>
 
-
+{{--
 <li class="sidebar-menu-item sidebar-dropdown">
     <a href="javascript:void(0)" class="{{menuActive('admin.ticket*',3)}}">
         <i class="menu-icon la la-ticket"></i>
@@ -365,7 +365,7 @@
             </li>
         </ul>
     </div>
-</li>
+</li>--}}
 
 
 <li class="sidebar-menu-item {{menuActive('admin.rates')}}">

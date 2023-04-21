@@ -72,7 +72,7 @@ class RegisterController extends Controller
     }
 
     public function registerAdmin(Request $request, $id){
-
+        
         $data = $request->all();  
 
         if($data['role_id'] == 1){ //si es cliente

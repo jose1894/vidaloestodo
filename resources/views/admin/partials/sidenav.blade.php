@@ -1,7 +1,7 @@
 <div class="sidebar capsule--rounded bg_img overlay--dark" data-background="{{getImage('assets/admin/images/sidebar/2.jpg','400x800')}}"
-     >
+      >
     <button class="res-sidebar-close-btn"><i class="las la-times"></i></button>
-    <div class="sidebar__inner">
+    <div class="sidebar__inner" style="background-color:#b61942!important">
         <div class="sidebar__logo">
             <a href="{{route('admin.dashboard')}}" class="sidebar__main-logo"><img
                     src="{{getImage(imagePath()['logoIcon']['path'] .'/logo_2.png')}}" alt="@lang('image')"></a>
