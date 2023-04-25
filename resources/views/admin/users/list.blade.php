@@ -5,17 +5,26 @@
     <div class="col-lg-12">
         <div class="card b-radius--10 ">
             <div class="card-body">
-                <div class="row">
-                        <div class="col-lg-4 mb-3">
-                            <form class="form-inline" action="{{ route('admin.users.search') }}" method="GET">
-                                <div class="input-group has_append">
-                                    <input type="text" name="search" class="form-control" placeholder="@lang('Search')..." value="{{ request()->search ?? '' }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn--success" id="search-btn" type="submit"><i class="la la-search"></i></button>
-                                    </div>
+                <div class="row justify-content-end">
+                    <div class="col-lg-6 mb-3">
+                        <form action="{{ route('admin.users.search') }}" method="GET" class="d-flex align-items-center justify-content-end">
+                            <div class="input-group align-items-center justify-content-end" >
+                                <label style="margin: 0;margin-right: 10px;">Filtrar por:</label>
+                                <select name="rol">
+                                    <option value="1">Seleccione
+                                    @foreach ($roles as $rol)
+                                        <option value="{{ $rol->id }}"> {{$rol->name}}
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group has_append">
+                                <input type="text" name="search" class="form-control" placeholder="@lang('Search')..." value="{{ request()->search ?? '' }}">
+                                <div class="input-group-append">
+                                    <button class="btn btn--success" id="search-btn" type="submit"><i class="la la-search"></i></button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-responsive--md  table-responsive">
                     <table class="table table--light style--two">

@@ -52,7 +52,7 @@ class ManageUsersController extends Controller
         //return $users;
         // dd($users);
 
-        $roles = Roles::with(['modules'])->get();
+        $roles = Roles::where('id','<>', '3')->with(['modules'])->get();
 
         return view('admin.users.list', compact('page_title', 'empty_message', 'users', 'roles'));
     }
@@ -130,15 +130,30 @@ class ManageUsersController extends Controller
 
     public function search(Request $request)
     {
-        // dd($request->all());
         $search = $request->search;
-        $users = User::where(function ($user) use ($search) {
+        $rol = $request->rol;
+        $users = User::where(function ($user) use ($search, $rol) {
             $user->where('username', 'like', "%$search%")
                 ->orWhere('email', 'like', "%$search%")
                 ->orWhere('mobile', 'like', "%$search%")
                 ->orWhere('firstname', 'like', "%$search%")
-                ->orWhere('lastname', 'like', "%$search%");
+                ->orWhere('lastname', 'like', "%$search%");  // $user->where('role_id', $rol);
         });
+
+        // dd($rol);
+        if($rol === '2') {
+            $moderators = Admin::where('role_id', '2')->get();
+
+            $clientes = User::with(
+                [
+                    'roles.modules:id,name','plan_users'
+                ]
+            )->get();//latest()->paginate(getPaginate());//->get();//->paginate(getPaginate());
+
+            $users = $moderators->sortByDesc('created_at');
+        }
+        // $sql = $users->toSql();
+        // dd($sql);
 
         // if (is_null($scope)) {
             // $scope = 'list';
@@ -165,7 +180,7 @@ class ManageUsersController extends Controller
         //         $page_title .= 'SMS no verificado ';
         //         break;
         // }
-        $roles = Roles::with(['modules'])->get();
+        $roles = Roles::where('id','<>', '3')->with(['modules'])->get();
         $users = $users->paginate(getPaginate());
         $page_title .= 'Buscar Cliente - ' . $search;
         $empty_message = 'No se encontraron resultados de búsqueda';
