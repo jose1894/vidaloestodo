@@ -54,6 +54,7 @@
 
     <!-- jQuery library -->
     <script src="{{ asset('assets/admin/js/vendor/jquery-3.5.1.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <!-- bootstrap js -->
     <script src="{{ asset('assets/admin/js/vendor/bootstrap.bundle.min.js') }}"></script>
 

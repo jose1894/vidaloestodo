@@ -122,7 +122,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('admin.register.admin', 0) }}" method="POST" enctype="multipart/form-data">
+            <form id="add-form" action="{{ route('admin.register.admin', 0) }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="hidden" id="is_moderador" class="form-control" name="is_moderador" value="is_moderador" >
@@ -152,14 +152,21 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="mobile">@lang('Mobile')</label>
+                                <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" required>
+                            </div>                           
+                        </div>
+
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="email">@lang('Email')</label>
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                             </div>                           
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="role">@lang('Role')</label>
                                 <select class="form-control" id="role_id" name="role_id"> 
@@ -181,7 +188,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password">@lang('Password')</label>
-                                <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control password-add" name="password" required autocomplete="new-password">
                             </div>
                             
                         </div>
@@ -189,12 +196,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password-confirm">@lang('Confirm Password')</label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>                      
                         </div>
 
                     </div>
-                    <button type="submit" class="btn btn-block btn--success mr-2">@lang('Add')</button>
+                    <button type="submit" class="btn add-btn btn-block btn--success mr-2">@lang('Add')</button>
                 </div>
             </form>
         </div>
@@ -210,6 +217,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <form id="editForm" action="{{ route('admin.register.admin', isset($user->id) ? $user->id : '') }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
@@ -240,14 +248,21 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="mobile">@lang('Mobile')</label>
+                                <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" required>
+                            </div>                           
+                        </div>
+
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="email">@lang('Email')</label>
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                             </div>                           
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="role">@lang('Role')</label>
                                 <select class="form-control" id="role_id_edit" name="role_id"> 
@@ -270,7 +285,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password">@lang('Password')</label>
-                                <input id="password" type="password" class="form-control" name="password" autocomplete="new-password">
+                                <input id="password" type="password" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control password-edit" name="password" autocomplete="new-password">
                             </div>
                             
                         </div>
@@ -278,7 +293,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password-confirm">@lang('Confirm Password')</label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                                <input id="password-confirm" type="password" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>                      
                         </div>
 
@@ -341,6 +356,8 @@
 
 @push('script')
 
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/iziToast.min.css') }}">
+    <script src="{{ asset('assets/admin/js/iziToast.min.js') }}"></script>
     <script>
         'use strict';
         (function($){
@@ -349,9 +366,120 @@
                 type: 'image'
             });
 
-            $('#addModal, #editModal').on('shown.bs.modal', function (e) {
-                $(document).off('focusin.modal');
+            const rules = {
+                firstname:"required",
+                lastname:"required",
+                email:{email: true, required: true},
+                mobile:{required : true, minlength:10},
+                username:{required : true, minlength:6},
+                password:{required : true, },
+            }
+
+            const messages = {
+                firstname:"Ingrese nombre",
+                lastname:"Ingrese apellido",
+                email:{email:"Ingrese un email valido!", required:"Ingrese un email!"},
+                mobile:{minlength:"Ingrese un numero de telefono valido", required:"Ingrese un numero de telefono"},
+                username:{minlength:"Username debe tener al menos 6 caracteres", required:"Ingrese un username"},
+                password:{required:"Ingrese una contraseña"},
+                password_confirmation: {
+                    required: "Ingrese una contraseña",
+                    equalTo: "Las contraseñas no coinciden"
+                }
+            }
+
+            Object.freeze(rules)
+            Object.freeze(messages)
+
+
+            $("#add-form").validate({
+                rules:{
+                    ...rules,
+                    password_confirmation: {
+                        required: true,
+                        equalTo: ".password-add"
+                    }
+                },
+                messages,
+
+                submitHandler: function(form){
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    beforeSend(){
+                        iziToast.warning({message:"Informacion enviada, por favor espere", position: "topRight"});
+                    },
+                    success: function(response) {
+                        iziToast.success({message:"Usuario registrado", position: "topRight"});
+                        $("#add-form").find('input').val("")
+                        $("#add-form").find('select').val("")
+                        $("#addModal").modal('hide');
+                        setTimeout(() => {window.location.reload()}, 3000);
+                    },
+                    error(response){
+                        console.log(response)
+                        let str = response?.responseJSON?.message  || ""
+                        
+                        if (response?.responseJSON?.errors){
+                            const errors = response.responseJSON.errors
+                            for (let field of Object.keys(errors)){
+                                errors[field].forEach((error) => {
+                                    str += `<br>${error}`
+                                })
+                            }
+                        }
+
+                        iziToast.error({message:str, position: "topRight"});
+                        
+                    }
+                    
+                    });		
+                }
             });
+
+
+            $("#editForm").validate({
+                rules:{
+                    ...rules,
+                    password_confirmation: {
+                        required: true,
+                        equalTo: ".password-edit"
+                    }
+                },
+                messages,
+
+                submitHandler: function(form){
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    beforeSend(){
+                        iziToast.warning({message:"Informacion enviada, por favor espere", position: "topRight"});
+                    },
+                    success: function(response) {
+                        iziToast.success({message:"Usuario actualizado", position: "topRight"});
+                        setTimeout(() => {window.location.reload()}, 5000);
+                    },
+                    error(response){
+                        let str = response?.responseJSON?.message  || ""
+                        
+                        if (response?.responseJSON?.errors){
+                            const errors = response.responseJSON.errors
+                            for (let field of Object.keys(errors)){
+                                errors[field].forEach((error) => {
+                                    str += `<br>${error}`
+                                })
+                            }
+                        }
+                        iziToast.error({message:str, position: "topRight"});
+                       
+                    }
+                });		
+
+                }
+            });
+
 
             $('.edit-btn').on('click', function () {
                 var modal = $('#editModal');
@@ -361,6 +489,7 @@
                 modal.find('input[name=firstname]').val(user.firstname ? user.firstname : user.name.split(' ')[0] ? user.name.split(' ')[0] : '');
                 modal.find('input[name=lastname]').val(user.lastname ? user.lastname : user.name.split(' ')[1] ? user.name.split(' ')[1] : '');
                 modal.find('input[name=username]').val(user.username);
+                modal.find('input[name=mobile]').val(user.mobile);
                 modal.find('input[name=email]').val(user.email);
                 modal.find('select[name=role_id]').val(user.role_id);
                 let $option = $('<option />', {

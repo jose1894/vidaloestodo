@@ -93,7 +93,11 @@ class RegisterController extends Controller
             $user->lastname = isset($data['lastname']) ? $data['lastname'] : null;
             $user->email = strtolower(trim($data['email']));
             $user->username = trim($data['username']);
-            $user->mobile = isset($data['mobile']) ? $data['country_code'].$data['mobile'] : '';
+            $user->mobile = isset($data['mobile']) ? 
+                                        (isset($data['country_code']) ? 
+                                                                    $data['country_code'].$data['mobile'] 
+                                                                    : $data['mobile'])
+                                        : '';
             $user->address = [
                 'address' => '',
                 'state' => '',
