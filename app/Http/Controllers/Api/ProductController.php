@@ -134,6 +134,8 @@ class ProductController extends Controller
     private function quantityList($quantity)
     {
         $quantityArray = [];
+
+        
         // for ($i = 1; $i < $quantity + 1; $i++) {
         //     $quantityArray[$i] = $i;
         // }
