@@ -3,7 +3,7 @@ services:
   app_vidaloestodo_prod:
     build:
       args:
-        user: eurodocker
+        user: vidadocker
         uid: 1000
       context: ./
       dockerfile: Dockerfile
