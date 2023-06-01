@@ -99,7 +99,8 @@ class ProductController extends Controller
                     $product['precioBaseIvaDiscount'] = $precioBaseIvaDiscount;
                     $product['precioBaseIvaDiscountRates'] = getAmount($precioBaseIvaDiscount * $rates, 2);
                     $product['urlimage'] = getImage(imagePath()['product']['path'] . '/thumb_' . @$product['main_image'], imagePath()['product']['size']);
-                    $product['quantityList'] = $this->quantityList(intval($product->stocks[0]->quantity));
+                    // $product['quantityList'] = $this->quantityList(intval($product->stocks[0]->quantity));
+                    $product['quantityList'] = intval($product->stocks[0]->quantity);
                     $product['categoryMain'] = $category->id;
 
                     $arrayProducts[] = $product;
@@ -257,7 +258,8 @@ class ProductController extends Controller
             $product['precioBaseIvaDiscount'] = $precioBaseIvaDiscount;
             $product['precioBaseIvaDiscountRates'] = getAmount($precioBaseIvaDiscount * $rates, 2);
             $product['urlimage'] = getImage(imagePath()['product']['path'] . '/thumb_' . @$product['main_image'], imagePath()['product']['size']);
-            $product['quantityList'] = $this->quantityList(intval($product->stocks[0]->quantity));
+            // $product['quantityList'] = $this->quantityList(intval($product->stocks[0]->quantity));
+            $product['quantityList'] = intval($product->stocks[0]->quantity);
 
             $arrayProducts[] = $product;
         }
@@ -336,7 +338,8 @@ class ProductController extends Controller
             $product['cartACt'] = ['quantity' => 0];
             $product['precioBaseIvaRates'] = getAmount($product['precioBaseIva'] * $rates, 2);
             $product['urlimage'] = getImage(imagePath()['product']['path'] . '/' . $product->main_image, imagePath()['product']['size']);
-            $product['quantityList'] = isset($product->stocks[0]) ? $this->quantityList(intval($product->stocks[0]->quantity)) : []; //$product->stocks[0]->quantity $this->quantityList(intval($product->stocks[0]->quantity));
+            // $product['quantityList'] = isset($product->stocks[0]) ? $this->quantityList(intval($product->stocks[0]->quantity)) : []; //$product->stocks[0]->quantity $this->quantityList(intval($product->stocks[0]->quantity));
+            $product['quantityList'] = intval($product->stocks[0]->quantity); //$product->stocks[0]->quantity $this->quantityList(intval($product->stocks[0]->quantity));
             $arrayProducts[] = $product;
         }
 
