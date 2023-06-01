@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -133,13 +133,7 @@ class ProductController extends Controller
 
     private function quantityList($quantity)
     {
-        $quantityArray = [];
-
-        
-        // for ($i = 1; $i < $quantity + 1; $i++) {
-        //     $quantityArray[$i] = $i;
-        // }
-        return $quantityArray;
+        return range(1, $quantity);
     }
 
     private function rates()
@@ -175,7 +169,8 @@ class ProductController extends Controller
         $product['selected'] = 'N';
         $product['cartACt'] = ['quantity' => 0];
         $product['urlimage'] = getImage(imagePath()['product']['path'] . '/' . @$product->main_image, imagePath()['product']['size']);
-        $product['quantityList'] = $this->quantityList(intval($product->stocks[0]->quantity));
+        // $product['quantityList'] = $this->quantityList(intval($product->stocks[0]->quantity));
+        $product['quantityList'] = intval($product->stocks[0]->quantity);
         
         //productos relacionados
         $rProducts = $product->categories()
