@@ -465,7 +465,7 @@ Route::get('search_cities','SiteController@search_cities')->name('search_cities'
 Route::get('check/plans_expires', 'SiteController@plans_expires')->name('plans_expires');
 
 Route::get('/', function (){
-    return redirect('/admin')
+    return redirect('/admin');
 })->name('home');
 // Route::get('/', 'SiteController@index')->name('home');
 
