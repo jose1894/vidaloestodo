@@ -41,8 +41,8 @@ services:
     container_name: nginx_vidaloestodo_prod
     restart: unless-stopped
     ports:
-      # - "127.0.0.1:8000:80"
-      - 8000:80
+      - "127.0.0.1:8000:80"
+      #- 8000:80
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d:/etc/nginx/conf.d/
