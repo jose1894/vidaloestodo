@@ -40,7 +40,10 @@ Route::post('remove_cart_all', 'API\CartController@removeCartAll')->name('remove
 Route::get('general-settings/scope-sitename', 'API\GeneralSettingsController@scopeSitename')->name('scope-sitename');
 
 /** WebServices */
-Route::get('curl', 'API\WebServices@curl')->name('curl');
+Route::get('curl_products', 'API\WebServices@curl_products')->name('curl_products');
+Route::get('curl_categories', 'API\WebServices@curl_categories')->name('curl_categories');
+Route::get('categories_stelar', 'API\WebServices@categories_stelar')->name('categories_stelar');
+Route::get('products_stelar', 'API\WebServices@products_stelar')->name('products_stelar');
 
 
 Route::middleware('auth:sanctum')->group(function () {

@@ -91,7 +91,10 @@ class CategoryController extends Controller
             $validation_rule['image_input']  = ['required', 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])];
 
         }else{
-            $category = Category::where('name', $request->name)->where('parent_id', $request->parent_id)->where('id', '!=', $id)->first();
+            $category = Category::where('name', $request->name)
+            ->where('parent_id', $request->parent_id)
+            ->where('id', '!=', $id)
+            ->first();
 
             if($category){
                 return response()->json(['status'=>'error', 'message'=>'El nombre ya ha está en uso']);
@@ -101,6 +104,7 @@ class CategoryController extends Controller
 
             $validation_rule['image_input']  = ['nullable', 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])];
         }
+
         $validator = Validator::make($request->all(), $validation_rule,[
             'meta_keywords.array.*' => 'Todas las palabras clave',
             'image_input.required'   => 'El campo de la Imagen es obligatorio'

@@ -477,7 +477,6 @@ class ProductController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
-
     public function highlight(Request $request)
     {
         $request->validate([
