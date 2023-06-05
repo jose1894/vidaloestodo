@@ -139,53 +139,53 @@ class WebServices extends Controller
     {
         $categories = Category::whereNull('parent_id')->get();
 
-         foreach ($categories as $category) {
-         $products = $this->curl_products(strtoupper($category['name']));
-        //$products = $this->curl_products(strtoupper('Aseo Y Uso'));
-        $datos = json_decode($products, true);
-        $categories = Category::all()->toArray();
-        $productIva = ProductIva::all()->toArray();
+        foreach ($categories as $category) {
+            $products = $this->curl_products(strtoupper($category['name']));
+            //$products = $this->curl_products(strtoupper('Aseo Y Uso'));
+            $datos = json_decode($products, true);
+            $categories = Category::all()->toArray();
+            $productIva = ProductIva::all()->toArray();
 
-        if ($datos) {
-            foreach ($datos as $dato) {
-                $departamento = ucwords(strtolower($dato['Departamento']));
-                $grupo = ucwords(strtolower($dato['Grupo']));
+            if ($datos) {
+                foreach ($datos as $dato) {
+                    $departamento = ucwords(strtolower($dato['Departamento']));
+                    $grupo = ucwords(strtolower($dato['Grupo']));
 
-                $indexDepartment = array_search($departamento, array_column($categories, 'name'));
-                $indexGroup = array_search($grupo, array_column($categories, 'name'));
-                $indexIva = array_search($dato['Iva'], array_column($productIva, 'productIva'));
+                    $indexDepartment = array_search($departamento, array_column($categories, 'name'));
+                    $indexGroup = array_search($grupo, array_column($categories, 'name'));
+                    $indexIva = array_search($dato['Iva'], array_column($productIva, 'productIva'));
 
-                $padre = $categories[$indexDepartment]['id'];
-                $hijo = $categories[$indexGroup]['id'];
+                    $padre = $categories[$indexDepartment]['id'];
+                    $hijo = $categories[$indexGroup]['id'];
 
-                $product = new Product();
-                $product->brand_id          = NULL;
-                $product->sku               = $dato['SKU'];
-                $product->name              = ucwords(strtolower($dato['Nombre']));
-                $product->slug              = Str::slug($dato['Nombre'], '-');
-                $product->description       = $dato['Descripcion'];
-                $product->base_price        = $dato['Precio'];
-                $product->prime_price       = $dato['Precio'];
-                $product->iva               = $dato['Iva'];
-                $product->iva_id            = $indexIva;
-                $product->save();
-                
-                $product->categories()->attach([$categories[$indexDepartment]['id'], $categories[$indexGroup]['id']]);
-                $product->tags()->attach([1]);
-                
-                $productStock = new ProductStock();
-                $productStock->product_id = $product->id;
-                $productStock->sku = $dato['SKU'];
-                $productStock->quantity = $dato['Stock'];
-                $productStock->save();
+                    $product = new Product();
+                    $product->brand_id          = NULL;
+                    $product->sku               = $dato['SKU'];
+                    $product->name              = ucwords(strtolower($dato['Nombre']));
+                    $product->slug              = Str::slug($dato['Nombre'], '-');
+                    $product->description       = $dato['Descripcion'];
+                    $product->base_price        = $dato['Precio'];
+                    $product->prime_price       = $dato['Precio'];
+                    $product->iva               = $dato['Iva'];
+                    $product->iva_id            = $indexIva;
+                    $product->save();
 
-               // dd("Padre: " . $padre . " Hijo: " . $hijo. " Producto: ".$product->id);
-               //usleep(100000);
+                    $product->categories()->attach([$categories[$indexDepartment]['id'], $categories[$indexGroup]['id']]);
+                    $product->tags()->attach([1]);
+
+                    $productStock = new ProductStock();
+                    $productStock->product_id = $product->id;
+                    $productStock->sku = $dato['SKU'];
+                    $productStock->quantity = $dato['Stock'];
+                    $productStock->save();
+
+                    // dd("Padre: " . $padre . " Hijo: " . $hijo. " Producto: ".$product->id);
+                    //usleep(100000);
+                }
             }
-        }
 
-        // usleep(100000);
-         }
+            // usleep(100000);
+        }
         // return response()->json(['categories' => $categories, 'products' => $products]);
     }
 }
