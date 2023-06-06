@@ -108,9 +108,15 @@
                             </div>
                             @endif
                         </div>
-                        <div style="color: black;">
-                            <span onclick="window.open('{{ route('pages', ['id' => 39, 'slug'=> 'terminos-y-condiciones'])}}', '_blank')" style="cursor: pointer;">@lang('Terms and Conditions?')</span>
-                            <input id="terms-conditions" onclick="termsConditios()" type="checkbox" style="width: 25px; height: 20px;">
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div style="color: black;">
+                                    <input id="terms-conditions" onclick="termsConditios()" type="checkbox" style="width: 25px; height: 20px;">
+                                    <span onclick="window.open('{{ route('pages', ['id' => 39, 'slug'=> 'terminos-y-condiciones'])}}', '_blank')" style="cursor: pointer;">@lang('Terms and Conditions?')</span>
+                                </div>
+                                <a onclick="window.open('{{ route('pages', ['id' => 39, 'slug'=> 'terminos-y-condiciones'])}}', '_blank')" style="cursor: pointer;">Leer t&eacute;rminos y condiciones</a>
+                            </div>
                         </div>
 
                         <div class="contact-group">
