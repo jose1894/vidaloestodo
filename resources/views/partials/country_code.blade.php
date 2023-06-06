@@ -236,7 +236,7 @@
 <option value="598" data-country="Uruguay" data-code="UY">@lang("+598")</option>
 <option value="998" data-country="Uzbekistan" data-code="UZ">@lang("+998")</option>
 <option value="678" data-country="Vanuatu" data-code="VU">@lang("+678")</option>
-<option value="58" data-country="Venezuela, Bolivarian Republic of Venezuela" data-code="VE">@lang("+58")</option>
+<option value="58" selected data-country="Venezuela, Bolivarian Republic of Venezuela" data-code="VE">@lang("+58")</option>
 <option value="84" data-country="Vietnam" data-code="VN">@lang("+84")</option>
 <option value="1284" data-country="Virgin Islands, British" data-code="VG">@lang("+1284")</option>
 <option value="1340" data-country="Virgin Islands, U.S." data-code="VI">@lang("+1340")</option>
