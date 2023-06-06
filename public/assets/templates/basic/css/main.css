@@ -1430,7 +1430,7 @@ body *::-webkit-scrollbar-thumb {
   line-height: 22px;
   width: 22px;
   font-size: 12px;
-  background: var(--naranja-argo);
+  background: var(--color_company_3);
   color: #ffffff;
   text-align: center;
   -webkit-border-radius: 50%;
@@ -5856,7 +5856,7 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
 }
 
 #cart-button img {
-  width: 25px;
+  width: 35px;
 }
 
 .bg-argo-black {

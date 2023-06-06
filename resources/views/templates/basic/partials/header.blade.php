@@ -85,7 +85,7 @@
                     </li>
                     <li>
                         <a class="xcart" href="javascript:void(0)" id="cart-button">
-                            <img src="{{ getImage('assets/images/icos/car-ico.png', '54x54') }}"
+                            <img src="{{ getImage('assets/images/icos/cart.png', '54x54') }}"
                                 alt="@lang('logo')">
                             <span class="cart-count amount">0</span>
                         </a>
