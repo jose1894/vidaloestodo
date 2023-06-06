@@ -430,12 +430,12 @@
   -moz-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   width: 60%;
-  background-color: var(--naranja-argo);
-  border: solid 1px var(--naranja-argo);
+  background-color: var(--color_company_3);
+  /* border: solid 1px var(--color_company_3); */
   display: block;
   margin: auto;
   color: var(--white-argo);
-  border-color: var(--naranja-argo);
+  /* border-color: var(--color_company_3); */
   height: auto;
   white-space: nowrap !important;
   font-family: "forgola-bold", Helvetica, Arial, Lucida, sans-serif;

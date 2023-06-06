@@ -5,7 +5,7 @@
             <div class="header-wrapper justify-content-between align-items-center">
                 <div class="logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ getImage('assets/images/logoIcon/logo-algolar.png', '183x54') }}"
+                        <img src="{{ getImage('assets/images/logoIcon/logo_empresa_blanco_original.png', '183x54') }}"
                             alt="@lang('logo')">
                     </a>
                 </div>

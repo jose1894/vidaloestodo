@@ -17,6 +17,8 @@ Route::get('productsDetail/{slug}/', 'API\ProductController@productDetails')->na
 Route::get('productsRecents', 'API\ProductController@productsRecents')->name('productsRecents');
 Route::get('search_bar_home', 'API\ProductController@search_bar_home')->name('search_bar_home');
 Route::get('productsByCategory/{slug}/', 'API\ProductController@productsByCategory')->name('productsByCategory');
+Route::get('products/more_products','API\ProductController@more_products')->name('more_products');
+
 
 /* Categories */
 Route::get('categories', 'API\CategoryController@index')->name('categories');

@@ -1398,13 +1398,13 @@ body *::-webkit-scrollbar-thumb {
   z-index: 9;
 }
 .header-wrapper .logo {
-  max-width: 180px;
+  max-width: 250px;
 }
 .header-wrapper .logo a {
   display: block;
 }
 .header-wrapper .logo img {
-  width: 70%;
+  width: 80%;
 }
 .shortcut-icons {
   align-items: center;
@@ -5849,6 +5849,10 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
   --text-argo-two: #545454;
   --bg-argo-related: #eaeaea;
   --text-argo-general: #7d7d7d;
+  --color_company_1: #af1e4f;
+  --color_company_2: #f4f4f4;
+  --color_company_3: #fab614;
+  --color_company_4: #e8487e;
 }
 
 #cart-button img {
@@ -5864,7 +5868,7 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
 }
 
 .header-form-group button {
-  background-color: var(--naranja-argo);
+  background-color: var(--color_company_3);
   border-radius: 0 4px 4px 0;
   color: var(--white-argo);
 }
@@ -6074,7 +6078,7 @@ subfooter .subfooter-icos img {
 }
 
 .argo-details .cmn-btn {
-  background: var(--naranja-argo);
+  background: var(--color_company_3);
 }
 
 .item-argo .cl-white {
@@ -6132,13 +6136,13 @@ subfooter .subfooter-icos img {
   -moz-transition: 0.7s ease;
   -o-transition: 0.7s ease;
   transition: 0.7s ease;
-  color: var(--white-argo);
+  color: var(--color_company_1);
   font-size: 0.9rem;
   font-family: 'forgola-bold';
 }
 
 .menu-argo-btn .x-argo-t:hover {
-  color: var(--naranja-argo);
+  color: var(--color_company_3);
 }
 
 div.xargo-sub .categories {
@@ -6241,7 +6245,7 @@ div.xargo-sub .categories {
 
 .bar-bottom-argo .menu li a {
   font-size: 14px;
-  color: var(--white-argo);
+  color: var(--color_company_1);
   font-family: 'forgola-bold', Helvetica, Arial, Lucida, sans-serif;
 }
 
@@ -6269,7 +6273,7 @@ div.xargo-sub .categories {
   -moz-transition: 0.2s ease;
   -o-transition: 0.2s ease;
   transition: 0.2s ease;
-  color: var(--naranja-argo);
+  color: var(--color_company_1);
 }
 
 .c-link a:hover {
@@ -7075,7 +7079,7 @@ figure.is-loading:after {
 
 nav#menu-normal {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #333;
+  background-color: var(--color_company_1);
   flex-wrap: wrap !important;
   color: #ffffff;
 }
@@ -7092,7 +7096,7 @@ nav#menu-normal form.menu-buscador {
   margin-bottom: 0px;
 }
 nav#menu-normal .area-links {
-  background-color: #453f3f;
+  background-color: var(--color_company_2);
 }
 nav#menu-normal .linea-dos {
   height: 40px;

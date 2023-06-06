@@ -391,4 +391,38 @@ class ProductController extends Controller
             ]
         );
     }
+
+    public function more_products(Request $request)
+    {
+        if (!isset(request()->perpage)) {
+            $perpage    = 15;
+        } else {
+            $perpage    = request()->perpage;
+        }
+
+        $page = $request->page;
+        $index = $request->page + 1;
+
+        $categories = Category::with(
+            [
+                'products' => function ($q) {
+                    //$q->take(4)
+                    return $q->whereHas('categories');
+                },
+                'products.reviews',
+                'products.offers',
+                'products.stocks' => function ($q) {
+                    $q->where('quantity', '>', 0);
+                },
+            ]
+        )
+        ->where('in_filter_menu',  '1')
+        //->orderBy('position', 'asc')
+        ->orderByRaw(
+            "case when position is null then 1 else 0 end, position"
+        )
+        ->paginate(3);
+
+    }
+
 }
