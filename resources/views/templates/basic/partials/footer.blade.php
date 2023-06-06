@@ -9,50 +9,65 @@
     <div class="container c-argo">
 
       <div class="row">
-        <h6>@lang('title footer')</h6>
       </div>
 
 
       <div class="row">
-        <div class="link-argo-footer">
-            <div class="widget-link">
-                <ul>
-                    
-                    @if($pages->count() > 0)
-                        @foreach ($pages as $item)
-                            <!-- Si es hazte prime -->
-                            @if($item->id == 53)
-                                <li><a href="{{ route('plans') }}">@php echo __($item->data_values->page_title) @endphp</a></li>
-                            @else 
-                                <li><a href="{{route('pages', ['id' => $item->id, 'slug'=> slug($item->data_values->page_title) ])}}">@php echo __($item->data_values->page_title) @endphp</a></li>
-                            @endif
-                            
-                        @endforeach
-                    @endif
-                </ul>
-            </div>  
+        <div class="col-12 col-md-3">
+            <h6 class="text-left mb-3">@lang('title footer')</h6>
+            <div class="link-argo-footer">
+                <div class="widget-link">
+                    <ul>                        
+                        @if($pages->count() > 0)
+                            @foreach ($pages as $item)
+                                <!-- Si es hazte prime -->
+                                @if($item->id == 53)
+                                    <li><a href="{{ route('plans') }}">@php echo __($item->data_values->page_title) @endphp</a></li>
+                                @else 
+                                    <li><a href="{{route('pages', ['id' => $item->id, 'slug'=> slug($item->data_values->page_title) ])}}">@php echo __($item->data_values->page_title) @endphp</a></li>
+                                @endif
+                                
+                            @endforeach
+                        @endif
+                    </ul>
+                </div> 
+            </div> 
         </div>
-      </div>
-
-
-    <div class="row">
-        <h6>@lang('title client')</h6>
-      </div>
-
-    <div class="row">
-        <div class="link-argo-footer">
-            <div class="widget-link">
-                <ul>
-                    <!--<li><a href="">Chat Online</a></li>-->
-                    <li>0412-4170588</li>
-                    <li><a href="info@alfogolarexpress.com">info@alfogolarexpress.com</a></li>
-                    <li>Horario ATC: 8:00 am a 5:00 pm</li>
-                    <li>Horario de Entrega 8:00 am a 06:00 pm</li>
-                    <li>En menos de 90 min, Gratis para todas sus compras.</li>
-                </ul>
-            </div>  
+        <div class="col-12 col-md-6">
+            <h6 class="text-left mb-3">@lang('title client')</h6>
+            <div class="link-argo-footer">
+                <div class="widget-link">
+                    <ul>
+                        <!--<li><a href="">Chat Online</a></li>-->
+                        <li>0412-4431159</li>
+                        <li><a href="vidaenlinea@vidaautomercados.com">vidaenlinea@vidaautomercados.com</a></li>
+                        <li>Horarios: 8:00 am a 8:00 pm</li>
+                        {{-- <li>Horario de Entrega 8:00 am a 06:00 pm</li>
+                        <li>En menos de 90 min, Gratis para todas sus compras.</li> --}}
+                        <li>Direcci&oacute;n: Centro Comercial La Viña Siglo XXI, AV. 106 Urb, Piso 1, Valencia, Carabobo</li>
+                    </ul>
+                </div>  
+            </div>
         </div>
-      </div>
+        <div class="col-12 col-md-3">
+            <h6 class="text-left mb-3">S&iacute;guenos</h6>
+            <div class="link-argo-footer">
+                <div class="widget-link">
+                    <ul class="social-icons">    
+                        <li>
+                            <a href="https://www.instagram.com/vidaloestodo"><i class="fab fa-instagram"></i> Vidaloestodo</a>
+                        </li>
+                        <li>
+                            <a href="https://www.vidaloestodo.com/#:~:text=Zonas%20de%20Entrega-,S%C3%ADguenos,-Direcci%C3%B3n%3A%0ACentro"><i class="fab fa-youtube"></i></a> Vidaloestodo
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a> Vidaloestodo
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!--         <div class="footer-bottom">
             <div class="footer-widget widget-about">
@@ -102,7 +117,7 @@
 </footer>
 
 
-<subfooter> 
+<subfooter class="d-none"> 
   <div class="container">
     <div class="footer-copyright" id="footer-copyright">
             <div class="copyright-area d-flex flex-wrap align-items-center justify-content-between">
@@ -159,3 +174,21 @@
         </div>
     </div>
 </div>
+
+@push('script')
+<style>
+.link-argo-footer .widget-link ul{
+    display:block!important;
+}
+.link-argo-footer .widget-link  ul li{
+    padding: 0px!important;
+}
+.link-argo-footer .widget-link  ul.social-icons li{
+    padding: 7px!important;
+}
+
+.social-icons li a:hover{
+    background:none!important;
+}
+</style>
+@endpush
