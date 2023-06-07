@@ -231,8 +231,8 @@ class ProductController extends Controller
 
         $product->brand_id          = $request->brand_id;
         $product->sku               = $request->has_variants ? null : $request->sku;
-        $product->oem_code          = $request->oem_code;
-        $product->internal_code     = $request->internal_code;
+        // $product->oem_code          = $request->oem_code;
+        // $product->internal_code     = $request->internal_code;
         $product->name              = $request->name;
         $product->model             = $request->model;
         $product->has_variants      = $request->has_variants ?? 0;
@@ -633,42 +633,5 @@ class ProductController extends Controller
         $combo->products_combo          = $request->products_combo;
         $combo->cantidad          = $request->cantidad;
         $combo->save();
-    }
-
-    public function import(Request $request)
-    {
-        $rows = Excel::toArray(new ProductImport, request()->file('fileSelect'));
-        //dd($rows);
-        foreach ($rows as $row) {
-            foreach ($row as $rowd) {
-                //print_r($rowd[8]);
-                $product = Product::where('internal_code', $rowd[0])->first();
-                // dd($row);
-                if ($product) {
-                    
-                    $iva = ProductIva::where('percentage', isset($rowd[2]) ? $rowd[2] : 16)->first();
-                    $product->base_price          = isset($rowd[3]) ? $rowd[3] : 0;
-                    $product->prime_price          = isset($rowd[5]) ? $rowd[5] : 0;
-                    
-                    if ($iva) {
-                        $product->iva          = $iva ? 1 : 0;
-                        $product->iva_id          = $iva ? $iva->id : 0;
-                    }
-                    
-                    $stock = ProductStock::where('product_id', $product->id)->first();
-                    if (isset($stock)) {
-                        $stock->quantity = isset($rowd[8]) ? $rowd[8] : 0;
-                        $stock->save();
-                    }
-                    $product->save();
-                }
-            }
-        }
-        return redirect()->back()->with('success', 'File imported successfully!');
-    }
-
-    public function export()
-    {
-        return Excel::download(new ProductExport, 'product.xlsx');
     }
 }
