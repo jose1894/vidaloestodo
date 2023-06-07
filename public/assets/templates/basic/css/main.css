@@ -5936,14 +5936,14 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
 }
 
 .bg-footer-argo {
-  background: var(--naranja-argo);
+  background: var(--color_company_2);
   padding: 2rem 0;
 }
 
 .bg-footer-argo .c-argo h6 {
   text-align: center;
   font-weight: 600;
-  color: #fff;
+  /* color: #fff; */
   margin: auto;
 }
 
@@ -5980,7 +5980,7 @@ subfooter .subfooter-icos img {
 
 .widget-link a,
 .widget-link li {
-  color: var(--white-argo);
+  color: var(--text-argo-general);
   margin: 0 00.2rem;
   font-size: 0.9rem;
   font-family: 'forgola-regular';
