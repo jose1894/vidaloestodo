@@ -224,7 +224,7 @@
 }
 
 .item-prod .item-final .btn-area span {
-  color: #ff6900;
+  color: var(--color_company_1);
   margin-right: 5px;
 }
 
