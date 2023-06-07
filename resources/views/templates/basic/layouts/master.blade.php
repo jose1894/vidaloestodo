@@ -155,7 +155,7 @@
         </div>--}}
         <!-- ===========Loader=========== -->
         
-        <a href="https://wa.me/584124170588?text=" class="whatsapp" target="_blank">
+        <a href="https://wa.me/5804124431159?text=" class="whatsapp" target="_blank">
             <img src="{{ URL('assets/images/whatsapp-icon.png') }}" />
         </a>
 

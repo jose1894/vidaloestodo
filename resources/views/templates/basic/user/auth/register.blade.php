@@ -124,7 +124,7 @@
                                 <div class="m--10 d-flex flex-wrap align-items-center justify-content-between">
                                     <span class="account-alt">¿Ya tienes una cuenta? <a href="{{ route('user.login') }}">Iniciar Sesión</a></span>
 
-                                    <button type="submit" id="recaptcha" class="custom-button d-sm-block" disabled style="background: rgb(108, 117, 125);" disabled>Registrar</button>
+                                    <button type="submit" id="recaptcha" class=" d-sm-block cmn-btn-argo" disabled>Registrar</button>
                                 </div>
                             </div>
                         </div>

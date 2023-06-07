@@ -2584,7 +2584,7 @@ header {
   position: fixed;
   right: 0;
   overflow-y: scroll;
-  top: 140px;
+  top: 120px;
   z-index: 99999;
   -webkit-transition: 0.7s ease;
   -moz-transition: 0.7s ease;
@@ -5119,7 +5119,7 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
   display: block;
 }
 .contact-group .account-alt a {
-  color: #ff0000;
+  color: var(--color_company_1);
 }
 .contact-group .custom-button {
   background: var(--blue-argo);
@@ -5410,7 +5410,7 @@ div[class*='col']:nth-of-type(6n + 6) .dashboard-item .dashboard-icon {
   width: 35px;
   height: 35px;
   line-height: 35px;
-  background: #ff0000;
+  background: var(--color_company_3);
   color: #ffffff;
   z-index: 99999;
   bottom: 70px;
@@ -6393,7 +6393,7 @@ div.xargo-sub .categories {
 }
 
 .login-wrapper .captcha {
-  background-color: var(--naranja-argo);
+  background-color: var(--color_company_1);
   font-family: 'forgola-bold';
 }
 
