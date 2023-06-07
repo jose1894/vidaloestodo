@@ -1201,7 +1201,11 @@
                     if (response.length > 0) {
                         $('#shipping_user').html(response);
                     }
+                },
+                error: function(error){
+                    return;
                 }
+
             });
         }
 
@@ -1224,6 +1228,8 @@
                 url: "{{ route('get-rate') }}",
                 method: "get",
                 success: function(response){
+                    if (!response) return 
+
                     if(response.rate) {
                         $('.header-rate').text(response.rate);
                     }else{
