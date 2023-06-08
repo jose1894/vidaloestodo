@@ -31,31 +31,37 @@ class Category extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'products_categories', 'category_id', 'product_id')
-            ->with('offer', 'offer.activeOffer', 'reviews')
-            ->whereHas('categories')
-            //->whereHas('stocks')
-            ->whereHas('stocks', function ($p) {
-                //$p->whereHas('amounts', function ($t) {
-                $p->where('quantity', '>', '0');
-                //});
-            });
+        ->with('offer', 'offer.activeOffer', 'reviews')
+        ->whereHas('categories')
+        //->whereHas('stocks')
+        ->whereHas('stocks', function ($p) {
+            //$p->whereHas('amounts', function ($t) {
+            $p->where('quantity','>','0');
+            //});
+        });
         //->whereHas('brand')
-        // ->take(4)
-        //->inRandomOrder();
+       // ->take(4)
+       //->inRandomOrder();
         //->orderBy('id', 'desc')
-        // ->limit(24);
+       // ->limit(24);
     }
 
 
     public function specialProuducts()
     {
         return $this->belongsToMany(Product::class, 'products_categories', 'category_id', 'product_id')
-            ->with('offer', 'offer.activeOffer', 'reviews', 'categories', 'stocks')
-            ->whereHas('categories')
-            ->whereHas('stocks', function ($p) {
-                $p->where('quantity', '>', '0');
-            })
-            //->inRandomOrder()
-            ->limit(6);
+        ->with('offer', 'offer.activeOffer', 'reviews')
+        ->whereHas('categories')
+        //->whereHas('stocks')
+        ->whereHas('stocks', function ($p) {
+            //$p->whereHas('amounts', function ($t) {
+            $p->where('quantity','>','0');
+            //});
+        })
+        //->whereHas('brand')
+       // ->take(4)
+       ->inRandomOrder()
+        //->orderBy('id', 'desc')
+        ->limit(6);
     }
 }

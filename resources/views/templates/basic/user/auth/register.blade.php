@@ -41,18 +41,18 @@
                         </div> --}}
 
                         <div class="row">
-                            <div class="form-group col-6">
+                            <div class="col-6">
                                 <label>@lang('Mobile')</label>
 
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <select name="country_code">
+                                            <select name="country_code form-control">
                                                 @include('partials.country_code')
                                             </select>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" placeholder="Teléfono">
+                                    <input style="height:65px" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" placeholder="Teléfono">
                                 </div>
                             </div>
 
@@ -60,8 +60,8 @@
                                 <label for="email">@lang('Country')</label>
                                 <!-- <input type="text" name="country"  > -->
 
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
+                                <div class="input-group2">
+                                    <div class="input-group-prepend2">
                                         <span class="input-group-text">
                                             <select name="country">
                                                 @include('partials.country')
