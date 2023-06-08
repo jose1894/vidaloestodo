@@ -88,17 +88,17 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'username';
+        return 'email';
     }
 
     protected function validateLogin(Request $request)
     {
         $customRecaptcha = \App\Plugin::where('act', 'custom-captcha')->where('status', 1)->first();
         $validation_rule = [
-            $this->username() => 'required|string',
+            $this->username() => 'required|string|email:filter',
             'password' => 'required|string',
-        ];
-
+        ];        
+        
         if ($customRecaptcha) {
             $validation_rule['captcha'] = 'required';
         }

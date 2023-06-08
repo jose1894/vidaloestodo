@@ -40,14 +40,14 @@ Route::namespace('Gateway')->prefix('ipn')->name('ipn.')->group(function () {
 });
 
 // User Support Ticket
-Route::prefix('ticket')->group(function () {
-    Route::get('/', 'TicketController@supportTicket')->name('ticket');
-    Route::get('/new', 'TicketController@openSupportTicket')->name('ticket.open');
-    Route::post('/create', 'TicketController@storeSupportTicket')->name('ticket.store');
-    Route::get('/view/{ticket}', 'TicketController@viewTicket')->name('ticket.view');
-    Route::post('/reply/{ticket}', 'TicketController@replyTicket')->name('ticket.reply');
-    Route::get('/download/{ticket}', 'TicketController@ticketDownload')->name('ticket.download');
-});
+// Route::prefix('ticket')->group(function () {
+//     Route::get('/', 'TicketController@supportTicket')->name('ticket');
+//     Route::get('/new', 'TicketController@openSupportTicket')->name('ticket.open');
+//     Route::post('/create', 'TicketController@storeSupportTicket')->name('ticket.store');
+//     Route::get('/view/{ticket}', 'TicketController@viewTicket')->name('ticket.view');
+//     Route::post('/reply/{ticket}', 'TicketController@replyTicket')->name('ticket.reply');
+//     Route::get('/download/{ticket}', 'TicketController@ticketDownload')->name('ticket.download');
+// });
 
 
 /*
@@ -444,8 +444,8 @@ Route::name('user.')->prefix('user')->group(function () {
             //Order
             Route::get('orders/{type}', 'OrderController@orders')->name('orders');
             Route::get('order/{order_number}', 'OrderController@orderDetails')->name('order');
-            Route::get('product_review', 'UserController@productsReview')->name('product.to_review');
-            Route::post('product_review/add', 'UserController@addReview')->name('product.review');
+            // Route::get('product_review', 'UserController@productsReview')->name('product.to_review');
+            // Route::post('product_review/add', 'UserController@addReview')->name('product.review');
 
         });
     });
