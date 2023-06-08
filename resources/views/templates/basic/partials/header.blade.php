@@ -191,7 +191,7 @@
                                     @php echo $category->icon @endphp {{ $category->name }}
                                 </a>
                                 <div class="cate-icon">
-                                    <i class="las la-angle-down"></i>
+                                    <i class="fas fa-chevron-down"></i>
                                 </div>
 
                                 @if ($category->allSubcategories->count() > 0)
@@ -252,7 +252,7 @@
                                     @php echo $category->icon @endphp {{ $category->name }}
                                 </a>
                                 <div class="cate-icon">
-                                    <i class="las la-angle-down"></i>
+                                    <i class="fas fa-chevron-down"></i>
                                 </div>
 
                                 @if ($category->allSubcategories->count() > 0)

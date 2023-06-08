@@ -5,7 +5,7 @@
 
     @if ($subcategory->allSubcategories)
     <div class="cate-icon">
-        <i class="las la-angle-down"></i>
+        <i class="fas fa-chevron-down"></i>
     </div>
     @if($subcategory->allSubcategories->count() >0)
     <ul class="sub-category">

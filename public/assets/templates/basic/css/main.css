@@ -2816,7 +2816,7 @@ header {
 }
 .left-category .categories li a {
   font-size: 14px;
-  line-height: 22px;
+  line-height: 15px;
   display: block;
   padding: 10px 15px;
   color: #000;
@@ -2824,18 +2824,21 @@ header {
 }
 .left-category .categories li a i {
   margin-right: 12px;
-  color: var(--blue-argo);
+  color: var(--color_company_3);
   font-size: 18px;
   position: absolute;
   left: 15px;
+  top: 5px;
 }
 .left-category .categories li a:hover {
-  background: var(--blue-argo);
-  color: #ffffff;
+  background: var(--color_company_2);
+  color:var(--black-argo);
 }
-.left-category .categories li a:hover i {
+
+/* .left-category .categories li a:hover i {
   color: #ffffff;
-}
+} */
+
 .left-category .categories li .sub-category {
   background: #ffffff;
   -webkit-transition: all ease 0.3s;
@@ -2912,15 +2915,16 @@ header {
   .cate-icon {
     position: absolute;
     right: 10px;
-    top: 9px;
+    top: 0px;
     width: 30px;
     height: 30px;
     line-height: 30px;
     text-align: center;
     display: none;
-    border-radius: 50%;
-    background: var(--naranja-argo);
-    color: #fff;
+    /* border-radius: 50%;
+    background: var(--color_company_3); */
+    color: var(--color_company_3);
+    font-size: 1.5rem;
   }
   .left-category .categories .cate-icon-wrapper > .cate-icon {
     display: inline-block;
@@ -6142,7 +6146,7 @@ subfooter .subfooter-icos img {
   background-color: var(--white-argo);
   max-width: 350px;
   width: 100%;
-  height: calc(100vh - 136px);
+  height: calc(100vh - 110px);
   padding: 2rem 0;
   position: fixed;
   left: 0;

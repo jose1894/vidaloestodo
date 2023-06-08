@@ -6,7 +6,7 @@
             </a>
 
             <div class="cate-icon" v-if="subitem.all_subcategories.length > 0">
-                <i class="las la-angle-down"></i>
+                <i class="fas fa-chevron-down"></i>
             </div>
             <menu-subcategory v-if="subitem.all_subcategories.length > 0" :subcategory="subitem.all_subcategories"></menu-subcategory>
         </li>
