@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email:filter|max:160|unique:users', //email:filter valida el domino del email tiene q terminar en .algo
             'mobile' => 'string|max:30|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'username' => 'required|alpha_num|unique:users|min:6',
+            // 'username' => 'required|alpha_num|unique:users|min:6',
             'captcha' => 'sometimes|required',
             'country_code' => 'string'
         ]);
@@ -126,7 +126,7 @@ class RegisterController extends Controller
         $user->lastname = isset($data['lastname']) ? $data['lastname'] : null;
         $user->email = strtolower(trim($data['email']));
         $user->password = Hash::make($data['password']);
-        $user->username = trim($data['username']);
+        // $user->username = trim($data['username']);
         $user->mobile = isset($data['mobile']) ? $data['country_code'].$data['mobile'] : '';
         $user->address = [
             'address' => '',

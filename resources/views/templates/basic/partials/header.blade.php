@@ -301,7 +301,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="login-username">@lang('Email')</label>
-                        <input type="text" class="form-control" name="username" id="login-username"
+                        <input type="text" class="form-control" name="email" id="login-username"
                             value="{{ old('email') }}" placeholder="@lang('Email')">
                     </div>
                     <div class="form-group">
