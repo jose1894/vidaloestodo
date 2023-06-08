@@ -1,6 +1,6 @@
 <li>
     <a href="{{ route('products.category', ['id'=>$subcategory->id, 'slug'=>slug($subcategory->name)]) }}">
-        @php echo $subcategory->icon @endphp {{ __($subcategory->name) }}
+     {{ __($subcategory->name) }}
     </a>
 
     @if ($subcategory->allSubcategories)

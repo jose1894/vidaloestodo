@@ -2639,7 +2639,7 @@ header {
   right: 10px;
   top: 14px;
   display: inline-block;
-  font-size: 25px;
+  font-size: 17px;
   color: #000;
   cursor: pointer;
 }
@@ -2831,7 +2831,7 @@ header {
   top: 5px;
 }
 .left-category .categories li a:hover {
-  background: var(--color_company_2);
+  /* background: var(--color_company_2); */
   color:var(--black-argo);
 }
 
@@ -2937,16 +2937,16 @@ header {
   .cate-icon {
     position: absolute;
     right: 10px;
-    top: 9px;
+    top: 0px;
     width: 30px;
     height: 30px;
     line-height: 30px;
     text-align: center;
     display: none;
-    border-radius: 50%;
-    border: 1px solid #e5e5e5;
-    background: var(--blue-argo);
-    color: #000;
+    /* border-radius: 50%;
+    background: var(--color_company_3); */
+    color: var(--color_company_3);
+    font-size: 1.5rem;
   }
   .left-category .categories .cate-icon-wrapper > .cate-icon {
     display: inline-block;
@@ -6196,7 +6196,7 @@ div.xargo-sub .categories {
 }
 
 .xargo-sub li {
-  border-bottom: solid 1px var(--black-argo);
+  border-bottom: solid 1px #f1ebeb;
 }
 
 .xargo-sub .cate-icon:hover {

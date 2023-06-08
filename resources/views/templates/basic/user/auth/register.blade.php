@@ -47,7 +47,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <select name="country_code form-control">
+                                            <select name="country_code">
                                                 @include('partials.country_code')
                                             </select>
                                         </span>

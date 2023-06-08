@@ -121,7 +121,7 @@ class WebServices extends Controller
                 $category->name             = ucwords(strtolower($hijo));
                 $category->slug             = Str::slug($hijo, '-');
                 $category->parent_id        = $id;
-                $category->icon             = "<i class='fas fa-heartbeat'></i>";
+                $category->icon             = NULL;
                 $category->meta_title       = NULL;
                 $category->meta_description = NULL;
                 $category->meta_keywords    = NULL;

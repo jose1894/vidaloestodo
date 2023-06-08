@@ -1064,7 +1064,7 @@
 
         .billing-label {
             font-size: 12px;
-            color: #efa46d;
+            color: var(--color_company_1);
             font-weight: 900;
         }
 
@@ -1153,12 +1153,12 @@
         }
 
         .texto-correcto {
-            color: darkorange;
+            color: var(--color_company_1);
             font-size: 14px;
         }
 
         .texto-correcto-propina {
-            color: darkorange;
+            color: var(--color_company_1);
             font-size: 10px;
         }
 
@@ -1171,7 +1171,7 @@
             display: block;
             min-width: 66px;
             padding: 1px 5px;
-            background-color: #ff900c;
+            background-color: var(--color_company_1);
             margin-left: 13px;
             border-radius: 5px;
             font-size: 14px;
@@ -1971,7 +1971,7 @@
 
         function method_payment(opcion) {
             if (opcion == 1) {
-                $('#card_m_payment1').css('background-color', '#ff6900').css('color', 'white');
+                $('#card_m_payment1').css('background-color', '#af1e4f').css('color', 'white');
                 $('#card_m_payment2').css('background-color', 'rgba(214, 224, 226, 0.2)').css('color', '#7f8081');
 
                 $('#method_payment_1').prop('checked', true);
@@ -1985,7 +1985,7 @@
 
             } else {
 
-                $('#card_m_payment2').css('background-color', '#ff6900').css('color', 'white');
+                $('#card_m_payment2').css('background-color', '#af1e4f').css('color', 'white');
                 $('#card_m_payment1').css('background-color', 'rgba(214, 224, 226, 0.2)').css('color', '#7f8081');
 
                 $('#method_payment_1').prop('checked', false);
@@ -2000,7 +2000,7 @@
 
         function method_entrega(opcion) {
             if (opcion == 1) {
-                $('#card_m_envio1').css('background-color', '#ff6900').css('color', 'white');
+                 $('#card_m_envio1').css('background-color', '#af1e4f').css('color', 'white');
                 $('#card_m_envio2').css('background-color', 'rgba(214, 224, 226, 0.2)').css('color', '#7f8081');
 
                 $('#method_entrega_1').prop('checked', true);
@@ -2015,7 +2015,7 @@
                 //pay.form.order_time = dayDate();
 
             } else {
-                $('#card_m_envio2').css('background-color', '#ff6900').css('color', 'white');
+                $('#card_m_envio2').css('background-color', '#af1e4f').css('color', 'white');
                 $('#card_m_envio1').css('background-color', 'rgba(214, 224, 226, 0.2)').css('color', '#7f8081');
 
                 $('#method_entrega_2').prop('checked', true);
@@ -2036,7 +2036,7 @@
               $('.checkbox-shipping').prop('checked', false);
 
               if (opcion == 1) {
-                  $('#card_m_envio1').css('background-color', '#ff6900').css('color', 'white');
+                  $('#card_m_envio1').css('background-color', '#af1e4f').css('color', 'white');
                   $('#card_m_envio2').css('background-color', 'rgba(214, 224, 226, 0.2)').css('color', '#7f8081');
 
                   $('#method_entrega_1').prop('checked', true);
@@ -2054,7 +2054,7 @@
                   pay.shipping_type = 1;
                   $('#SelectDate').hide();
               } else {
-                  $('#card_m_envio2').css('background-color', '#ff6900').css('color', 'white');
+                  $('#card_m_envio2').css('background-color', '#af1e4f').css('color', 'white');
                   $('#card_m_envio1').css('background-color', 'rgba(214, 224, 226, 0.2)').css('color', '#7f8081');
 
                   $('#method_entrega_2').prop('checked', true);
