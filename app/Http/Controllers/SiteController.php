@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Category;
+use App\Exports\OrderExport;
 use App\Frontend;
 use App\Order;
 use App\OrderDetail;
@@ -280,10 +281,13 @@ class SiteController extends Controller
             ]
         )
         ->where('in_filter_menu',  '1')
-        ->orderBy('position', 'asc')
+        //->orderBy('position', 'asc')
+        ->orderByRaw(
+            "case when position is null then 1 else 0 end, position"
+        )
         ->paginate(3);
 
-    //   dd($data['categories']);
+      // dd($data['categories'][0]->specialProuducts);
 
         $rate = $this->getRate();
         $data2 = array();
@@ -294,7 +298,7 @@ class SiteController extends Controller
                 // unset($data['featured_products'][$key]); 
             }
         }*/
-        // dd($this->activeTemplate . 'home');
+        // dd($data['featured_products']);
         //return $data['featured_products'];
         return view($this->activeTemplate . 'home', $data);
     }
@@ -325,7 +329,10 @@ class SiteController extends Controller
             ]
         )
         ->where('in_filter_menu',  '1')
-        ->orderBy('position', 'asc')
+        //->orderBy('position', 'asc')
+        ->orderByRaw(
+            "case when position is null then 1 else 0 end, position"
+        )
         ->paginate(3);
 
        // dd( $categories);
@@ -1474,6 +1481,7 @@ class SiteController extends Controller
 
     public function placeholderImage($size = null)
     {
+
         if ($size != 'undefined') {
             $size = $size;
             $imgWidth = explode('x', $size)[0];
@@ -1484,8 +1492,7 @@ class SiteController extends Controller
             $imgHeight = 150;
             $text = 'Tamaño Indefinido';
         }
-        $fontFile = realpath('../public/assets/font') . DIRECTORY_SEPARATOR . 'RobotoMono-Regular.ttf';
-
+        $fontFile = realpath('assets/font') . DIRECTORY_SEPARATOR . 'RobotoMono-Regular.ttf';
         $fontSize = round(($imgWidth - 50) / 8);
         if ($fontSize <= 9) {
             $fontSize = 9;
@@ -1752,6 +1759,10 @@ class SiteController extends Controller
 
 
         return view('invoice.print', compact('page_title', 'order', 'discountPrime'));
+    }
+
+    public function exportInvoice(Order $order){
+        return (new OrderExport($order->id))->download('order-'.$order->id.'.xlsx');
     }
 
     public function setMoneda(Request $request)

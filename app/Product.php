@@ -58,6 +58,11 @@ class Product extends Model
         return $this->belongsToMany(Tags::class, 'products_tags', 'product_id', 'tags_id');
     }
 
+    public function unidadMedida()
+    {
+        return $this->belongsTo(UnidadMedida::class, 'unidad_medida', 'id');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'products_categories', 'product_id', 'category_id');
