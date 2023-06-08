@@ -1,6 +1,7 @@
 /node_modules
-/public/hot
+/public/hotgit 
 /public/storage
+/public/assets/images/product
 /storage/*.key
 /vendor
 /app/Http/Controllers/Gateway/blockio/cacert.pem
