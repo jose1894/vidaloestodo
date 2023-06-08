@@ -79,6 +79,45 @@ function uploadFile($file, $location, $size = null, $old = null){
     return $filename;
 }
 
+function copyImageForSeeder($imagePath, $location, $size = null, $old = null, $thumb = null)
+{
+    $path = makeDirectory($location);
+    if (!$path) throw new Exception('El archivo no puede ser creado.');
+
+    if (!empty($old)) {
+        removeFile($location . '/' . $old);
+        removeFile($location . '/thumb_' . $old);
+    }
+
+    $filename = uniqid() . time() . '.' . pathinfo($imagePath, PATHINFO_EXTENSION);
+
+    $image = Image::make($imagePath);
+
+    if (!empty($size)) {
+        $size   = explode('x', strtolower($size));
+        $width  = $size[0];
+        $height = $size[1];
+
+        $canvas = Image::canvas($width, $height);
+
+        $image = $image->resize($width, $height, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+        $canvas->insert($image, 'center');
+        $canvas->save($location . '/' . $filename);
+    }else{
+        $image->save($location . '/' . $filename);
+    }
+
+    if (!empty($thumb)) {
+        $thumb = explode('x', $thumb);
+        Image::make($imagePath)->resize($thumb[0], $thumb[1])->save($location . '/thumb_' . $filename);
+    }
+
+    return $filename;
+}
+
 function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
 {
     $path = makeDirectory($location);

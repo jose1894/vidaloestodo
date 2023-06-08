@@ -72,10 +72,13 @@
                     <li>
                         <div class="link-argo header-change-moneda">
                             <a href="#">Moneda</a>
-                            <a href="#" id="moneda" name="moneda">
-                                <span class="header-moneda"> </span>
-                            </a>
+                            <div >
+                                <a href="#" id="moneda" name="moneda">
+                                    <span class="header-moneda">Dolares</span>
+                                </a>
+                            </div>
                         </div>
+                    </li>
                     <li>
                         <div class="header-bar e-none">
                             <span></span>
