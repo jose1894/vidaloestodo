@@ -7,13 +7,10 @@
 @endphp
 
 <div class="account-section padding-bottom padding-top">
-    <div class="contact-thumb d-none d-lg-block">
-        <img src="{{ getImage('assets/images/frontend/login_page/'. @$login_content->data_values->image, '600x840') }}" alt="@lang('login-bg')">
-    </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
-                <div class="section-header left-style">
+            <div class="offset-md-2 col-md-8 col-12">
+                <div class="section-header left-style text-center">
                     <h3 class="title">@lang('welcome_back')</h3>
                     <p>@lang('welcome_back_desc')</p>
                 </div>
@@ -21,8 +18,8 @@
                         @csrf
 
                         <div class="contact-group">
-                            <label for="username">@lang('Username')</label>
-                            <input id="username" type="text" name="username" placeholder="@lang('Enter Your Username')" value="{{ old('username') }}">
+                            <label for="username">@lang('Email')</label>
+                            <input id="username" type="text" name="email" placeholder="Ingresa tu email" value="{{ old('email') }}">
                         </div>
 
                         <div class="contact-group">
@@ -45,7 +42,7 @@
                         @endif
 
                         <div class="contact-group">
-                            <button type="submit" id="recaptcha" class="custom-button m-0 ml-auto">@lang('Login')</button>
+                            <button type="submit" id="recaptcha" class="m-0 ml-auto cmn-btn-argo">@lang('Login')</button>
                         </div>
 
 

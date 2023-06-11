@@ -1767,8 +1767,9 @@ class SiteController extends Controller
 
     public function setMoneda(Request $request)
     {
-        $moneda = $request['moneda'];//ession()->get('moneda');
-        //dd($request['moneda']);
+        // $moneda = $request['moneda'];
+        $moneda = session()->get('moneda');
+        
         switch ($moneda) {
             case 'Dolares':
                 session()->put('moneda', 'Dolares');
