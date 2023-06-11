@@ -85,8 +85,7 @@
                     </li>
                     <li>
                         <a class="xcart" href="javascript:void(0)" id="cart-button">
-                            <img src="{{ getImage('assets/images/icos/cart.png', '54x54') }}"
-                                alt="@lang('logo')">
+                            <img src="{{ getImage('assets/images/icos/cart.png', '54x54') }}" alt="@lang('logo')">
                             <span class="cart-count amount">0</span>
                         </a>
                     </li>
@@ -188,7 +187,7 @@
                             <li>
                                 <a
                                     href="{{ route('products.category', ['id' => $category->id, 'slug' => slug($category->name)]) }}">
-                                    @php echo $category->icon @endphp {{ $category->name }}
+                                    1 {{ $category->name }}
                                 </a>
                                 <div class="cate-icon">
                                     <i class="fas fa-chevron-down"></i>
@@ -249,7 +248,7 @@
                             <li>
                                 <a
                                     href="{{ route('products.category', ['id' => $category->id, 'slug' => slug($category->name)]) }}">
-                                    @php echo $category->icon @endphp {{ $category->name }}
+                                    <img style="width: 40px; height: 40px;" src="{{ getImage('assets/images/category/'. @$category->image) }}" alt="@lang('profile-image')"> {{ $category->name }}
                                 </a>
                                 <div class="cate-icon">
                                     <i class="fas fa-chevron-down"></i>
@@ -328,7 +327,7 @@
                     <div class="pt-2 mb-0">
                         <p class="create-accounts">
                             <a href="{{ route('user.password.request') }}" class="mb-2">¿@lang('Forgot
-                                                                                                                                                                                                        Password')?</a>
+                                                                                                                                                                                                                                    Password')?</a>
                         </p>
                         <p class="create-accounts">
                             <span>¿@lang('Don\'t have an account')? <a href="{{ route('user.register') }}"
