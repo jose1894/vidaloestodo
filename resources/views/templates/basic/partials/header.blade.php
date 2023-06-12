@@ -190,7 +190,7 @@
                             <li>
                                 <a
                                     href="{{ route('products.category', ['id' => $category->id, 'slug' => slug($category->name)]) }}">
-                                    1 {{ $category->name }}
+                                    <img style="width: 40px; height: 40px;" src="{{ getImage('assets/images/category/'. @$category->image) }}" alt="@lang('profile-image')"> {{ $category->name }} {{ $category->name }}
                                 </a>
                                 <div class="cate-icon">
                                     <i class="fas fa-chevron-down"></i>
