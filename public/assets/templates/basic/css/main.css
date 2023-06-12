@@ -962,7 +962,7 @@ body *::-webkit-scrollbar-thumb {
   background: #1769ff;
 }
 .social-icons li a i[class*='instagram'] {
-  background: #e4405f;
+  background: #df2f93;
 }
 .social-icons li a i[class*='vimeo'] {
   background: #1ab7ea;
@@ -973,6 +973,11 @@ body *::-webkit-scrollbar-thumb {
 .social-icons li a i[class*='star'] {
   background: #ffc363;
 }
+
+.social-icons li a i[class*='youtube'] {
+  background: #f30e38;
+}
+
 .social-icons li a:hover {
   color: #ffffff;
   background: #ff0000;
