@@ -1812,9 +1812,9 @@ header {
   color: #000;
 }
 .mobile-menu .nav-tabs li a.active {
-  background: var(--blue-argo);
-  border-right: 1px solid var(--blue-argo);
-  border-bottom: 1px solid var(--blue-argo);
+  background: var(--color_company_3);
+  border-right: 1px solid var(--color_company_3);
+  border-bottom: 1px solid var(--color_company_3);
   color: #000;
 }
 .mobile-menu .left-category .categories {
