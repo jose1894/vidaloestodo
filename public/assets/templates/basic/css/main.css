@@ -2802,6 +2802,7 @@ header {
   right: 18px;
   left: unset;
 }
+
 .left-category .categories {
   background: #ffffff;
   -webkit-border-radius: 5px;
@@ -2810,10 +2811,12 @@ header {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px 0;
 }
+
 .left-category .categories li {
   padding: 0;
   position: relative;
 }
+
 .left-category .categories li a {
   font-size: 14px;
   line-height: 15px;
@@ -2822,6 +2825,7 @@ header {
   color: #000;
   /* padding-left: 40px; */
 }
+
 .left-category .categories li a i {
   margin-right: 12px;
   color: var(--color_company_3);
