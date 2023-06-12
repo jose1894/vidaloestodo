@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/owl.min.css') }}">
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/main.css?v=0.0.3') }}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/main.css?v=0.0.4') }}">
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue ." css/color.php?color1=$general->
     base_color&color2=$general->secondary_color") }}">
