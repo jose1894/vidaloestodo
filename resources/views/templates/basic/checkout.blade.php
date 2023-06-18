@@ -142,6 +142,10 @@
                                             <span class="subtitle">Propina</span>
                                             <span class="text-danger" id="propina">{{ $general->cur_sym }}0.00</span>
                                         </li>
+                                        <li>
+                                            <span class="subtitle">IGTF</span>
+                                            <span id="propina">{{ $general->cur_sym }}0.00</span>
+                                        </li>
                                         <li class="border-0">
                                             <span class="subtitle bold">@lang('Total')</span>
                                             <span class="cl-title" id="cartTotal">{{ $general->cur_sym }}

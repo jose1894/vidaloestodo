@@ -2831,6 +2831,16 @@ header {
   /* padding-left: 40px; */
 }
 
+.left-category .categories .sub-category li a {
+  font-size: 14px;
+  line-height: 15px;
+  display: block;
+  padding: 10px 15px;
+  color: #000;
+  /*! padding-left: 40px; */
+}
+
+
 .left-category .categories li a i {
   margin-right: 12px;
   color: var(--color_company_3);
@@ -2895,7 +2905,7 @@ header {
     width: 1px;
     position: absolute;
     content: '';
-    background: var(--naranja-argo);
+    /* background: var(--naranja-argo); */
     left: 20px;
   }
 }
@@ -2913,7 +2923,7 @@ header {
     width: 1px;
     position: absolute;
     content: '';
-    background: rgba(0, 104, 225, 0.3);
+    /* background: rgba(0, 104, 225, 0.3); */
     left: 20px;
   }
 }
