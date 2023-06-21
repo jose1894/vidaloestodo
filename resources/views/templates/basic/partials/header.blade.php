@@ -43,6 +43,7 @@
                     </div>
                 </form>
                 <ul class="shortcut-icons" onclick="$('.dropdown-content').css('display','none');">
+                    
                     <li>
                         @if (Auth::check())
                             <div class="link-argo">
@@ -69,7 +70,7 @@
                             </a>
                         </div>
                     </li>
-                    <li>
+                    {{-- <li>
                         <div class="link-argo header-change-moneda">
                             <a href="#">Moneda</a>
                             <div >
@@ -78,7 +79,22 @@
                                 </a>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
+                    <li class="nav-item dropdown ml-3 ">
+                        <div class="link-argo header-change-moneda">
+                        <span data-toggle="dropdown" class="nav-item desplegable " aria-expanded="false">
+                            <span class="">
+                                <small class="d-block">Moneda</small>
+                                <a class="nav-link ">
+                                    <span class="">Dolar</span>
+                                </a>
+                            </span>
+                            <i class="ml-2 fas fa-chevron-down "></i>
+                        </span>
+                        <div class="dropdown-menu ">
+                            <a class="dropdown-item ">Bolivares</a></div>
+                        </div>
+                        </li>
                     <li>
                         <div class="header-bar e-none">
                             <span></span>
