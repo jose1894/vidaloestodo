@@ -160,7 +160,7 @@ class SiteController extends Controller
         $index = 1;
 
         return response()->json(['shipping' => $data]);
-       // return view('partials.shipping_user', ['data' => $data, 'index' => $index]);
+        // return view('partials.shipping_user', ['data' => $data, 'index' => $index]);
     }
 
     public function delete_shipping_user(Request $request)
@@ -172,8 +172,8 @@ class SiteController extends Controller
         $index = 1;
 
         return response()->json(['shipping' => $datas]);
-       // return view('partials.shipping_user', ['data' => $data
-       // return true;
+        // return view('partials.shipping_user', ['data' => $data
+        // return true;
     }
 
     public function search_bar_home(Request $request)
@@ -182,7 +182,7 @@ class SiteController extends Controller
 
         $search = explode(" ", $search);
 
-		$search = implode("%", $search);
+        $search = implode("%", $search);
 
         $products_like = Product::with('productIva')
             ->where(function ($product) use ($search) {
@@ -231,47 +231,33 @@ class SiteController extends Controller
     {
         $date_now = Carbon::now()->format('Y-m-d H:i:s');
         $data['page_title']             = 'Inicio';
-        /*$products = Product::with(
-            [
-                'categories',
-                'offer',
-                'offer.activeOffer',
-                'reviews',
-                'stocks' => function ($query) {
-                    $query->where('quantity', '>', 0)->latest()->get(); //el ultimo stock registrado
-                },
-                'productIva',
-            ]
-        )
-            ->where('is_plan', 0)
-            ->whereHas('categories')
-            ->orderBy('id', 'desc')
-            ->get();
 
-        
-        $data['featured_products']      = $products->where('is_featured', 1);
-        $data['special_products']       = $products->where('is_special', 1);
-        $data['offers']                 = Offer::where('status', 1)
-            ->where('end_date', '>', Carbon::now())
-            ->with([
-                'products' => function ($q) {
-                    return $q->whereHas('categories');
-                },
-                'products.reviews'
-            ])
-            ->get();
+        // $data['categories'] = Category::
+        // with(
+        //     [
+        //         'products' => function ($q) {
+        //             //$q->take(4)
+        //             return $q->whereHas('categories');
+        //         },
+        //         'products.reviews',
+        //         'products.offers',
+        //         'products.stocks' => function ($q) {
+        //             $q->where('quantity', '>', 0);
+        //         },
+        //     ]
+        // )
+        // ->where('in_filter_menu',  '1')
+        // ->orderByRaw(
+        //     "case when position is null then 1 else 0 end, position"
+        // )
+        // ->paginate(3);
 
-        $data['top_selling_products'] = Product::topSales();
-        $data['top_brands']           = Brand::where('top', 1)->get();
-        $data['top_categories']       = Category::where('is_top', 1)->get();
-        $data['special_categories']   = Category::where('is_special', 1)->get();*/
+        // dd($data['categories'][0]->specialProuducts);
 
-        $data['categories'] = Category::
-        with(
+        $data['categories'] = Category::with(
             [
                 'products' => function ($q) {
-                    //$q->take(4)
-                    return $q->whereHas('categories');
+                    return $q->with('brand')->whereHas('categories');
                 },
                 'products.reviews',
                 'products.offers',
@@ -279,20 +265,23 @@ class SiteController extends Controller
                     $q->where('quantity', '>', 0);
                 },
             ]
-        )
-        ->where('in_filter_menu',  '1')
-        //->orderBy('position', 'asc')
-        ->orderByRaw(
-            "case when position is null then 1 else 0 end, position"
-        )
-        ->paginate(3);
 
-      // dd($data['categories'][0]->specialProuducts);
-
+        )
+            ->whereHas('products', function ($query) {
+                $query->whereHas('stocks', function ($query) {
+                    $query->where('quantity', '>', 0);
+                });
+            })
+            ->where('in_filter_menu',  '1')
+            ->orderByRaw(
+                "case when position is null then 1 else 0 end, position"
+            )
+            ->paginate(3);
+            
         $rate = $this->getRate();
-        $data2 = array();
-        
-       /* foreach ($data['featured_products'] as $key => $link) {
+
+
+        /* foreach ($data['featured_products'] as $key => $link) {
             if ($link->stocks) {
 
                 // unset($data['featured_products'][$key]); 
@@ -303,7 +292,8 @@ class SiteController extends Controller
         return view($this->activeTemplate . 'home', $data);
     }
 
-    public function more_products(Request $request){
+    public function more_products(Request $request)
+    {
 
         if (!isset(request()->perpage)) {
             $perpage    = 15;
@@ -314,12 +304,10 @@ class SiteController extends Controller
         $page = $request->page;
         $index = $request->page + 1;
 
-        $categories = Category::
-        with(
+        $categories = Category::with(
             [
                 'products' => function ($q) {
-                    //$q->take(4)
-                    return $q->whereHas('categories');
+                    return $q->with('brand')->whereHas('categories');
                 },
                 'products.reviews',
                 'products.offers',
@@ -327,15 +315,20 @@ class SiteController extends Controller
                     $q->where('quantity', '>', 0);
                 },
             ]
-        )
-        ->where('in_filter_menu',  '1')
-        //->orderBy('position', 'asc')
-        ->orderByRaw(
-            "case when position is null then 1 else 0 end, position"
-        )
-        ->paginate(3);
 
-       // dd( $categories);
+        )
+            ->whereHas('products', function ($query) {
+                $query->whereHas('stocks', function ($query) {
+                    $query->where('quantity', '>', 0);
+                });
+            })
+            ->where('in_filter_menu',  '1')
+            ->orderByRaw(
+                "case when position is null then 1 else 0 end, position"
+            )
+            ->paginate(3);
+
+        // dd( $categories);
 
         return view(activeTemplate() . 'sections.carrusel_product_scroll_infinit', ['data' => $categories, 'index' => $index]);
     }
@@ -437,18 +430,18 @@ class SiteController extends Controller
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity','>','0');
+                    $p->where('quantity', '>', '0');
                     //});
                 })
                 //->orderBy('name', 'desc')
                 ->orderByRaw(
-					"CASE WHEN name = '" . $search_key . "' THEN 0  
+                    "CASE WHEN name = '" . $search_key . "' THEN 0  
 							   WHEN name LIKE '" . $search_key . "%' THEN 1  
 							   WHEN name LIKE '%" . $search_key . "%' THEN 2  
 							   WHEN name LIKE '%" . $search_key . "' THEN 3  
 							   ELSE 4
 						  END, name ASC"
-				)
+                )
                 ->paginate($perpage);
 
             $products_match = Product::select('*')
@@ -477,18 +470,18 @@ class SiteController extends Controller
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity','>','0');
+                    $p->where('quantity', '>', '0');
                     //});
                 })
                 //->orderBy('name', 'desc')
                 ->orderByRaw(
-					"CASE WHEN name = '" . $search_key . "' THEN 0  
+                    "CASE WHEN name = '" . $search_key . "' THEN 0  
 							   WHEN name LIKE '" . $search_key . "%' THEN 1  
 							   WHEN name LIKE '%" . $search_key . "%' THEN 2  
 							   WHEN name LIKE '%" . $search_key . "' THEN 3  
 							   ELSE 4
 						  END, name ASC"
-				)
+                )
                 ->paginate($perpage);
         } else {
             $products_like   = Category::where('id', $category_id)
@@ -510,7 +503,7 @@ class SiteController extends Controller
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity','>','0');
+                    $p->where('quantity', '>', '0');
                     //});
                 })
                 ->where(function ($query) use ($search_key) {
@@ -533,7 +526,8 @@ class SiteController extends Controller
         return view($this->activeTemplate . $view, compact('page_title', 'products', 'empty_message', 'search_key', 'category_id', 'perpage'));
     }
 
-    public function more_product_search(Request $request){
+    public function more_product_search(Request $request)
+    {
 
         $search_key     = $request->search;
         $category_id    = $request->id;
@@ -572,7 +566,7 @@ class SiteController extends Controller
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity','>','0');
+                    $p->where('quantity', '>', '0');
                     //});
                 })
                 ->orderBy('name', 'desc')
@@ -604,7 +598,7 @@ class SiteController extends Controller
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity','>','0');
+                    $p->where('quantity', '>', '0');
                     //});
                 })
                 ->orderBy('name', 'desc')
@@ -613,29 +607,29 @@ class SiteController extends Controller
             $category = Category::whereId($request->id)->firstOrFail();
 
             $all_products           = $category->products()
-            ->with('categories', 'offer', 'offer.activeOffer', 'brand', 'reviews')
-            ->whereHas('categories')
-            ->whereHas('stocks', function ($p) {
-                //$p->whereHas('amounts', function ($t) {
-                $p->where('quantity','>','0');
-                //});
-            })
-            ->where(function ($query) use ($search_key) {
-                return $query->where('name', 'like', "%{$search_key}%")
-                    ->orWhere('summary', 'like', "%{$search_key}%")
-                    ->orWhere('description', 'like', "%{$search_key}%");
-            })
-            ->get();
+                ->with('categories', 'offer', 'offer.activeOffer', 'brand', 'reviews')
+                ->whereHas('categories')
+                ->whereHas('stocks', function ($p) {
+                    //$p->whereHas('amounts', function ($t) {
+                    $p->where('quantity', '>', '0');
+                    //});
+                })
+                ->where(function ($query) use ($search_key) {
+                    return $query->where('name', 'like', "%{$search_key}%")
+                        ->orWhere('summary', 'like', "%{$search_key}%")
+                        ->orWhere('description', 'like', "%{$search_key}%");
+                })
+                ->get();
 
             if (in_array("0", $brand)) {
-            $productCollection  = $all_products;
+                $productCollection  = $all_products;
             } else {
-            $productCollection  = $all_products->whereIn('brand.id', $brand);
-            }     
+                $productCollection  = $all_products->whereIn('brand.id', $brand);
+            }
 
-            $products_like =  paginate($productCollection, $perpage, $page , $options = []);
+            $products_like =  paginate($productCollection, $perpage, $page, $options = []);
             //dd($category_id);
-           /* $products_like   = Category::where('id', $category_id)
+            /* $products_like   = Category::where('id', $category_id)
                 // ->where('parent_id', $category_id)
                 // ->orWhereNull('parent_id')
                 ->firstOrFail()->products()
@@ -660,9 +654,7 @@ class SiteController extends Controller
                 ->paginate($perpage,$page);
                 dd( $products_like);
             $products_like->where('parent_id', $category_id);*/
-
-            
-        }       
+        }
 
         $products = isset($products_match) ? $products_match->count() > 0 ? $products_match : $products_like : $products_like;
 
@@ -756,7 +748,7 @@ class SiteController extends Controller
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity','>','0');
+                    $p->where('quantity', '>', '0');
                     //});
                 })
                 ->orderBy('id', 'desc')
@@ -769,7 +761,7 @@ class SiteController extends Controller
                 ->orderBy('id', 'desc')
                 ->whereHas('stocks', function ($p) {
                     //$p->whereHas('amounts', function ($t) {
-                    $p->where('quantity','>','0');
+                    $p->where('quantity', '>', '0');
                     //});
                 })
                 //->whereHas('brand')
@@ -794,11 +786,11 @@ class SiteController extends Controller
 
         $products           =  paginate($productCollection, $perpage, $page = null, $options = []);
 
-       // if ($request->ajax()) {
-       //     $view = 'partials.products_filter';
+        // if ($request->ajax()) {
+        //     $view = 'partials.products_filter';
         //} else {
         $view = 'plugins.list_products_recent';
-       // }
+        // }
 
         $empty_message = "Disculpe! Sin resultados.";
 
@@ -830,8 +822,8 @@ class SiteController extends Controller
                 //->whereHas('brand')
                 ->get();
         } else {*/
-            $all_products       = Product::topSales(30);
-       // }
+        $all_products       = Product::topSales(30);
+        // }
 
         $min_price              = $all_products->min('base_price') ?? 0;
         $max_price              = $all_products->max('base_price') ?? 0;
@@ -852,10 +844,10 @@ class SiteController extends Controller
         $products           =  paginate($productCollection, $perpage, $page = null, $options = []);
 
         //if ($request->ajax()) {
-         //   $view = 'partials.products_filter';
+        //   $view = 'partials.products_filter';
         //} else {
         $view = 'plugins.list_products_bestsellers';
-       // }
+        // }
 
         $empty_message = "Disculpe! Sin resultados.";
 
@@ -922,10 +914,10 @@ class SiteController extends Controller
 
 
         return view($this->activeTemplate . $view, compact('products', 'perpage', 'brand', 'min_price', 'max_price', 'page_title', 'brands', 'min', 'max', 'category_id', 'empty_message'));
-    
     }
 
-    public function more_product_offers(Request $request){
+    public function more_product_offers(Request $request)
+    {
 
         $brands                 = Brand::latest()->get();
         $categories             = Category::where('parent_id', null)->latest()->get();
@@ -990,7 +982,6 @@ class SiteController extends Controller
 
 
         return view($this->activeTemplate . $view, compact('products'));
-    
     }
 
     public function productsByCategory(Request $request, $id)
@@ -1014,7 +1005,7 @@ class SiteController extends Controller
         } else {
             $perpage = request()->perpage;
         }
-       // dd($perpage);
+        // dd($perpage);
 
         $all_products           = $category->products()
             ->with('categories', 'offer', 'offer.activeOffer', 'brand', 'reviews')
@@ -1041,7 +1032,7 @@ class SiteController extends Controller
             $productCollection = $productCollection->where('base_price', '<=', $max);
         }
 
-        $products           =  paginate($productCollection, $perpage, $page , $options = []);
+        $products           =  paginate($productCollection, $perpage, $page, $options = []);
 
         if ($request->ajax()) {
             $view = 'partials.products_filter';
@@ -1070,12 +1061,13 @@ class SiteController extends Controller
             ->has('products')
             ->get();
 
-         //   dd($products);
+        //   dd($products);
 
         return view($this->activeTemplate . $view, compact('products', 'perpage', 'brand', 'min_price', 'max_price', 'page_title', 'empty_message', 'min', 'max', 'category', 'brands', 'seo_contents', 'subcategory'));
     }
 
-    public function more_products_category(Request $request){
+    public function more_products_category(Request $request)
+    {
 
         $category = Category::whereId($request->id)->firstOrFail();
         $page_title             = 'Productos por Categoría - ' . $category->name;
@@ -1097,18 +1089,18 @@ class SiteController extends Controller
         }
 
         $all_products           = $category->products()
-        ->with('categories', 'offer', 'offer.activeOffer', 'brand', 'reviews')
-        ->whereHas('categories')
-        //->whereHas('brand')
-        ->get();
+            ->with('categories', 'offer', 'offer.activeOffer', 'brand', 'reviews')
+            ->whereHas('categories')
+            //->whereHas('brand')
+            ->get();
 
         if (in_array("0", $brand)) {
             $productCollection  = $all_products;
         } else {
             $productCollection  = $all_products->whereIn('brand.id', $brand);
-        }     
+        }
 
-        $products =  paginate($productCollection, $perpage, $page , $options = []);
+        $products =  paginate($productCollection, $perpage, $page, $options = []);
 
         $view = 'partials.products_scroll_infinite';
 
@@ -1194,7 +1186,7 @@ class SiteController extends Controller
         $product = Product::where('id', $id)
             ->where('is_plan', 0)
             ->with('categories', 'assignAttributes', 'offer', 'offer.activeOffer', 'reviews', 'productImages')
-            ->whereHas('categories')            
+            ->whereHas('categories')
             // ->whereHas('brand')
             ->first();
 
@@ -1213,7 +1205,7 @@ class SiteController extends Controller
         } else $discount = 0;
 
         //productos relacionados
-        $rProducts = $product->categories()        
+        $rProducts = $product->categories()
             ->with(
                 [
                     'products',
@@ -1226,7 +1218,7 @@ class SiteController extends Controller
             ->get()
             ->map(function ($item) use ($id) {
                 return $item->products->where('id', '!=', $id)
-                ->take(12);
+                    ->take(12);
             });
 
         //Meto los rProducts no duplicados en un solo array
@@ -1761,15 +1753,16 @@ class SiteController extends Controller
         return view('invoice.print', compact('page_title', 'order', 'discountPrime'));
     }
 
-    public function exportInvoice(Order $order){
-        return (new OrderExport($order->id))->download('order-'.$order->id.'.xlsx');
+    public function exportInvoice(Order $order)
+    {
+        return (new OrderExport($order->id))->download('order-' . $order->id . '.xlsx');
     }
 
     public function setMoneda(Request $request)
     {
         // $moneda = $request['moneda'];
         $moneda = session()->get('moneda');
-        
+
         switch ($moneda) {
             case 'Dolares':
                 session()->put('moneda', 'Dolares');
@@ -1782,7 +1775,7 @@ class SiteController extends Controller
                 session()->save();
                 $moneda = session()->get('moneda');
                 break;
-                
+
             case 'Euros':
                 session()->put('moneda', 'Euros');
                 session()->save();
@@ -1815,18 +1808,19 @@ class SiteController extends Controller
     public function getRate()
     {
         $rate = Rates::select('tasa_del_dia')->where('status', '1')->where('type', session()->get('moneda'))->orderBy('id', 'desc')->first();
-       //dd($rate);
-       if($rate){
-        session()->put('rate', $rate->tasa_del_dia);
-        session()->save();
-        //dd(session()->get('rate'));
-        return response()->json(['rate' => $rate->tasa_del_dia]);
-       }
-       return null;
+        //dd($rate);
+        if ($rate) {
+            session()->put('rate', $rate->tasa_del_dia);
+            session()->save();
+            //dd(session()->get('rate'));
+            return response()->json(['rate' => $rate->tasa_del_dia]);
+        }
+        return null;
     }
-    
-    public function route(Request $request){
-       // dd($request->all());
+
+    public function route(Request $request)
+    {
+        // dd($request->all());
         return route('products.category', ['id' => $request->id, 'slug' => slug($request->slug)]);
     }
 }

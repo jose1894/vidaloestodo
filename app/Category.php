@@ -38,12 +38,13 @@ class Category extends Model
             //$p->whereHas('amounts', function ($t) {
             $p->where('quantity','>','0');
             //});
-        });
+        })
+        ->where('show_in_frontend',  '1')
         //->whereHas('brand')
        // ->take(4)
-       //->inRandomOrder();
+       ->inRandomOrder()
         //->orderBy('id', 'desc')
-       // ->limit(24);
+        ->limit(24);
     }
 
 

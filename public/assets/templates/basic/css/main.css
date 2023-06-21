@@ -8642,6 +8642,16 @@ nav#menu-normal ul li .nav-item.desplegable i {
         top: -50px;
         left: -15px;
     }
+
+    nav#menu-normal ul li small {
+        color: var(--text-h2);
+    }
+
+    nav#menu-normal a.dropdown-item,
+    nav#menu-normal a.nav-link {
+        color: var(--text-h2);
+        font-family: MuliBold, Helvetica, Arial, Lucida, sans-serif
+    }
 }
 
 @media (min-width:576px) {
@@ -8656,12 +8666,32 @@ nav#menu-normal ul li .nav-item.desplegable i {
         /* left: -15px; */
     }
 
+    nav#menu-normal ul li small {
+        color: var(--text-h2);
+    }
+
+    nav#menu-normal a.dropdown-item,
+    nav#menu-normal a.nav-link {
+        color: var(--text-h2);
+        font-family: MuliBold, Helvetica, Arial, Lucida, sans-serif
+    }
+
 }
 
 @media (min-width:768px) {
 
     nav#menu-normal .buscar-auto-complete {
         max-height: calc(100vh - 96px) !important
+    }
+
+    nav#menu-normal ul li small {
+        color: var(--text-h2);
+    }
+
+    nav#menu-normal a.dropdown-item,
+    nav#menu-normal a.nav-link {
+        color: var(--text-h2);
+        font-family: MuliBold, Helvetica, Arial, Lucida, sans-serif
     }
 
 }
@@ -8727,7 +8757,7 @@ nav#menu-normal .dropdown-toggle:after {
 
 nav#menu-normal a.dropdown-item,
 nav#menu-normal a.nav-link {
-    color: #fff !important;
+    color: #fff;
     font-family: MuliBold, Helvetica, Arial, Lucida, sans-serif
 }
 
