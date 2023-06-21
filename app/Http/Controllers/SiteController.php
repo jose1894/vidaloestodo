@@ -231,29 +231,7 @@ class SiteController extends Controller
     {
         $date_now = Carbon::now()->format('Y-m-d H:i:s');
         $data['page_title']             = 'Inicio';
-
-        // $data['categories'] = Category::
-        // with(
-        //     [
-        //         'products' => function ($q) {
-        //             //$q->take(4)
-        //             return $q->whereHas('categories');
-        //         },
-        //         'products.reviews',
-        //         'products.offers',
-        //         'products.stocks' => function ($q) {
-        //             $q->where('quantity', '>', 0);
-        //         },
-        //     ]
-        // )
-        // ->where('in_filter_menu',  '1')
-        // ->orderByRaw(
-        //     "case when position is null then 1 else 0 end, position"
-        // )
-        // ->paginate(3);
-
-        // dd($data['categories'][0]->specialProuducts);
-
+        
         $data['categories'] = Category::with(
             [
                 'products' => function ($q) {
@@ -276,19 +254,9 @@ class SiteController extends Controller
             ->orderByRaw(
                 "case when position is null then 1 else 0 end, position"
             )
-            ->paginate(3);
+            ->paginate(6);
             
         $rate = $this->getRate();
-
-
-        /* foreach ($data['featured_products'] as $key => $link) {
-            if ($link->stocks) {
-
-                // unset($data['featured_products'][$key]); 
-            }
-        }*/
-        // dd($data['featured_products']);
-        //return $data['featured_products'];
         return view($this->activeTemplate . 'home', $data);
     }
 
@@ -326,7 +294,7 @@ class SiteController extends Controller
             ->orderByRaw(
                 "case when position is null then 1 else 0 end, position"
             )
-            ->paginate(3);
+            ->paginate(6);
 
         // dd( $categories);
 
