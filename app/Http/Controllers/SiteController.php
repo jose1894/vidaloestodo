@@ -325,6 +325,7 @@ class SiteController extends Controller
                 'productIva',
             ]
         )
+        ->where('show_in_frontend',  '1')
             ->where('is_plan', 0)
             ->whereHas('categories')
             ->orderBy('id', 'desc')
@@ -393,6 +394,7 @@ class SiteController extends Controller
                 ->where(function ($product) use ($search_key) {
                     $product->where('name', 'like', "%" . $search_key . "%");
                 })
+                ->where('show_in_frontend',  '1')
                 ->where('is_plan', 0)
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
@@ -433,6 +435,7 @@ class SiteController extends Controller
                         'productIva'
                     ]
                 )
+                ->where('show_in_frontend',  '1')
                 ->where('is_plan', 0)
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
@@ -529,6 +532,7 @@ class SiteController extends Controller
                 ->where(function ($product) use ($search_key) {
                     $product->where('name', 'like', "%" . $search_key . "%");
                 })
+                ->where('show_in_frontend',  '1')
                 ->where('is_plan', 0)
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
@@ -561,6 +565,7 @@ class SiteController extends Controller
                         'productIva'
                     ]
                 )
+                ->where('show_in_frontend',  '1')
                 ->where('is_plan', 0)
                 ->whereHas('categories')
                 ->whereHas('stocks', function ($p) {
@@ -656,7 +661,8 @@ class SiteController extends Controller
                 ->get();
         } else {
             $all_products       = Product::with('categories', 'offer', 'offer.activeOffer', 'reviews', 'brand', 'productIva')
-                ->where('is_plan', 0)
+            ->where('show_in_frontend',  '1')    
+            ->where('is_plan', 0)
                 ->whereHas('categories')
                 //->whereHas('brand')
                 ->get();
@@ -723,7 +729,9 @@ class SiteController extends Controller
                 ->get();
         } else {
             $all_products       = Product::with('categories', 'offer', 'offer.activeOffer', 'reviews', 'brand', 'productIva')
-                ->where('is_plan', 0)
+            ->where('show_in_frontend',  '1')    
+            ->where('is_plan', 0)
+                ->where('show_in_frontend',  '1')
                 ->whereHas('categories')
                 ->orderBy('id', 'desc')
                 ->whereHas('stocks', function ($p) {
@@ -847,6 +855,7 @@ class SiteController extends Controller
                 },
             ]
         )
+        ->where('show_in_frontend',  '1')
             ->where('is_plan', 0)
             ->whereHas('categories')
             ->whereHas('offer.activeOffer')
@@ -856,6 +865,7 @@ class SiteController extends Controller
         $min_price              = $all_products->min('base_price') ?? 0;
         $max_price              = $all_products->max('base_price') ?? 0;
         if (in_array("0", $brand)) {
+
             $productCollection  = $all_products;
         } else {
             $productCollection  = $all_products->whereIn('brand.id', $brand);
@@ -919,6 +929,7 @@ class SiteController extends Controller
                 },
             ]
         )
+        ->where('show_in_frontend',  '1')
             ->where('is_plan', 0)
             ->whereHas('categories')
             ->whereHas('offer.activeOffer')
@@ -1151,6 +1162,7 @@ class SiteController extends Controller
         }
 
         $product = Product::where('id', $id)
+        ->where('show_in_frontend',  '1')
             ->where('is_plan', 0)
             ->with('categories', 'assignAttributes', 'offer', 'offer.activeOffer', 'reviews', 'productImages')
             ->whereHas('categories')
@@ -1316,7 +1328,7 @@ class SiteController extends Controller
 
         $review_available = false;
 
-        $product = Product::where('id', $id)->where('is_plan', 0)
+        $product = Product::where('id', $id)->where('show_in_frontend',  '1')->where('is_plan', 0)
             ->with('categories', 'offer', 'offer.activeOffer', 'reviews', 'productImages')
             ->whereHas('categories')
             //->whereHas('brand')
@@ -1551,12 +1563,12 @@ class SiteController extends Controller
     public function addToCompare(Request $request)
     {
         $id         = $request->product_id;
-        $product    = Product::where('id', $id)->where('is_plan', 0)->with('categories')->first();
+        $product    = Product::where('id', $id)->where('show_in_frontend',  '1')->where('is_plan', 0)->with('categories')->first();
 
         $compare            = session()->get('compare');
         if ($compare) {
             $reset_compare      = reset($compare);
-            $prev_product   = Product::where('id', $reset_compare['id'])->where('is_plan', 0)->with('categories')->first();
+            $prev_product   = Product::where('id', $reset_compare['id'])->where('show_in_frontend',  '1')->where('is_plan', 0)->with('categories')->first();
 
             $not_same       = empty(array_intersect($product->categories->pluck('id')->toArray(), $prev_product->categories->pluck('id')->toArray()));
 
@@ -1605,6 +1617,7 @@ class SiteController extends Controller
         }
 
         $compare_data   = Product::with('categories', 'offer', 'offer.activeOffer', 'reviews', 'productIva')
+        ->where('show_in_frontend',  '1')
             ->where('is_plan', 0)
             ->whereHas('categories')
             //->whereHas('brand')
@@ -1632,6 +1645,7 @@ class SiteController extends Controller
         }
 
         $compare_data   = Product::with('categories', 'offer', 'offer.activeOffer', 'reviews', 'productIva')
+        ->where('show_in_frontend',  '1')
             ->where('is_plan', 0)
             ->whereHas('categories')
             //->whereHas('brand')
