@@ -167,7 +167,8 @@
                                                             <span>
                                                                 @if ($moneda == 'Dolares' || $moneda == '')
                                                                     @if ($discount > 0)
-                                                                        {{ $general->cur_sym }}{{ getAmount($item->precioBaseIva - $discount, 2) }}
+                                                                        {{ getAmount($item->precioBaseIva - $discount, 2) }}
+                                                                        {{ $general->cur_sym }}
                                                                         <del>{{ getAmount($item->precioBaseIva, 2) }}</del>
                                                                         @if (!is_null($item->prime_price))
                                                                             <br>
@@ -180,7 +181,8 @@
                                                                             {{ $general->cur_sym }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }} --}}
                                                                         @endif
                                                                     @else
-                                                                        {{ $general->cur_sym }}{{ getAmount($item->precioBaseIva, 2) }}
+                                                                        {{ getAmount($item->precioBaseIva, 2) }}
+                                                                        {{ $general->cur_sym }}
                                                                         @if (!is_null($item->prime_price))
                                                                             <br>
                                                                             <span class="precio-prime">
