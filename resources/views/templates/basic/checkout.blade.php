@@ -54,49 +54,54 @@
                                                                         <del>{{ getAmount($item->product->precioBaseIva, 2) }}</del>
                                                                         @if (!is_null($item->product->prime_price))
                                                                             <br>
-                                                                            
-                                                                            <span class="precio-prime"><span class="palabra-tipo"><b>Prime:</b></span>
-                                                                            {{ getAmount($item->product->precioPrimeIva ?? $$item->product->prime_price, 2) }} {{ $general->cur_sym }}</span>
-                                                                            
-                                                                            
+
+                                                                            <span class="precio-prime"><span
+                                                                                    class="palabra-tipo"><b>Prime:</b></span>
+                                                                                {{ getAmount($item->product->precioPrimeIva ?? $$item->product->prime_price, 2) }}
+                                                                                {{ $general->cur_sym }}</span>
                                                                         @endif
                                                                     @else
                                                                         {{ $general->cur_sym }}{{ getAmount($item->product->precioBaseIva, 2) }}
                                                                         @if (!is_null($item->product->prime_price))
                                                                             <br>
-                                                                           <span class="precio-prime"><span class="palabra-tipo"><b>Prime:</b></span>
-                                                                           {{ getAmount($item->product->precioPrimeIva ?? $item->product->prime_price, 2) }} 
-                                                                           {{ $general->cur_sym }}</span>
+                                                                            <span class="precio-prime"><span
+                                                                                    class="palabra-tipo"><b>Prime:</b></span>
+                                                                                {{ getAmount($item->product->precioPrimeIva ?? $item->product->prime_price, 2) }}
+                                                                                {{ $general->cur_sym }}</span>
                                                                             {{-- <b>Prime:</b>
       
                                                                                 {{ $general->cur_sym }}{{ getAmount($item->product->precioPrimeIva ?? $item->product->prime_price, 2) }} --}}
                                                                         @endif
                                                                     @endif
                                                                 @else
-                                                                    @if ($discount > 0)                                                                        
-                                                                        {{ getAmount($item->product->precioBaseIva - $discount * $rate, 2) }}
-                                                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
-
+                                                                    @if ($discount > 0)
+                                                                        <span class="text-danger">
+                                                                            {{ getAmount($item->product->precioBaseIva - $discount * $rate, 2) }}
+                                                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                                                        </span>
                                                                         <del>{{ getAmount($item->product->precioBaseIva * $rate, 2) }}</del>
                                                                         @if (!is_null($item->product->prime_price))
                                                                             <br>
-                                                                            <span class="precio-prime"><span class="palabra-tipo"><b>Prime:</b></span>
-                                                                            {{ getAmount(($item->product->precioPrimeIva ?? $item->product->prime_price) * $rate, 2) }} 
-                                                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}</span>
+                                                                            <span class="precio-prime"><span
+                                                                                    class="palabra-tipo"><b>Prime:</b></span>
+                                                                                {{ getAmount(($item->product->precioPrimeIva ?? $item->product->prime_price) * $rate, 2) }}
+                                                                                {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}</span>
                                                                             {{-- <b>Prime:</b>
       
                                                                                 {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->product->precioPrimeIva ?? $item->product->prime_price * $rate, 2) }} --}}
                                                                         @endif
                                                                     @else
-                                                                        
-                                                                        {{ getAmount($item->product->precioBaseIva * $rate, 2) }} 
-                                                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                                                        <span class="text-danger">
+                                                                            {{ getAmount($item->product->precioBaseIva * $rate, 2) }}
+                                                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                                                        </span>
                                                                         @if (!is_null($item->product->prime_price))
                                                                             <br>
                                                                             <span class="precio-prime">
-                                                                                <span class="palabra-tipo"><b>Prime:</b></span>
+                                                                                <span
+                                                                                    class="palabra-tipo"><b>Prime:</b></span>
 
-                                                                                {{ getAmount(($item->product->precioPrimeIva ?? $item->product->prime_price) * $rate, 2) }} 
+                                                                                {{ getAmount(($item->product->precioPrimeIva ?? $item->product->prime_price) * $rate, 2) }}
                                                                                 {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
                                                                             </span>
                                                                             {{-- <b>Prime:</b>
@@ -130,8 +135,7 @@
                                         </li>
                                         <li>
                                             <span class="subtitle">@lang('IVA')</span>
-                                            <span
-                                                class="cl-title">{{ $general->cur_sym }}{{ getAmount($iva, 2) }}</span>
+                                            <span class="cl-title">{{ $general->cur_sym }}{{ getAmount($iva, 2) }}</span>
                                         </li>
                                         @if (session()->has('coupon'))
                                             <li>
@@ -332,7 +336,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                       
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -454,13 +458,13 @@
                                     </div>
                                     <div class="col-md-12 col-lg-12">
                                         <!-- <span>
-                                                <small class="textspan">
-                                                    El 100% de la propina va a
-                                                    nuestros Zoneros. No es
-                                                    obligatorio, solo si es de tu
-                                                    agrado.
-                                                </small>
-                                            </span>-->
+                                                    <small class="textspan">
+                                                        El 100% de la propina va a
+                                                        nuestros Zoneros. No es
+                                                        obligatorio, solo si es de tu
+                                                        agrado.
+                                                    </small>
+                                                </span>-->
                                     </div>
                                     {{-- <div class="col-md-12 col-lg-12 mt-2 justify-content-end">
                                         <button @click="submit" type="button" class="btn btn-success">Continuar con el Proceso de Pago</button>
@@ -590,16 +594,19 @@
 
                                             INGRESE PRIMERO EL PAGO EN DIVISAS Y LUEGO EN BOLIVARES
                                             <!--, ingrese PRIMERO el
-                                                Pago en Divisas y por último en Bs-->
+                                                    Pago en Divisas y por último en Bs-->
                                         </small></span> </p>
                                 <p align="center" v-if="!depositReturn.id">
-                                    <small style="font-weight: 900;font-size: 15px;" class="textspan text-danger text-center">INGRESE EL PRIMER METODO
-                                        DE PAGO</small></p>
+                                    <small style="font-weight: 900;font-size: 15px;"
+                                        class="textspan text-danger text-center">INGRESE EL PRIMER METODO
+                                        DE PAGO</small>
+                                </p>
                                 <p align="center" v-else>
-                                    <small style="font-weight: 900;font-size: 15px;" class="textspan text-danger">INGRESE EL SEGUNDO METODO DE PAGO</small>
+                                    <small style="font-weight: 900;font-size: 15px;" class="textspan text-danger">INGRESE
+                                        EL SEGUNDO METODO DE PAGO</small>
                                 </p>
                                 <!--<p><small class="textspan text-info mb-2">ALGUNOS MÉTODOS DE PAGOS NO SE ENCUENTRAN
-                                            DISPONIBLES CON MULTIPAGO</small></p>-->
+                                                DISPONIBLES CON MULTIPAGO</small></p>-->
                             </div>
 
                             <div class="col-md-12 col-lg-12">
@@ -1533,7 +1540,7 @@
                         }
                     } else {
                         this.validateCash();
-                       // debugger
+                        // debugger
                         // console.log(this.error);
                         if (this.error.length == 0) {
                             if (!pay.order.id) {
@@ -1553,7 +1560,8 @@
                     // pay.formcash.totalbs = montoPendienteBs
                     // pay.formcash.totaldollar = this.totalpago
                     var montoPendienteBs = 0
-                    if (this.depositReturn.method_currency == 'BS.F' || this.depositReturn.method_currency == 'BS') {
+                    if (this.depositReturn.method_currency == 'BS.F' || this.depositReturn.method_currency ==
+                        'BS') {
                         if (!pay.order.id) {
                             var montoPendienteBs = parseFloat(this.totalbs - this.totalpago).toFixed(2);
                             //let montoPendienteBs = parseFloat((!pay.order.id ? this.totalbs : pay.secondPayment.totalbs) - this.totalpago).toFixed(2);
@@ -1761,7 +1769,8 @@
                 },
                 totalPendiente: function() {
                     //debugger
-                    if (this.depositReturn.method_currency == 'BS.F' || this.depositReturn.method_currency == 'BS') {
+                    if (this.depositReturn.method_currency == 'BS.F' || this.depositReturn.method_currency ==
+                        'BS') {
                         const montoPendienteBs = parseFloat(this.totalbs - this.totalpago).toFixed(2);
                         const cambioDollar = parseFloat((montoPendienteBs) / parseFloat(this.tasa));
                         const montoPendienteDollar = parseFloat((Math.round(cambioDollar * 100) / 100)).toFixed(
@@ -1774,9 +1783,10 @@
                         return `Bs.${montoPendienteBs} / $.${montoPendienteDollar}`
                     }
                 },
-                totalPagado: function() {                    
+                totalPagado: function() {
                     // debugger
-                    if (this.depositReturn.method_currency == 'BS.F' || this.depositReturn.method_currency == 'BS') {
+                    if (this.depositReturn.method_currency == 'BS.F' || this.depositReturn.method_currency ==
+                        'BS') {
                         const montoPendienteBs = parseFloat(this.totalpago).toFixed(2);
                         const cambioDollar = parseFloat((montoPendienteBs) / parseFloat(this.tasa));
                         const montoPendienteDollar = parseFloat((Math.round(cambioDollar * 100) / 100)).toFixed(
@@ -2018,7 +2028,7 @@
 
         function method_entrega(opcion) {
             if (opcion == 1) {
-                 $('#card_m_envio1').css('background-color', '#af1e4f').css('color', 'white');
+                $('#card_m_envio1').css('background-color', '#af1e4f').css('color', 'white');
                 $('#card_m_envio2').css('background-color', 'rgba(214, 224, 226, 0.2)').css('color', '#7f8081');
 
                 $('#method_entrega_1').prop('checked', true);

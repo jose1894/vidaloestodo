@@ -122,16 +122,15 @@
                                                         <span>
                                                             @if ($moneda == 'Dolares' || $moneda == '')
                                                                 @if ($discount > 0)
-                                                                    
                                                                     {{ getAmount($item->precioBaseIva - $discount, 2) }}
                                                                     {{ $general->cur_sym }}
-                                                                    
+
                                                                     <del>{{ getAmount($item->precioBaseIva, 2) }}</del>
                                                                     @if (!is_null($item->prime_price))
                                                                         <br>
                                                                         <span class="precio-prime"><span
                                                                                 class="palabra-tipo"><b>Prime:</b> </span>
-                                                                                {{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }}
+                                                                            {{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }}
                                                                             {{ $general->cur_sym }}</span>
                                                                         {{-- <b>Prime:</b> 
                                                                         {{ $general->cur_sym }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }} --}}
@@ -143,7 +142,7 @@
                                                                         <br>
                                                                         <span class="precio-prime"><span
                                                                                 class="palabra-tipo"><b>Prime:</b> </span>
-                                                                                {{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }}
+                                                                            {{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }}
                                                                             {{ $general->cur_sym }}</span>
                                                                         {{-- <b>Prime:</b> 
                                                                         {{ $general->cur_sym }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }} --}}
@@ -151,25 +150,33 @@
                                                                 @endif
                                                             @else
                                                                 @if ($discount > 0)
-                                                                    {{ getAmount(($item->precioBaseIva - $discount) * $rate, 2) }} {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                                                    <span class="text-danger">
+                                                                        {{ getAmount(($item->precioBaseIva - $discount) * $rate, 2) }}
+                                                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                                                    </span>
                                                                     <del>{{ getAmount($item->precioBaseIva * $rate, 2) }}</del>
                                                                     @if (!is_null($item->prime_price))
                                                                         <br>
                                                                         <span class="precio-prime"><span
-                                                                                class="palabra-tipo"><b><b>Prime:</b> </b> </span>
-                                                                                {{ getAmount(($item->precioPrimeIva ?? $item->prime_price) * $rate, 2) }}
+                                                                                class="palabra-tipo"><b><b>Prime:</b> </b>
+                                                                            </span>
+                                                                            {{ getAmount(($item->precioPrimeIva ?? $item->prime_price) * $rate, 2) }}
                                                                             {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}</span>
                                                                         {{-- <b>Prime:</b> 
                                                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price * $rate, 2) }} --}}
                                                                     @endif
                                                                 @else
-                                                                    {{ getAmount($item->precioBaseIva * $rate, 2) }} {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                                                    <span class="text-danger">
+                                                                        {{ getAmount($item->precioBaseIva * $rate, 2) }}
+                                                                        {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                                                    </span>
                                                                     @if (!is_null($item->prime_price))
                                                                         <br>
                                                                         <span class="precio-prime"><span
-                                                                                class="palabra-tipo"><b><b>Prime:</b> </b> </span>
-                                                                                {{ getAmount(($item->precioPrimeIva ?? $item->prime_price) * $rate, 2) }}
-                                                                                {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}</span>
+                                                                                class="palabra-tipo"><b><b>Prime:</b> </b>
+                                                                            </span>
+                                                                            {{ getAmount(($item->precioPrimeIva ?? $item->prime_price) * $rate, 2) }}
+                                                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}</span>
                                                                         {{-- <b>Prime:</b> 
                                                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price * $rate, 2) }} --}}
                                                                     @endif

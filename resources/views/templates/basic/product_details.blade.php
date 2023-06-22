@@ -263,9 +263,11 @@
                                 @else
                                     @if($discount > 0)                                                                       
                                     <span class="special_price">
+                                        <span class="text-danger">
                                         {{ getAmount(($product->precioBaseIva - $discount) * $rate, 2)  }}</span>
                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }} 
 
+                                    </span>
                                     <del class="price-data">{{getAmount($product->precioBaseIva* $rate, 2) }}</del>
                                     <del>{{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}</del>
                                     @if(!is_null($product->prime_price) )
@@ -277,8 +279,10 @@
                                     @else
                                     
                                     <span class="price-data">
+                                        <span class="text-danger">
                                         {{ getAmount($product->precioBaseIva * $rate, 2)}}</span>
                                     {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+                                    </span>
                                     @if(!is_null($product->prime_price) )
                                     <br>
                                     <b>Prime:</b> 
