@@ -84,28 +84,38 @@
 																<del>{{ getAmount($item->precioBaseIva, 2) }}</del>                                                  
 																@if(!is_null($item->prime_price) )
 																	<br>
-																	Prime: {{ $general->cur_sym }}{{ getAmount($item->precioPrimeIva??$item->prime_price, 2) }}
+																	<b>Prime:</b> 
+																	{{ getAmount($item->precioPrimeIva??$item->prime_price, 2) }}
+																	{{ $general->cur_sym }}
 																@endif                                              
 															@else
 																{{ $general->cur_sym }}{{ getAmount($item->precioBaseIva, 2) }}
 																@if(!is_null($item->prime_price) )
 																	<br>
-																	Prime: {{ $general->cur_sym }}{{ getAmount($item->precioPrimeIva??$item->prime_price, 2) }}
+																	<b>Prime:</b> 
+																	{{ getAmount($item->precioPrimeIva??$item->prime_price, 2) }}
+																	{{ $general->cur_sym }}
 																@endif  
 															@endif
 														@else 
 															@if($discount > 0)
-															{{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioBaseIva - $discount, 2) * $rate }}
+																{{ getAmount($item->precioBaseIva - $discount, 2) * $rate }}
+																{{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
 																<del>{{ getAmount($item->precioBaseIva * $rate, 2) }}</del>                                                  
 																@if(!is_null($item->prime_price) )
 																	<br>
-																	Prime: {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioPrimeIva??$item->prime_price * $rate, 2) }}
+																	<b>Prime:</b> 
+																	{{ getAmount(($item->precioPrimeIva??$item->prime_price) * $rate, 2) }}
+																	{{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
 																@endif                                              
 															@else
-															{{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioBaseIva * $rate, 2) }}
+																{{ getAmount($item->precioBaseIva * $rate, 2) }}
+																{{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
 																@if(!is_null($item->prime_price) )
 																	<br>
-																	Prime: {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioPrimeIva??$item->prime_price * $rate, 2) }}
+																	<b>Prime:</b> 
+																	{{ getAmount(($item->precioPrimeIva??$item->prime_price) * $rate, 2) }}
+																	{{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
 																@endif  
 															@endif
 														@endif

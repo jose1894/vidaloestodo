@@ -1,4 +1,4 @@
-@if($products)
+@if ($products)
 
     <div class="row prod-list">
         @foreach ($products as $item)
@@ -17,15 +17,16 @@
                     <div class="item-prod">
                         <div class="item-bord item-bord">
 
-                            <a
-                                href="{{ route('product.detail', ['id' => $item->id, 'slug' => slug($item->name)]) }}">
+                            <a href="{{ route('product.detail', ['id' => $item->id, 'slug' => slug($item->name)]) }}">
                                 <div class="item-img">
                                     @if (isset($item->offer))
                                         @if ($item->offer['activeOffer'])
                                             @if ($item->offer['activeOffer']['discount_type'] == 2)
-                                                <span class="text-white bg-danger tag-discount discount-products"> -{{$item->offer['activeOffer']['amount']}}% </span>
-                                            @else 
-                                                <span class="text-white bg-danger tag-discount discount-products"> -{{$item->offer['activeOffer']['amount']}}$ </span>
+                                                <span class="text-white bg-danger tag-discount discount-products">
+                                                    -{{ $item->offer['activeOffer']['amount'] }}% </span>
+                                            @else
+                                                <span class="text-white bg-danger tag-discount discount-products">
+                                                    -{{ $item->offer['activeOffer']['amount'] }}$ </span>
                                             @endif
                                         @endif
                                     @endif
@@ -35,7 +36,7 @@
                             </a>
                             <div class="item-descp">
 
-                                
+
                                 <span class="screenReaderOnlyText"></span>
                                 <h3 class="item-nomb">
                                     <a href="{{ route('product.detail', ['id' => $item->id, 'slug' => slug($item->name)]) }}"
@@ -57,11 +58,11 @@
                                     @endif
                                 </p>
                                 <p class="producto-categ">
-                                    <span data-automation-id="price-per-unit">{{ $item->iva == 1 ? 'IVA Incluido' : 'Exento'}}</span>
+                                    <span
+                                        data-automation-id="price-per-unit">{{ $item->iva == 1 ? 'IVA Incluido' : 'Exento' }}</span>
                                 </p>
                             </div>
-                            <div style="display: none;"
-                                class="item-prod-argo badgeProduct{{ $item->id }}"></div>
+                            <div style="display: none;" class="item-prod-argo badgeProduct{{ $item->id }}"></div>
                             <div class="item-final">
                                 <div class="prec-area">
                                     <span class="prec-vent">
@@ -77,58 +78,63 @@
                                                     @if (!is_null($item->prime_price))
                                                         <br>
                                                         <span class="precio-prime">
-                                                            <span class="palabra-tipo">Prime:</span>
+                                                            <span class="palabra-tipo"><b>Prime:</b> </span>
                                                             {{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }}
                                                             {{ $general->cur_sym }}
                                                         </span>
-                                                        {{-- Prime:
+                                                        {{-- <b>Prime:</b> 
                                                         {{ $general->cur_sym }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }} --}}
                                                     @endif
                                                 @else
-                                                    {{ $general->cur_sym }}{{ getAmount($item->precioBaseIva, 2) }}
+                                                    {{ getAmount($item->precioBaseIva, 2) }}
+                                                    {{ $general->cur_sym }}
                                                     @if (!is_null($item->prime_price))
                                                         <br>
                                                         <span class="precio-prime">
-                                                            <span class="palabra-tipo">Prime:</span>
-                                                            {{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }}
-                                                            {{ $general->cur_sym }}
-                                                        </span>
-                                                        {{-- Prime:
+                                                            n class="palabra-tipo"><b>Prime:</b> </span>
+                                                        <spa {{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }}
+                                                            {{ $general->cur_sym }} </span>
+                                                            {{-- <b>Prime:</b> 
                                                         {{ $general->cur_sym }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price, 2) }} --}}
                                                     @endif
                                                 @endif
-                                            @else
+                                                @else
+                                                
                                                 @if ($discount > 0)
-                                                    {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioBaseIva - $discount * $rate, 2) }}
+                                                    {{ getAmount(($item->precioBaseIva - $discount) * $rate, 2) }}
+                                                    {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+
                                                     <del>{{ getAmount($item->precioBaseIva * $rate, 2) }}</del>
                                                     @if (!is_null($item->prime_price))
                                                         <br>
                                                         <span class="precio-prime">
-                                                            <span class="palabra-tipo">Prime:</span>
-                                                            {{ getAmount($item->precioPrimeIva ?? $item->prime_price * $rate, 2) }}
+                                                            <span class="palabra-tipo"><b>Prime:</b> </span>
+                                                            {{ getAmount(($item->precioPrimeIva ?? $item->prime_price) * $rate, 2) }}
                                                             {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
                                                         </span>
-                                                        {{-- Prime:
+                                                        {{-- <b>Prime:</b> 
                                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price * $rate, 2) }} --}}
                                                     @endif
                                                 @else
-                                                    {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioBaseIva * $rate, 2) }}
+                                                    {{ getAmount($item->precioBaseIva * $rate, 2) }}
+                                                    {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
+
                                                     @if (!is_null($item->prime_price))
                                                         <br>
                                                         <span class="precio-prime">
-                                                            <span class="palabra-tipo">Prime:</span>
-                                                            {{ getAmount($item->precioPrimeIva ?? $item->prime_price * $rate, 2) }}
-                                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}
-                                                        </span>
-                                                        {{-- Prime:
+                                                            n class="palabra-tipo"><b>Prime:</b> </span>
+                                                        <span {{ getAmount(($item->precioPrimeIva ?? $item->prime_price) * $rate, 2) }}
+                                                            {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }} </span>
+                                                            {{-- <b>Prime:</b> 
                                                         {{ $moneda == 'Euros' ? '€. ' : 'Bs. ' }}{{ getAmount($item->precioPrimeIva ?? $item->prime_price * $rate, 2) }} --}}
                                                     @endif
                                                 @endif
                                             @endif
+
                                         </span>
                                     </span>
-                                </div>
-                                <div class="btn-area">
+                                    v>
+                                    </di <div class="btn-area">
 
                                     <button @click="isShow = true" type="submit"
                                         class="cmn-btn-argo-item cart-add-btn showProduct{{ $item['id'] }}"
@@ -177,7 +183,6 @@
             </div>
         @endforeach
     </div>
-
 @else
-<h3 style="display: none;">Sin Productos</h3>
+    <h3 style="display: none;">Sin Productos</h3>
 @endif
