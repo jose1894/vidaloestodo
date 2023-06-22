@@ -20,7 +20,7 @@
 								{{$key->name}}
 							</a>
 								<br>
-							<span>
+							<span style="color: var(--text-h2)">
 								{{$general->cur_sym }}{{ getAmount($key->precioBaseIva, 2) }}
 							</span>
 						</div>

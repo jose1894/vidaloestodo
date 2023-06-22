@@ -182,7 +182,7 @@ class SiteController extends Controller
 
         $search = explode(" ", $search);
 
-        $search = implode("%", $search);
+		$search = implode("%", $search);
 
         $products_like = Product::with('productIva')
             ->where(function ($product) use ($search) {
@@ -215,7 +215,6 @@ class SiteController extends Controller
         })->paginate(10);
 
         $products = $products_match->count() > 0 ? $products_match : $products_like;
-
 
         return view('partials.search_products_categories', ['products' => $products, 'categories' => $categories]);
     }

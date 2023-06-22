@@ -23,6 +23,7 @@
         "maatwebsite/excel": "^3.1",
         "mailjet/mailjet-apiv3-php": "^1.4",
         "mollie/laravel-mollie": "^2.10.0",
+        "nunomaduro/phpinsights": "^2.8",
         "paypal/rest-api-sdk-php": "*",
         "phpmailer/phpmailer": "^6.2",
         "razorpay/razorpay": "^2.5",
@@ -40,7 +41,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "extra": {
         "laravel": {
