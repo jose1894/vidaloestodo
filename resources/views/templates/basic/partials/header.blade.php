@@ -43,7 +43,7 @@
                     </div>
                 </form>
                 <ul class="shortcut-icons" onclick="$('.dropdown-content').css('display','none');">
-                    
+
                     <li>
                         @if (Auth::check())
                             <div class="link-argo">
@@ -82,19 +82,24 @@
                     </li> --}}
                     <li class="nav-item dropdown ml-3 ">
                         <div class="link-argo header-change-moneda">
-                        <span data-toggle="dropdown" class="nav-item desplegable " aria-expanded="false">
-                            <span class="">
-                                <small class="d-block">Moneda</small>
-                                <a class="nav-link ">
-                                    <span class="">Dolar</span>
-                                </a>
+                            <span data-toggle="dropdown" class="nav-item desplegable " aria-expanded="false">
+                                <span class="">
+                                    <small class="d-block">Moneda </small>
+                                    <a class="nav-link ">
+                                        <span class="header-moneda">{{ session()->get('moneda') }}</span>
+                                    </a>
+                                </span>
+                                <i class="ml-2 fas fa-chevron-down "></i>
                             </span>
-                            <i class="ml-2 fas fa-chevron-down "></i>
-                        </span>
-                        <div class="dropdown-menu ">
-                            <a class="dropdown-item ">Bolivares</a></div>
+                            <div class="dropdown-menu ">
+                                @if (session()->get('moneda') == 'Bolívares')
+                                    <a href="javascript:void(0)" class="dropdown-item header-moneda-selecc">Dolares</a>
+                                @else
+                                    <a href="javascript:void(0)" class="dropdown-item header-moneda-selecc">Bolívares</a>
+                                @endif
+                            </div>
                         </div>
-                        </li>
+                    </li>
                     <li>
                         <div class="header-bar e-none">
                             <span></span>
@@ -206,7 +211,9 @@
                             <li>
                                 <a
                                     href="{{ route('products.category', ['id' => $category->id, 'slug' => slug($category->name)]) }}">
-                                    <img style="width: 40px; height: 40px;" src="{{ getImage('assets/images/category/'. @$category->image) }}" alt="@lang('profile-image')"> {{ $category->name }}
+                                    <img style="width: 40px; height: 40px;"
+                                        src="{{ getImage('assets/images/category/' . @$category->image) }}"
+                                        alt="@lang('profile-image')"> {{ $category->name }}
                                 </a>
                                 <div class="cate-icon">
                                     <i class="fas fa-chevron-down"></i>
@@ -267,7 +274,9 @@
                             <li>
                                 <a
                                     href="{{ route('products.category', ['id' => $category->id, 'slug' => slug($category->name)]) }}">
-                                    <img style="width: 40px; height: 40px;" src="{{ getImage('assets/images/category/'. @$category->image) }}" alt="@lang('profile-image')"> {{ $category->name }}
+                                    <img style="width: 40px; height: 40px;"
+                                        src="{{ getImage('assets/images/category/' . @$category->image) }}"
+                                        alt="@lang('profile-image')"> {{ $category->name }}
                                 </a>
                                 <div class="cate-icon">
                                     <i class="fas fa-chevron-down"></i>
@@ -346,7 +355,7 @@
                     <div class="pt-2 mb-0">
                         <p class="create-accounts">
                             <a href="{{ route('user.password.request') }}" class="mb-2">¿@lang('Forgot
-                                                                                                                                                                                                                                    Password')?</a>
+                                                                                                                                                                                                                                                                Password')?</a>
                         </p>
                         <p class="create-accounts">
                             <span>¿@lang('Don\'t have an account')? <a href="{{ route('user.register') }}"

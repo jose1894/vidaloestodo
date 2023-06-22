@@ -947,17 +947,17 @@
 
             //Setear moneda
             $(document).on('click','.header-change-moneda',function(e){
-
+// console.log($('.header-moneda-selecc').text().trim());
                 $.ajax({
                     headers: {"X-CSRF-TOKEN": "{{ csrf_token() }}",},
-                    url:"{{route('set-moneda')}}?moneda=" + $('.header-moneda').text().trim(),
+                    url:"{{route('set-moneda')}}?moneda=" + $('.header-moneda-selecc').text().trim(),
                     method:"GET",
                     success:function(response)
                     {
                         if(response.moneda) {
                             notify('success', response.moneda);
                             $('.header-moneda').text(response.moneda);
-                            //location.reload();
+                            location.reload();
                             //window.location.replace("{{ route('home') }}");
                         }else{
                             notify('error', response);

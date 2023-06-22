@@ -1728,8 +1728,8 @@ class SiteController extends Controller
 
     public function setMoneda(Request $request)
     {
-        // $moneda = $request['moneda'];
-        $moneda = session()->get('moneda');
+        $moneda = $request['moneda'];
+       // $moneda = session()->get('moneda');
 
         switch ($moneda) {
             case 'Dolares':
