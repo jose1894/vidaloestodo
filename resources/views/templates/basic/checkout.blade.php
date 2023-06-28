@@ -1545,7 +1545,7 @@
                     }
                 },
                 megasoft() {
-                    window.open('{{ route('megasoft') }}?total=' + parseFloat(this.form.total))
+                    window.open('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total))
                     {{-- axios
                         .get('{{ route('megasoft') }}?total=' + parseFloat(this.form.total))
                         .then((response) => {
