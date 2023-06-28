@@ -989,6 +989,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="element-37" class="col-md-12 col-lg-12" style="display: none;">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card mb-3 card-envio" id="" onclick="">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mt-1 mb-2 text-muted">Megasoft</h6>
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-12">
+                                                        <a href="#" @click="megasoft" class="btn btn-primary btn-sm">Confirmar pago</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12 col-lg-12">
                                 <div class="alert alert-success" role="alert" v-if="message">
                                     <small>@{{ message }}</small>
@@ -1524,6 +1543,14 @@
                         /*Pago Unico*/
                         this.singlePayment();
                     }
+                },
+                megasoft() {
+                    window.open('{{ route('megasoft') }}?total=' + parseFloat(this.form.total))
+                    {{-- axios
+                        .get('{{ route('megasoft') }}?total=' + parseFloat(this.form.total))
+                        .then((response) => {
+                            console.log(response)
+                        }) --}}
                 },
                 singlePayment: async function() {
                     if (this.form.method_payment == 1) { //Pago Unico

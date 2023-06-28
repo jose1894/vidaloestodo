@@ -581,6 +581,10 @@ Route::post('remove_from_compare/{id}', 'SiteController@removeFromcompare')->nam
 Route::get('setmoneda', 'SiteController@setMoneda')->name('set-moneda');
 Route::get('getmoneda', 'SiteController@getMoneda')->name('get-moneda');
 
+
+//Megasoft
+Route::get('megasoft', 'SiteController@megasoft')->name('megasoft');
+
 Route::get('getrate', 'SiteController@getRate')->name('get-rate');
 
 Route::get('migrate',function() {
