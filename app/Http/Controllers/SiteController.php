@@ -1932,5 +1932,5 @@ class SiteController extends Controller
     //     } else {
     //     echo $response;
     //     }
-    // }
+    }
 }
