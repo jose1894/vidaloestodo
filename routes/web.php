@@ -583,7 +583,7 @@ Route::get('getmoneda', 'SiteController@getMoneda')->name('get-moneda');
 
 
 //Megasoft
-Route::get('megasoft', 'SiteController@megasoft')->name('megasoft');
+Route::get('verificacion-megasoft', 'SiteController@megasoft')->name('verificacion-megasoft');
 
 Route::get('getrate', 'SiteController@getRate')->name('get-rate');
 
