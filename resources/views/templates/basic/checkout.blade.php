@@ -1546,7 +1546,7 @@
                     }
                 },
                 megasoft() {
-                    const iframe = document.getElementById('#megasoft-iframe')
+                    const iframe = document.getElementById('megasoft-iframe')
                     iframe.src= '{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total)
                 },
                 singlePayment: async function() {
