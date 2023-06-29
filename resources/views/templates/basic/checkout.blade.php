@@ -1001,7 +1001,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="row mt-2">
-                                                    
+                                                    <iframe width="100%" id="megasoft-iframe">
+                                                    </iframe>
                                                 </div>
                                             </div>
                                         </div>
@@ -1545,12 +1546,8 @@
                     }
                 },
                 megasoft() {
-                    window.open('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total))
-                    {{-- axios
-                        .get('{{ route('megasoft') }}?total=' + parseFloat(this.form.total))
-                        .then((response) => {
-                            console.log(response)
-                        }) --}}
+                    const iframe = document.getElementById('#megsoft-iframe')
+                    iframe.src= '{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total)
                 },
                 singlePayment: async function() {
                     if (this.form.method_payment == 1) { //Pago Unico
