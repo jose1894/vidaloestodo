@@ -1548,12 +1548,12 @@
                 megasoft() {
                     {{-- const iframe = document.getElementById('megasoft-iframe') --}}
                     {{-- iframe.src= '{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total) --}}
-                    {{-- axios
+                    axios
                         .get('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total))
                         .then((response) => {
-                            iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data
-                        }) --}}
-                    window.open('https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data, '_blank')
+                            {{-- iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data --}}
+                            window.open('https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data, '_blank')
+                        })
                 },
                 singlePayment: async function() {
                     if (this.form.method_payment == 1) { //Pago Unico
