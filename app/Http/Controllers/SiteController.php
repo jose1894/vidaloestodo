@@ -1943,7 +1943,7 @@ class SiteController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, [
-            CURLOPT_URL => "https://200.71.151.226:8443:8443/payment/action/paymentgatewayuniversal-querystatus?". $control,
+            CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-querystatus?control=". $control . "&version=3",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
