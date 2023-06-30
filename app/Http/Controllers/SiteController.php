@@ -1884,6 +1884,7 @@ class SiteController extends Controller
 
     public function megasoft(Request $request){
         $curl = curl_init();
+        dd($request->total);
 
         curl_setopt_array($curl, [
             CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2606202301&factura=1265&monto=" . $request->total,
