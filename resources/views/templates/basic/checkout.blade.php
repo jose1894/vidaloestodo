@@ -1551,6 +1551,7 @@
                     axios
                         .get('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total))
                         .then((response) => {
+                            debugger
                             iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data
                         })
                 },
