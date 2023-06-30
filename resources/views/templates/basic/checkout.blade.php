@@ -1551,8 +1551,8 @@
                     axios
                         .get('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total))
                         .then((response) => {
-                            {{-- iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data --}}
-                            window.open('https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data, '_blank')
+                            iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data.control
+                            {{-- window.open('https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data.control, '_blank') --}}
                         })
                 },
                 singlePayment: async function() {
