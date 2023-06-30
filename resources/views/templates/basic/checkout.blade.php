@@ -1001,7 +1001,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row mt-2">
-                                                    <iframe width="100%" id="megasoft-iframe" border="0">
+                                                    <iframe width="100%" height="300px" id="megasoft-iframe" border="0">
                                                     </iframe>
                                                 </div>
                                             </div>
