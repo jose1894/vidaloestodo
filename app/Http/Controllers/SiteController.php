@@ -1907,7 +1907,7 @@ class SiteController extends Controller
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            echo $response;
+            echo json_encode(['control' => $response]);
         }
 
         // $curl = curl_init();
