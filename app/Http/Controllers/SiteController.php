@@ -1938,7 +1938,7 @@ class SiteController extends Controller
 
     public function responseMegasoft(Request $request) {
         $control = session()->get('megasoft-control');
-
+        dd('return');
 
         $curl = curl_init();
 
