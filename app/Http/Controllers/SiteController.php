@@ -1881,6 +1881,7 @@ class SiteController extends Controller
         // dd($request->all());
         return route('products.category', ['id' => $request->id, 'slug' => slug($request->slug)]);
     }
+
     public function megasoft(Request $request){
         $curl = curl_init();
 
@@ -1910,8 +1911,39 @@ class SiteController extends Controller
 
         $curl = curl_init();
 
+        session()->put('megasoft-control', $response);
         curl_setopt_array($curl, [
             CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_COOKIE => "JSESSIONID=22F8EC805F50F4B1FD0ADE2E26311490; JSESSIONID=5ED2A773BE4007132637A43C5303E2ED",
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+        echo "cURL Error #:" . $err;
+        } else {
+        echo $response;
+        }
+    }
+
+    public function responseMegasoft(Request $request) {
+        $control = session()->get('megasoft-control');
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://200.71.151.226:8443:8443/payment/action/paymentgatewayuniversal-querystatus?". $control,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
