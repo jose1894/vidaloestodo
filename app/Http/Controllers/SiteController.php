@@ -1902,7 +1902,7 @@ class SiteController extends Controller
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        dd($response);
         curl_close($curl);
 
         if ($err) {
