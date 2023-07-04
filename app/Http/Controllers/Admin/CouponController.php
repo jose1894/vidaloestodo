@@ -112,7 +112,8 @@ class CouponController extends Controller
             return response()->json($validator->errors());
         }
 
-        $products = Product::select('id','name')->where('name', 'like', "%$request->search%")->whereHas('categories')->whereHas('brand')->paginate($request->rows??5);
+        // $products = Product::select('id','name')->where('name', 'like', "%$request->search%")->whereHas('categories')->whereHas('brand')->paginate($request->rows??5);
+        $products = Product::select('id','name')->where('name', 'like', "%$request->search%")->whereHas('categories')->paginate($request->rows??5);
 
         $response = [];
 

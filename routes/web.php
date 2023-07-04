@@ -353,6 +353,17 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
         });
 
+
+        //roles
+        Route::get('roles', 'RoleController@index')->name('roles.all');
+        Route::post('roles/create/{id}', 'RoleController@store')->name('roles.store');
+        Route::post('roles/{id}', 'RoleController@delete')->name('roles.delete')->where('id', '[0-9]+');
+
+        Route::get('roles/search/', 'RoleController@rolSearch')->name('roles.search');
+        Route::get('roles/trashed', 'RoleController@trashed')->name('roles.trashed');
+        Route::get('roles/trashed/search/', 'RoleController@rolTrashedSearch')->name('roles.trashed.search');
+        Route::post('roles/set-top/', 'RoleController@setTop')->name('roles.settop');
+
         //Modules
         Route::get('modules', 'ModulesController@index')->name('modules.index');
         Route::post('modules/create/{id}', 'ModulesController@store')->name('modules.store');

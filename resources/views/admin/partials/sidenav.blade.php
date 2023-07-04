@@ -1,3 +1,8 @@
+<style>
+.sidebar[class*="overlay"] .sidebar__menu .sidebar-submenu .sidebar-menu-item a .menu-icon, .sidebar[class*="overlay"] .sidebar__menu .sidebar-submenu .sidebar-menu-item a .menu-title{
+    color: #e0e0e0!important;
+}
+</style>
 <div class="sidebar capsule--rounded bg_img overlay--dark" data-background="{{getImage('assets/admin/images/sidebar/2.jpg','400x800')}}"
       >
     <button class="res-sidebar-close-btn"><i class="las la-times"></i></button>
