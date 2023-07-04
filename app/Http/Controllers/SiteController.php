@@ -1886,7 +1886,7 @@ class SiteController extends Controller
         $curl = curl_init();
         
         curl_setopt_array($curl, [
-            CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2606202301&factura=1265&monto=" . $request->total,
+            CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2606202301&monto=" . $request->total,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

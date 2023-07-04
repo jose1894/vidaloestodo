@@ -1546,9 +1546,10 @@
                     }
                 },
                 megasoft() {
+                    debugger
                     const iframe = document.getElementById('megasoft-iframe')
                     axios
-                        .get('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.total))
+                        .get('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.totalbs))
                         .then((response) => {
                             iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data.control
                         })
@@ -2013,7 +2014,8 @@
             $('#btngateway' + gateway).css('border', '1px solid #e77e46');
             $('#btngateway' + selecGateway).css('border', '1px solid #dfdddd');
             selecGateway = gateway;
-            pay.form.gateway = gateway;
+            pay.form.gateway = gateway;             
+            pay.disguise = (gateway == 37) ? true : false
         }
 
         const dayDate = () => {
@@ -2037,7 +2039,6 @@
                 pay.blockInput = 0;
                 pay.formcash.totaldollar = pay.total
                 pay.formcash.totalbs = pay.totalbs
-
 
             } else {
 
