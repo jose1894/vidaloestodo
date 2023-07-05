@@ -1948,7 +1948,10 @@ class SiteController extends Controller
         
         // Mostrar la información del voucher
         echo '<h3> Pago procesado con respuesta: '. $respuesta->descripcion .'</h3>';
-        echo '<center> <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> </center>';
+        echo '<center> 
+                <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> 
+                <button class="btn btn-danger" onclick="window.close()"> Cerrar </button>
+            </center>';
         echo '<script>window.print()</script>';
     }
 }
