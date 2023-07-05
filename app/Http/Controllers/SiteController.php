@@ -1971,7 +1971,8 @@ class SiteController extends Controller
             $respuesta = simplexml_load_string($response);
 
             // Mostrar la información del voucher
-            echo '<pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre>';
+            echo '<h3> Pago procesado con respuesta:'. $respuesta->estado .'</h3>';
+            echo '<center> <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> </center>';
         }
     }
 }
