@@ -1947,6 +1947,7 @@ class SiteController extends Controller
         $respuesta = $this->processPaymentQuery($request);
         
         // Mostrar la información del voucher
+        var_dump($respuesta);
         echo '<h3> Pago procesado con respuesta: '. $respuesta->descripción .'</h3>';
         echo '<center> <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> </center>';
     }
