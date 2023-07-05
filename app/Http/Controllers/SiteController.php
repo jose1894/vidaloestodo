@@ -1907,43 +1907,13 @@ class SiteController extends Controller
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            // echo json_encode(['control' => $response]);
-        // }
-
-            // $curl = curl_init();
-
             session()->put('megasoft-control', $response);
             header("Location: https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response);
-            die();
-            // curl_setopt_array($curl, [
-            //     CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response,
-            //     CURLOPT_RETURNTRANSFER => true,
-            //     CURLOPT_ENCODING => "",
-            //     CURLOPT_MAXREDIRS => 10,
-            //     CURLOPT_TIMEOUT => 30,
-            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            //     CURLOPT_CUSTOMREQUEST => "GET",
-            //     CURLOPT_POSTFIELDS => "",
-            //     CURLOPT_COOKIE => "JSESSIONID=22F8EC805F50F4B1FD0ADE2E26311490; JSESSIONID=5ED2A773BE4007132637A43C5303E2ED",
-            // ]);
-
-            // $response = curl_exec($curl);
-            // $err = curl_error($curl);
-
-            // curl_close($curl);
-
-            // if ($err) {
-            //     echo "cURL Error #:" . $err;
-            // } else {
-            //     echo $response;
-            // }
-    
+            die();    
         }
     }
 
-    public function responseMegasoft(Request $request) {
-        $control = session()->get('megasoft-control');
-
+    public function processPaymentQuery(Request $request){
         $curl = curl_init();
 
         curl_setopt_array($curl, [
@@ -1965,14 +1935,19 @@ class SiteController extends Controller
 
         if ($err) {
             echo "cURL Error #:" . $err;
+            die();
         } else {
-            // echo $response;
-            // Parsear la respuesta XML
-            $respuesta = simplexml_load_string($response);
+            return simplexml_load_string($response);
+        }        
+    }
 
-            // Mostrar la información del voucher
-            echo '<h3> Pago procesado con respuesta:'. $respuesta->estado .'</h3>';
-            echo '<center> <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> </center>';
-        }
+    public function responseMegasoft(Request $request) {
+        $control = session()->get('megasoft-control');
+
+        $respuesta = $this->processPaymentQuery($request);
+        
+        // Mostrar la información del voucher
+        echo '<h3> Pago procesado con respuesta: '. $respuesta->descripción .'</h3>';
+        echo '<center> <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> </center>';
     }
 }
