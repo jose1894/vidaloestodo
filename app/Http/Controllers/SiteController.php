@@ -1942,13 +1942,13 @@ class SiteController extends Controller
     }
 
     public function responseMegasoft(Request $request) {
-        $control = session()->get('megasoft-control');
+        // $control = session()->get('megasoft-control');
 
         $respuesta = $this->processPaymentQuery($request);
         
         // Mostrar la información del voucher
-        var_dump($respuesta);
         echo '<h3> Pago procesado con respuesta: '. $respuesta->descripcion .'</h3>';
         echo '<center> <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> </center>';
+        echo '<script>window.print()</script>';
     }
 }
