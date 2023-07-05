@@ -1910,31 +1910,33 @@ class SiteController extends Controller
             // echo json_encode(['control' => $response]);
         // }
 
-            $curl = curl_init();
+            // $curl = curl_init();
 
             session()->put('megasoft-control', $response);
-            curl_setopt_array($curl, [
-                CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_POSTFIELDS => "",
-                CURLOPT_COOKIE => "JSESSIONID=22F8EC805F50F4B1FD0ADE2E26311490; JSESSIONID=5ED2A773BE4007132637A43C5303E2ED",
-            ]);
+            header("Location: https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response);
+            die();
+            // curl_setopt_array($curl, [
+            //     CURLOPT_URL => "https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response,
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => "",
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 30,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => "GET",
+            //     CURLOPT_POSTFIELDS => "",
+            //     CURLOPT_COOKIE => "JSESSIONID=22F8EC805F50F4B1FD0ADE2E26311490; JSESSIONID=5ED2A773BE4007132637A43C5303E2ED",
+            // ]);
 
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
+            // $response = curl_exec($curl);
+            // $err = curl_error($curl);
 
-            curl_close($curl);
+            // curl_close($curl);
 
-            if ($err) {
-                echo "cURL Error #:" . $err;
-            } else {
-                echo $response;
-            }
+            // if ($err) {
+            //     echo "cURL Error #:" . $err;
+            // } else {
+            //     echo $response;
+            // }
     
         }
     }
