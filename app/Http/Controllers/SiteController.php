@@ -1966,7 +1966,12 @@ class SiteController extends Controller
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            echo $response;
+            // echo $response;
+            // Parsear la respuesta XML
+            $respuesta = simplexml_load_string($response);
+
+            // Mostrar la información del voucher
+            echo '<pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre>';
         }
     }
 }
