@@ -997,7 +997,7 @@
                                                 <h6 class="card-subtitle mt-1 mb-2 text-muted">Megasoft</h6>
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12">
-                                                        <a href="#" @click="megasoft" class="btn btn-primary btn-sm">Confirmar pago</a>
+                                                        {{-- <a href="#" @click="megasoft" class="btn btn-primary btn-sm">Confirmar pago</a> --}}
                                                     </div>
                                                 </div>
                                                 <div class="row mt-2">
@@ -1274,6 +1274,7 @@
         let pay = new Vue({
             el: '#accordion-payment',
             data: {
+                control_number: '',
                 blockInput: 0,
                 validated: 1,
                 message: '',
@@ -1420,6 +1421,7 @@
                 newDeposit: function() {
 
                     this.deposit = {
+                        control_number : this.control_number,
                         user_id: this.order.user_id,
                         method_code: this.datagatewayCur.method_code,
                         order_id: this.order.id,
@@ -1546,13 +1548,14 @@
                     }
                 },
                 megasoft() {
-                    debugger
-                    const iframe = document.getElementById('megasoft-iframe')
+                    window.open('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.totalbs), '_blank')
+                    {{-- const iframe = document.getElementById('megasoft-iframe')
                     axios
                         .get('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.totalbs))
                         .then((response) => {
-                            iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + response.data.control
-                        })
+                            this.control_number = response.data.control
+                            iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + this.control_number
+                        }) --}}
                 },
                 singlePayment: async function() {
                     if (this.form.method_payment == 1) { //Pago Unico
@@ -2015,7 +2018,9 @@
             $('#btngateway' + selecGateway).css('border', '1px solid #dfdddd');
             selecGateway = gateway;
             pay.form.gateway = gateway;             
-            pay.disguise = (gateway == 37) ? true : false
+            if (gateway == 37) {
+                pay.megasoft()
+            }
         }
 
         const dayDate = () => {
