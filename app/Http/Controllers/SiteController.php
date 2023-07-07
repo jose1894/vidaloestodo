@@ -1939,7 +1939,7 @@ class SiteController extends Controller
             echo "cURL Error #:" . $err;
             die();
         } else {
-            $response = simplexml_load_string($response);
+            $response = simplexml_load_string($response,'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
             return json_encode(['xml' => $response]);
         }        
     }
