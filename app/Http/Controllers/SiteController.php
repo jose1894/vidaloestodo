@@ -1908,12 +1908,14 @@ class SiteController extends Controller
             echo "cURL Error #:" . $err;
         } else {
             session()->put('megasoft-control', $response);
-            header("Location: https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response);
-            die();    
+            echo json_encode(['control' => $response]);
+            // header("Location: https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=". $response);
+            // die();    
         }
     }
 
     public function processPaymentQuery(Request $request){
+        // $control = session()->get('megasoft-control');
         $curl = curl_init();
 
         curl_setopt_array($curl, [
@@ -1937,7 +1939,8 @@ class SiteController extends Controller
             echo "cURL Error #:" . $err;
             die();
         } else {
-            return simplexml_load_string($response);
+            $response = simplexml_load_string($response);
+            return json_encode(['xml' => $response]);
         }        
     }
 
@@ -1950,8 +1953,11 @@ class SiteController extends Controller
         echo '<h3> Pago procesado con respuesta: '. $respuesta->descripcion .'</h3>';
         echo '<center> 
                 <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> 
-                <button class="btn btn-danger" onclick="window.close()"> Cerrar </button>
             </center>';
         echo '<script>window.print()</script>';
+    }
+
+    public function iframeBlank(){
+        return "<center><h2>Procesando solicitud, por favor espere... </h2>";
     }
 }

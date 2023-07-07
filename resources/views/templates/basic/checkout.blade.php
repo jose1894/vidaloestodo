@@ -995,14 +995,22 @@
                                         <div class="card mb-3 card-envio" id="" onclick="">
                                             <div class="card-body">
                                                 <h6 class="card-subtitle mt-1 mb-2 text-muted">Megasoft</h6>
-                                                <div class="row">
-                                                    <div class="col-md-12 col-lg-12">
-                                                        {{-- <a href="#" @click="megasoft" class="btn btn-primary btn-sm">Confirmar pago</a> --}}
+                                                
+                                                <!-- Modal Megasoft -->
+                                                <div class="modal fade" id="megasoft-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Pasarela de pagos</h5>
+                                                            <button type="button" id="close-megasoft-modal" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <iframe id="megasoft-iframe" height="500px" frameborder="0" width="100%" src="{{ route('iframe-blank') }}"></iframe>
+                                                        </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <iframe width="100%" height="400px" id="megasoft-iframe" frameborder="0" style="padding:10px">
-                                                    </iframe>
                                                 </div>
                                             </div>
                                         </div>
@@ -1418,8 +1426,8 @@
                     //  pay.usershipping = res.data.shipping
 
                 },
-                newDeposit: function() {
-
+                newDeposit: async function() {
+                    {{-- debugger --}}
                     this.deposit = {
                         control_number : this.control_number,
                         user_id: this.order.user_id,
@@ -1445,17 +1453,53 @@
                     //console.log(this.deposit);
                     // axios.post('{{ route('user.deposit.new') }}')
 
-                    axios.post('{{ route('user.deposit.new') }}', this.deposit)
+                    await axios.post('{{ route('user.deposit.new') }}', this.deposit)
                         .then(function(res) {
                             pay.depositReturn = res.data.depost
                             pay.paymentCompleted();
                             pay.formcash.referencia = ''
                         })
                         .catch(function(err) {
+                            
                             console.log(err);
                         })
+                    
                 },
-                finalizePurchase: function() {
+                async getMegasoftResponse() {
+                    iziToast.info({
+                                    message: "Por favor espere...",
+                                    position: "topRight"
+                                });
+                    let response = await axios.get('{{route('query-payment') }}?control=' + this.control_number)
+                    return response.data?.xml
+                },
+                finalizePurchase:async function() {
+                    
+                    const response = await this.getMegasoftResponse()
+                    {{-- debugger --}}
+                    if (this.form.gateway == 37){
+
+                        console.log(response.referencia)
+                        if (response.estado === 'A') {
+                            iziToast.success({
+                                    message: "Por favor espere mientras finaliza su compra",
+                                    position: "topRight"
+                                });
+                            await this.newOrder();
+                            await this.newDeposit();
+                        }else{
+                            const descripcion = (response.estado == 'R') 
+                                                    ? 'RECHAZADA' 
+                                                    : (response.estado == 'P') 
+                                                        ? 'PENDIENTE' 
+                                                        : 'ESPERA DE CONFIRMACION'
+                            iziToast.error({
+                                    message: "Su operacion tiene status de " + descripcion,
+                                    position: "topRight"
+                                });
+                            return
+                        }
+                    }
                     axios.get('{{ route('user.deposit.reduce') }}')
                         .then(function(res) {
                             //console.log(res.data);
@@ -1509,7 +1553,7 @@
                     const typePayment = this.gateways.find(function(m) {
                         return m.id == item
                     })
-
+                    {{-- debugger --}}
                     this.datagatewayCur = {
                         id: typePayment.currencies[0].id,
                         currency: typePayment.currencies[0].currency,
@@ -1548,14 +1592,16 @@
                     }
                 },
                 megasoft() {
-                    window.open('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.totalbs), '_blank')
-                    {{-- const iframe = document.getElementById('megasoft-iframe')
+                    $('#megasoft-modal').modal('show')
+                    const iframe = document.getElementById('megasoft-iframe')
+                    iframe.src = '{{ route('iframe-blank') }}'
                     axios
                         .get('{{ route('verificacion-megasoft') }}?total=' + parseFloat(this.form.totalbs))
                         .then((response) => {
                             this.control_number = response.data.control
+                            {{-- window.open('https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + this.control_number, '_blank') --}}
                             iframe.src = 'https://paytest.megasoft.com.ve/payment/action/paymentgatewayuniversal-data?control=' + this.control_number
-                        }) --}}
+                        }) 
                 },
                 singlePayment: async function() {
                     if (this.form.method_payment == 1) { //Pago Unico
@@ -1659,9 +1705,10 @@
                             }
                         }
                     } else {
+                        const referencia = (this.form.gateway == 37) ?  this.control_number: this.formcash.referencia
                         this.detail = {
                             numero_de_referencia: {
-                                field_name: this.formcash.referencia,
+                                field_name: referencia,
                                 type: "text"
                             }
                         }
@@ -2018,7 +2065,11 @@
             $('#btngateway' + selecGateway).css('border', '1px solid #dfdddd');
             selecGateway = gateway;
             pay.form.gateway = gateway;             
+            pay.disguise = true
+
             if (gateway == 37) {
+                pay.validated = 0
+                pay.disguise = true
                 pay.megasoft()
             }
         }
@@ -2199,11 +2250,27 @@
                 ]
             });
 
+            $('#close-megasoft-modal').click(function(){
+                $('#megasoft-modal').modal('hide')
+                $('#megasoft-iframe').attr('src', '{{ route('iframe-blank') }}')
+            })
+
             $('#propina_form').on('input', function() {
                 ButtomPropina($('#propina_form').val());
             }).change();
         })(jQuery)
     </script>
+@endpush
+
+
+@push('style')
+<style>
+.modal-content {
+    border-color: unset!important;
+    border-radius: 10px!important;
+    border: 0px !important;
+}
+</style>
 @endpush
 
 @push('breadcrumb-plugins')

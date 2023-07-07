@@ -620,6 +620,7 @@ class PaymentController extends Controller
         $depo['trx']                = $request->trx;
         $depo['try']                = 0;
         $depo['status']             = $request->status;
+        $depo['control_number']     = $request->control_number;
 
         $data = Deposit::create($depo);
        /// $this->reduceInventory();
