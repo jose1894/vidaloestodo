@@ -1947,8 +1947,8 @@ class SiteController extends Controller
     public function responseMegasoft(Request $request) {
         // $control = session()->get('megasoft-control');
 
-        $respuesta = $this->processPaymentQuery($request);
-        dd(json_decode($respuesta));        
+        $respuesta = json_decode($this->processPaymentQuery($request));
+        dd($respuesta->xml);        
         // Mostrar la información del voucher
         echo '<h3> Pago procesado con respuesta: '. $respuesta->xml->descripcion .'</h3>';
         echo '<center> 
