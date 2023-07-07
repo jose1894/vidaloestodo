@@ -1948,9 +1948,9 @@ class SiteController extends Controller
         // $control = session()->get('megasoft-control');
 
         $respuesta = $this->processPaymentQuery($request);
-        dd($respuesta);        
+        dd($respuesta->xml);        
         // Mostrar la información del voucher
-        echo '<h3> Pago procesado con respuesta: '. $respuesta->descripcion .'</h3>';
+        echo '<h3> Pago procesado con respuesta: '. $respuesta->xml->descripcion .'</h3>';
         echo '<center> 
                 <pre>' . htmlentities($respuesta->voucher, ENT_XML1) . '</pre> 
             </center>';
