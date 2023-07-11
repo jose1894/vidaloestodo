@@ -2065,7 +2065,7 @@
             $('#btngateway' + selecGateway).css('border', '1px solid #dfdddd');
             selecGateway = gateway;
             pay.form.gateway = gateway;             
-            pay.disguise = true
+            pay.disguise = false
 
             if (gateway == 37) {
                 pay.validated = 0
